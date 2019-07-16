@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $EUID -ne 0 ]]; then
-   echo " [!]This script must be run as root" 1>&2
+   echo " [!] This script must be run as root" 1>&2
    exit 1
 fi
 
@@ -35,7 +35,7 @@ fi
 
 # start up invader if not in docker otherwise return
 if [ -f /.dockerenv ]; then
-    echo " [*] invader reset complete returning back to Docker"
+    echo " [*] Invader reset complete returning back to Docker"
 else
     ./invader
 fi
