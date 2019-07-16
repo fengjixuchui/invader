@@ -183,5 +183,14 @@ python ./setup_database.py
 ./cert.sh
 
 cd ..
+cd
+cd invader
+chmod +x invader
+{
+cp invader /usr/local/bin
+chmod +x /usr/local/bin/invader
+cp invader /bin
+chmod +x /bin/invader
+} &> /dev/null
 
 echo -e '\n [*] Setup complete!\n'
