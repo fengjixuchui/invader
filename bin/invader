@@ -1,0 +1,44 @@
+if [[ "$1" = "-u" || "$1" = "--update" ]]
+then
+sleep 1
+echo ""$BS"[*] "$WHS"Installing update..."$CE""
+{
+rm -r ~/invader
+rm /bin/invader
+rm /usr/local/bin/invader
+cd ~
+git clone https://github.com/entynetproject/invader.git
+cd invader
+chmod +x install.sh
+./install.sh
+} &> /dev/null
+echo ""$GNS"[*] "$WHS"Successfully updated..."$CE""
+sleep 1
+exit
+fi
+
+cd ~
+if [[ -d ~/invader ]]
+then
+{
+cd ~/invader
+} &> /dev/null
+./invader $1 $2 $3 $4 $5 $6 $7 $8 $9
+else
+{
+ASESR="$( timeout -s SIGTERM 40 curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//' )"
+} &> /dev/null
+if [[ "$ASESR" != "" ]]
+then 
+cd ~
+{
+git clone https://github.com/entynetproject/invader.git
+cd ~/invader
+} &> /dev/null
+./invader $1 $2 $3 $4 $5 $6 $7 $8 $9
+else
+cd ~
+sleep 1
+exit
+fi
+fi
