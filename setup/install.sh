@@ -180,6 +180,7 @@ chmod 755 bomutils/build/bin/mkbom && sudo cp bomutils/build/bin/mkbom /usr/loca
 python ./setup_database.py
 
 # generate a cert
+chmod +x cert.sh
 ./cert.sh
 
 cd ..
@@ -187,9 +188,9 @@ cd
 cd invader
 chmod +x invader
 {
-cp invader /usr/local/bin
+cp bin/invader /usr/local/bin
 chmod +x /usr/local/bin/invader
-cp invader /bin
+cp bin/invader /bin
 chmod +x /bin/invader
 } &> /dev/null
 
