@@ -347,12 +347,12 @@ class MainMenu(cmd.Cmd):
                         num_listeners = len(num_listeners)
                     else:
                         num_listeners = 0
+		    info = 'Invader Post Exploitation Framework'
 
-                    print "       " + helpers.color(str(num_modules), "green") + " modules currently loaded"
-                    print("")
-	            print "       " + helpers.color(str(num_listeners), "green") + " listeners currently active"
-		    print("")
-                    print "       " + helpers.color(str(num_agents), "green") + " agents currently active\n"
+	            print ("        --=[ "+helpers.color(str(info), "green")+"")
+		    print ("+---**---==[ Available Modules: "+helpers.color(str(num_modules), "green")+"")
+	            print ("+---**---==[ Available Listeners: "+helpers.color(str(num_listeners), "green")+"")
+		    print ("        --=[ Registered Agents: "+helpers.color(str(num_agents), "green")+"")
 
 		    if len(self.resourceQueue) > 0:
 	    		self.cmdqueue.append(self.resourceQueue.pop(0))
