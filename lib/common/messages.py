@@ -31,8 +31,7 @@ def title(version):
      __  / __  __ \_ | / /  __ `/  __  /_  _ \_  ___/
     __/ /  _  / / /_ |/ // /_/ // /_/ / /  __/  /    
     /___/  /_/ /_/_____/ \__,_/ \__,_/  \___//_/     
-    The PowerShell/Python Post-Exploitation Framework                                           
-                                               
+    
     """
 
 def loading():
