@@ -1,4 +1,4 @@
-# Invader (PowerShell Payload)
+# Invader (Windows/Linux/OSX agent)
 
     ________                    _________            
     ____  _/_________   _______ ______  /____________
