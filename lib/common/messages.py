@@ -34,55 +34,6 @@ def title(version):
     
     """
 
-def loading():
-    """
-    Print and ascii loading screen.
-    """
-
-    print """
-                              `````````
-                         ``````.--::///+
-                     ````-+sydmmmNNNNNNN
-                   ``./ymmNNNNNNNNNNNNNN
-                 ``-ymmNNNNNNNNNNNNNNNNN
-               ```ommmmNNNNNNNNNNNNNNNNN
-              ``.ydmNNNNNNNNNNNNNNNNNNNN
-             ```odmmNNNNNNNNNNNNNNNNNNNN
-            ```/hmmmNNNNNNNNNNNNNNNNMNNN
-           ````+hmmmNNNNNNNNNNNNNNNNNMMN
-          ````..ymmmNNNNNNNNNNNNNNNNNNNN
-          ````:.+so+//:---.......----::-
-         `````.`````````....----:///++++
-        ``````.-/osy+////:::---...-dNNNN
-        ````:sdyyydy`         ```:mNNNNM
-       ````-hmmdhdmm:`      ``.+hNNNNNNM
-       ```.odNNmdmmNNo````.:+yNNNNNNNNNN
-       ```-sNNNmdh/dNNhhdNNNNNNNNNNNNNNN
-       ```-hNNNmNo::mNNNNNNNNNNNNNNNNNNN
-       ```-hNNmdNo--/dNNNNNNNNNNNNNNNNNN
-      ````:dNmmdmd-:+NNNNNNNNNNNNNNNNNNm
-      ```/hNNmmddmd+mNNNNNNNNNNNNNNds++o
-     ``/dNNNNNmmmmmmmNNNNNNNNNNNmdoosydd
-     `sNNNNdyydNNNNmmmmmmNNNNNmyoymNNNNN
-     :NNmmmdso++dNNNNmmNNNNNdhymNNNNNNNN
-     -NmdmmNNdsyohNNNNmmNNNNNNNNNNNNNNNN
-     `sdhmmNNNNdyhdNNNNNNNNNNNNNNNNNNNNN
-       /yhmNNmmNNNNNNNNNNNNNNNNNNNNNNmhh
-        `+yhmmNNNNNNNNNNNNNNNNNNNNNNmh+:
-          `./dmmmmNNNNNNNNNNNNNNNNmmd.
-            `ommmmmNNNNNNNmNmNNNNmmd:
-             :dmmmmNNNNNmh../oyhhhy:
-             `sdmmmmNNNmmh/++-.+oh.
-              `/dmmmmmmmmdo-:/ossd:
-                `/ohhdmmmmmmdddddmh/
-                   `-/osyhdddddhyo:
-                        ``.----.`
-
-                Welcome to the Invader"""
-    time.sleep(3)
-    os.system('clear')
-
-
 def wrap_string(data, width=40, indent=32, indentAll=False, followingHeader=None):
     """
     Print a option description message in a nicely
