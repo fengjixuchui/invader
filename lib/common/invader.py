@@ -1178,7 +1178,7 @@ class AgentsMenu(SubMenu):
         self.doc_header = 'Commands'
 
         # set the prompt text
-        self.prompt = '(invader: ' + helpers.color("agents", color="blue") + ') > '
+        self.prompt = '(Invader: ' + helpers.color("agents", color="blue") + ') > '
 
         messages.display_agents(self.mainMenu.agents.get_agents_db())
 
@@ -1791,7 +1791,7 @@ class PowerShellAgentMenu(SubMenu):
         name = self.mainMenu.agents.get_agent_name_db(sessionID)
 
         # set the text prompt
-        self.prompt = '(invader: ' + helpers.color(name, 'red') + ')> '
+        self.prompt = '(Invader: ' + helpers.color(name, 'red') + ')> '
 
         # agent commands that have opsec-safe alises in the agent code
         self.agentCommands = ['ls', 'dir', 'rm', 'del', 'cp', 'copy', 'pwd', 'cat', 'cd', 'mkdir', 'rmdir', 'mv', 'move', 'ipconfig', 'ifconfig', 'route', 'reboot', 'restart', 'shutdown', 'ps', 'tasklist', 'getpid', 'whoami', 'getuid', 'hostname']
@@ -1881,7 +1881,7 @@ class PowerShellAgentMenu(SubMenu):
             # replace the old name with the new name
             result = self.mainMenu.agents.rename_agent(oldname, parts[0])
             if result:
-                self.prompt = "(invader: " + helpers.color(parts[0], 'red') + ")> "
+                self.prompt = "(Invader: " + helpers.color(parts[0], 'red') + ")> "
         else:
             print helpers.color("[!] Please enter a new name for the agent")
 
@@ -2767,7 +2767,7 @@ class PythonAgentMenu(SubMenu):
         name = self.mainMenu.agents.get_agent_name_db(sessionID)
 
         # set the text prompt
-        self.prompt = '(invader: ' + helpers.color(name, 'red') + ')> '
+        self.prompt = '(Invader: ' + helpers.color(name, 'red') + ')> '
 
         # listen for messages from this specific agent
         #dispatcher.connect(self.handle_agent_event, sender=dispatcher.Any)
@@ -2842,7 +2842,7 @@ class PythonAgentMenu(SubMenu):
             # replace the old name with the new name
             result = self.mainMenu.agents.rename_agent(oldname, parts[0])
             if result:
-                self.prompt = "(invader: " + helpers.color(parts[0], 'red') + ")> "
+                self.prompt = "(Invader: " + helpers.color(parts[0], 'red') + ")> "
         else:
             print helpers.color("[!] Please enter a new name for the agent")
 
@@ -3493,7 +3493,7 @@ class ListenersMenu(SubMenu):
         self.doc_header = 'Listener Commands'
 
         # set the prompt text
-        self.prompt = '(invader: ' + helpers.color('listeners', color='blue') + ')> '
+        self.prompt = '(Invader: ' + helpers.color('listeners', color='blue') + ')> '
 
         # display all active listeners on menu startup
         messages.display_listeners(self.mainMenu.listeners.activeListeners)
@@ -3777,7 +3777,7 @@ class ListenerMenu(SubMenu):
         self.listenerName = listenerName
 
         # set the text prompt
-        self.prompt = '(invader: ' + helpers.color("listeners/%s" % (listenerName), 'red') + ')> '
+        self.prompt = '(Invader: ' + helpers.color("listeners/%s" % (listenerName), 'red') + ')> '
 
     def do_info(self, line):
         "Display listener module options."
@@ -3934,7 +3934,7 @@ class ModuleMenu(SubMenu):
             self.module = self.mainMenu.modules.modules[moduleName]
 
             # set the prompt text
-            self.prompt = '(invader: ' + helpers.color(self.moduleName, color="blue") + ')> '
+            self.prompt = '(Invader: ' + helpers.color(self.moduleName, color="blue") + ')> '
 
             # if this menu is being called from an agent menu
             if agent and 'Agent' in self.module.options:
@@ -4318,7 +4318,7 @@ class StagerMenu(SubMenu):
         self.stager = self.mainMenu.stagers.stagers[stagerName]
 
         # set the prompt text
-        self.prompt = '(invader: ' + helpers.color("stager/" + self.stagerName, color="blue") + ')> '
+        self.prompt = '(Invader: ' + helpers.color("stager/" + self.stagerName, color="blue") + ')> '
 
         # if this menu is being called from an listener menu
         if listener:
