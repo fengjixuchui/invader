@@ -142,7 +142,7 @@ class Credentials:
 
         if os.path.exists(export_path):
             try:
-                choice = raw_input(helpers.color("\n[>] File %s already exists, overwrite? [y/N] " % (export_path), "red"))
+                choice = raw_input(helpers.color("\n[?] File %s already exists, overwrite? [y/N] " % (export_path), "red"))
                 if choice.lower() != "" and choice.lower()[0] == "y":
                     pass
                 else:
@@ -153,7 +153,7 @@ class Credentials:
         creds = self.get_credentials()
 
         if len(creds) == 0:
-            print helpers.color("[!] No credentials in the database.")
+            print helpers.color("[!] No credentials found in the database.")
             return
 
         output_file = open(export_path, 'w')
