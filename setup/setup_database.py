@@ -20,7 +20,7 @@ punctuation = '!#%&()*+,-./:;<=>?@[]^_{|}~'
 
 # otherwise prompt the user for a set value to hash for the negotiation password
 if STAGING_KEY == "BLANK":
-    choice = raw_input("\n [*] Enter server password> ")
+    choice = raw_input("\n[*] Enter server password> ")
     if choice == "":
         # if no password is entered, generation something random
         STAGING_KEY = ''.join(random.sample(string.ascii_letters + string.digits + punctuation, 32))
@@ -175,4 +175,4 @@ c.execute('''CREATE TABLE "reporting" (
 conn.commit()
 conn.close()
 
-print "[*] Database setup completed!\n"
+print "[*] Database setup completed!"
