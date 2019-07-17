@@ -113,16 +113,13 @@ class MainMenu(cmd.Cmd):
 
         self.handle_args()
 
-        message = "[*] invader starting up..."
+        message = "[*] Invader starting up..."
         signal = json.dumps({
             'print': True,
             'message': message
         })
         dispatcher.send(signal, sender="invader")
 
-        # print the loading menu
-        messages.loading()
-    
     def get_db_connection(self):
         """
         Returns the 
@@ -195,7 +192,7 @@ class MainMenu(cmd.Cmd):
                     messages.title(VERSION)
                     print "[!] Warning: Running invader as non-root, after running as root will likely fail to access prior agents!"
                     while True:
-                        a = raw_input(helpers.color("[>] Are you sure you want to continue (y) or (n): "))
+                        a = raw_input(helpers.color("[?] Are you sure you want to continue (y) or (n): "))
                         if a.startswith("y"):
                             return
                         if a.startswith("n"):
@@ -290,7 +287,7 @@ class MainMenu(cmd.Cmd):
         """
         print "\n" + helpers.color("[!] Shutting down...")
 
-        message = "[*] invader shutting down..."
+        message = "[*] Invader shutting down..."
         signal = json.dumps({
             'print': True,
             'message': message
@@ -317,7 +314,7 @@ class MainMenu(cmd.Cmd):
             return self.conn
 
         except Exception:
-            print helpers.color("[!] Could not connect to database")
+            print helpers.color("[!] Could not connect to the database")
             print helpers.color("[!] Please run database_setup.py")
             sys.exit()
 
@@ -368,7 +365,7 @@ class MainMenu(cmd.Cmd):
             except KeyboardInterrupt as e:
                 self.menu_state = "Main"
                 try:
-                    choice = raw_input(helpers.color("\n[>] Exit? [y/N] ", "red"))
+                    choice = raw_input(helpers.color("\n[?] Exit from the Invader? [y/N] ", "red"))
                     if choice.lower() != "" and choice.lower()[0] == "y":
                         self.shutdown()
                         return True
@@ -627,7 +624,7 @@ class MainMenu(cmd.Cmd):
                     print helpers.color("[!] Format is 'remove <credID>/<credID-credID>/all'")
                 else:
                     if args[0].lower() == "all":
-                        choice = raw_input(helpers.color("[>] Remove all credentials from the database? [y/N] ", "red"))
+                        choice = raw_input(helpers.color("[?] Remove all credentials from the database? [y/N] ", "red"))
                         if choice.lower() != "" and choice.lower()[0] == "y":
                             self.credentials.remove_all_credentials()
                     else:
@@ -863,11 +860,11 @@ class MainMenu(cmd.Cmd):
 
         # Preobfuscate ALL module_source files
         if module == "" or module == "all":
-            choice = raw_input(helpers.color("[>] Preobfuscate all PowerShell module_source files using obfuscation command: \"" + self.obfuscateCommand + "\"?\nThis may take a substantial amount of time. [y/N] ", "red"))
+            choice = raw_input(helpers.color("[?] Preobfuscate all PowerShell module_source files using obfuscation command: \"" + self.obfuscateCommand + "\"?\nThis may take a substantial amount of time. [y/N] ", "red"))
             if choice.lower() != "" and choice.lower()[0] == "y":
                 obfuscate_all = True
                 obfuscate_confirmation = True
-                choice = raw_input(helpers.color("[>] Force reobfuscation of previously obfuscated modules? [y/N] ", "red"))
+                choice = raw_input(helpers.color("[?] Force reobfuscation of previously obfuscated modules? [y/N] ", "red"))
                 if choice.lower() != "" and choice.lower()[0] == "y":
                     reobfuscate = True
 
@@ -878,10 +875,10 @@ class MainMenu(cmd.Cmd):
                 print helpers.color("[!] The module_source file:" + module_source_fullpath + " does not exist.")
                 return
 
-            choice = raw_input(helpers.color("[>] Preobfuscate the module_source file: " + module + " using obfuscation command: \"" + self.obfuscateCommand + "\"? [y/N] ", "red"))
+            choice = raw_input(helpers.color("[?] Preobfuscate the module_source file: " + module + " using obfuscation command: \"" + self.obfuscateCommand + "\"? [y/N] ", "red"))
             if choice.lower() != "" and choice.lower()[0] == "y":
                 obfuscate_confirmation = True
-                choice = raw_input(helpers.color("[>] Force reobfuscation of previously obfuscated modules? [y/N] ", "red"))
+                choice = raw_input(helpers.color("[?] Force reobfuscation of previously obfuscated modules? [y/N] ", "red"))
                 if choice.lower() != "" and choice.lower()[0] == "y":
                     reobfuscate = True
 
@@ -1285,7 +1282,7 @@ class AgentsMenu(SubMenu):
 
             if sessionID and len(sessionID) != 0:
                 try:
-                    choice = raw_input(helpers.color("[>] Kill agent '%s'? [y/N] " % (name), 'red'))
+                    choice = raw_input(helpers.color("[?] Kill agent '%s'? [y/N] " % (name), 'red'))
                     if choice.lower() != '' and choice.lower()[0] == 'y':
                         self.mainMenu.agents.add_agent_task_db(sessionID, 'TASK_EXIT')
                 except KeyboardInterrupt:
@@ -1566,7 +1563,7 @@ class AgentsMenu(SubMenu):
 
         if name.lower() == 'all':
             try:
-                choice = raw_input(helpers.color('[>] Remove all agents from the database? [y/N] ', 'red'))
+                choice = raw_input(helpers.color('[?] Remove all agents from the database? [y/N] ', 'red'))
                 if choice.lower() != '' and choice.lower()[0] == 'y':
                     self.mainMenu.agents.remove_agent_db('%')
             except KeyboardInterrupt:
@@ -1794,7 +1791,7 @@ class PowerShellAgentMenu(SubMenu):
         name = self.mainMenu.agents.get_agent_name_db(sessionID)
 
         # set the text prompt
-        self.prompt = '(invader: ' + helpers.color(name, 'red') + ') > '
+        self.prompt = '(invader: ' + helpers.color(name, 'red') + ')> '
 
         # agent commands that have opsec-safe alises in the agent code
         self.agentCommands = ['ls', 'dir', 'rm', 'del', 'cp', 'copy', 'pwd', 'cat', 'cd', 'mkdir', 'rmdir', 'mv', 'move', 'ipconfig', 'ifconfig', 'route', 'reboot', 'restart', 'shutdown', 'ps', 'tasklist', 'getpid', 'whoami', 'getuid', 'hostname']
@@ -1884,7 +1881,7 @@ class PowerShellAgentMenu(SubMenu):
             # replace the old name with the new name
             result = self.mainMenu.agents.rename_agent(oldname, parts[0])
             if result:
-                self.prompt = "(invader: " + helpers.color(parts[0], 'red') + ") > "
+                self.prompt = "(invader: " + helpers.color(parts[0], 'red') + ")> "
         else:
             print helpers.color("[!] Please enter a new name for the agent")
 
@@ -1899,7 +1896,7 @@ class PowerShellAgentMenu(SubMenu):
         "Task agent to exit."
 
         try:
-            choice = raw_input(helpers.color("[>] Task agent to exit? [y/N] ", "red"))
+            choice = raw_input(helpers.color("[?] Task agent to exit? [y/N] ", "red"))
             if choice.lower() == "y":
 
                 self.mainMenu.agents.add_agent_task_db(self.sessionID, 'TASK_EXIT')
@@ -2770,7 +2767,7 @@ class PythonAgentMenu(SubMenu):
         name = self.mainMenu.agents.get_agent_name_db(sessionID)
 
         # set the text prompt
-        self.prompt = '(invader: ' + helpers.color(name, 'red') + ') > '
+        self.prompt = '(invader: ' + helpers.color(name, 'red') + ')> '
 
         # listen for messages from this specific agent
         #dispatcher.connect(self.handle_agent_event, sender=dispatcher.Any)
@@ -2845,7 +2842,7 @@ class PythonAgentMenu(SubMenu):
             # replace the old name with the new name
             result = self.mainMenu.agents.rename_agent(oldname, parts[0])
             if result:
-                self.prompt = "(invader: " + helpers.color(parts[0], 'red') + ") > "
+                self.prompt = "(invader: " + helpers.color(parts[0], 'red') + ")> "
         else:
             print helpers.color("[!] Please enter a new name for the agent")
 
@@ -2862,7 +2859,7 @@ class PythonAgentMenu(SubMenu):
         "Task agent to exit."
 
         try:
-            choice = raw_input(helpers.color("[>] Task agent to exit? [y/N] ", "red"))
+            choice = raw_input(helpers.color("[?] Task agent to exit? [y/N] ", "red"))
             if choice.lower() == "y":
 
                 self.mainMenu.agents.add_agent_task_db(self.sessionID, 'TASK_EXIT')
@@ -3496,7 +3493,7 @@ class ListenersMenu(SubMenu):
         self.doc_header = 'Listener Commands'
 
         # set the prompt text
-        self.prompt = '(invader: ' + helpers.color('listeners', color='blue') + ') > '
+        self.prompt = '(invader: ' + helpers.color('listeners', color='blue') + ')> '
 
         # display all active listeners on menu startup
         messages.display_listeners(self.mainMenu.listeners.activeListeners)
@@ -3524,7 +3521,7 @@ class ListenersMenu(SubMenu):
 
         if listenerID.lower() == 'all':
             try:
-                choice = raw_input(helpers.color('[>] Kill all listeners? [y/N] ', 'red'))
+                choice = raw_input(helpers.color('[?] Kill all listeners? [y/N] ', 'red'))
                 if choice.lower() != '' and choice.lower()[0] == 'y':
                     self.mainMenu.listeners.kill_listener('all')
             except KeyboardInterrupt:
@@ -3540,7 +3537,7 @@ class ListenersMenu(SubMenu):
 
         if listener_id.lower() == "all":
             try:
-                choice = raw_input(helpers.color("[>] Delete all listeners? [y/N] ", "red"))
+                choice = raw_input(helpers.color("[?] Delete all listeners? [y/N] ", "red"))
                 if choice.lower() != '' and choice.lower()[0] == 'y':
                     self.mainMenu.listeners.delete_listener("all")
             except KeyboardInterrupt:
@@ -3649,7 +3646,7 @@ class ListenersMenu(SubMenu):
             print helpers.color("[!] Please provide a listener name")
         elif listenerID.lower() == 'all':
             try:
-                choice = raw_input(helpers.color('[>] Start all listeners? [y/N] ', 'red'))
+                choice = raw_input(helpers.color('[?] Start all listeners? [y/N] ', 'red'))
                 if choice.lower() != '' and choice.lower()[0] == 'y':
                     self.mainMenu.listeners.enable_listener('all')
             except KeyboardInterrupt:
@@ -3665,7 +3662,7 @@ class ListenersMenu(SubMenu):
 
         if listenerID.lower() == 'all':
             try:
-                choice = raw_input(helpers.color('[>] Stop all listeners? [y/N] ', 'red'))
+                choice = raw_input(helpers.color('[?] Stop all listeners? [y/N] ', 'red'))
                 if choice.lower() != '' and choice.lower()[0] == 'y':
                     self.mainMenu.listeners.shutdown_listener('all')
             except KeyboardInterrupt:
@@ -3780,7 +3777,7 @@ class ListenerMenu(SubMenu):
         self.listenerName = listenerName
 
         # set the text prompt
-        self.prompt = '(invader: ' + helpers.color("listeners/%s" % (listenerName), 'red') + ') > '
+        self.prompt = '(invader: ' + helpers.color("listeners/%s" % (listenerName), 'red') + ')> '
 
     def do_info(self, line):
         "Display listener module options."
@@ -3937,7 +3934,7 @@ class ModuleMenu(SubMenu):
             self.module = self.mainMenu.modules.modules[moduleName]
 
             # set the prompt text
-            self.prompt = '(invader: ' + helpers.color(self.moduleName, color="blue") + ') > '
+            self.prompt = '(invader: ' + helpers.color(self.moduleName, color="blue") + ')> '
 
             # if this menu is being called from an agent menu
             if agent and 'Agent' in self.module.options:
@@ -3986,7 +3983,7 @@ class ModuleMenu(SubMenu):
         if prompt and ('OpsecSafe' in self.module.info) and (not self.module.info['OpsecSafe']):
 
             try:
-                choice = raw_input(helpers.color("[>] Module is not opsec safe, run? [y/N] ", "red"))
+                choice = raw_input(helpers.color("[?] Module is not opsec safe, run? [y/N] ", "red"))
                 if not (choice.lower() != "" and choice.lower()[0] == "y"):
                     return False
             except KeyboardInterrupt:
@@ -4151,7 +4148,7 @@ class ModuleMenu(SubMenu):
             # if we're running the module on all modules
             if agentName.lower() == "all":
                 try:
-                    choice = raw_input(helpers.color("[>] Run module on all agents? [y/N] ", "red"))
+                    choice = raw_input(helpers.color("[?] Run module on all agents? [y/N] ", "red"))
                     if choice.lower() != "" and choice.lower()[0] == "y":
 
                         # signal everyone with what we're doing
@@ -4321,7 +4318,7 @@ class StagerMenu(SubMenu):
         self.stager = self.mainMenu.stagers.stagers[stagerName]
 
         # set the prompt text
-        self.prompt = '(invader: ' + helpers.color("stager/" + self.stagerName, color="blue") + ') > '
+        self.prompt = '(invader: ' + helpers.color("stager/" + self.stagerName, color="blue") + ')> '
 
         # if this menu is being called from an listener menu
         if listener:
