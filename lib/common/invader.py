@@ -1,15 +1,12 @@
 """
 
-The main controller class for invader.
+The main controller class for Invader.
 
 This is what's launched from ./invader.
 Contains the Main, Listener, Agents, Agent, and Module
 menu loops.
 
 """
-
-# make version for invader
-VERSION = "2.5"
 
 from pydispatch import dispatcher
 
