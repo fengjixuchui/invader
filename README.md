@@ -10,8 +10,9 @@
 
 # About invader
 
-    INFO: Invader is a Windows PowerShell 
-    post exploitation framework.
+    INFO: Invader is a post exploitation framework 
+    that includes a pure-PowerShell2.0 Windows agent,
+    and a pure Python 2.6/2.7 Linux/OS X agent.
     
 ***
 
