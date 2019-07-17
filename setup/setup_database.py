@@ -175,4 +175,4 @@ c.execute('''CREATE TABLE "reporting" (
 conn.commit()
 conn.close()
 
-print "\n [*] Database setup completed!\n"
+print "[*] Database setup completed!\n"
