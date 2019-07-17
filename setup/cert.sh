@@ -9,5 +9,5 @@
 #openssl req -new -x509 -keyout ../data/invader-priv.key -out ../data/invader-chain.pem -days 365 -nodes
 openssl req -new -x509 -keyout ../data/invader-priv.key -out ../data/invader-chain.pem -days 365 -nodes -subj "/C=US" >/dev/null 2>&1
 
-echo -e "[*] Certificate written to ../data/invader-chain.pem\n"
-echo -e "[*] Private key written to ../data/invader-priv.key\n"
+echo -e "[*] Certificate written to ../data/invader-chain.pem"
+echo -e "[*] Private key written to ../data/invader-priv.key"
