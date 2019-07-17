@@ -92,7 +92,7 @@ class MainMenu(cmd.Cmd):
         (self.isroot, self.installPath, self.ipWhiteList, self.ipBlackList, self.obfuscate, self.obfuscateCommand) = helpers.get_config('rootuser, install_path,ip_whitelist,ip_blacklist,obfuscate,obfuscate_command')
 
         # change the default prompt for the user
-        self.prompt = '(invader) > '
+        self.prompt = '(Invader)> '
         self.do_help.__func__.__doc__ = '''Displays the help menu.'''
         self.doc_header = 'Commands'
 
