@@ -351,9 +351,11 @@ class MainMenu(cmd.Cmd):
                     else:
                         num_listeners = 0
 
-                    print "       " + helpers.color(str(num_modules), "green") + " modules currently loaded\n"
-                    print "       " + helpers.color(str(num_listeners), "green") + " listeners currently active\n"
-                    print "       " + helpers.color(str(num_agents), "green") + " agents currently active\n\n"
+                    print "       " + helpers.color(str(num_modules), "green") + " modules currently loaded"
+                    print("")
+	            print "       " + helpers.color(str(num_listeners), "green") + " listeners currently active"
+		    print("")
+                    print "       " + helpers.color(str(num_agents), "green") + " agents currently active\n"
 
 		    if len(self.resourceQueue) > 0:
 	    		self.cmdqueue.append(self.resourceQueue.pop(0))
@@ -1178,7 +1180,7 @@ class AgentsMenu(SubMenu):
         self.doc_header = 'Commands'
 
         # set the prompt text
-        self.prompt = '(Invader: ' + helpers.color("agents", color="blue") + ') > '
+        self.prompt = '(Invader: ' + helpers.color("agents", color="blue") + ')> '
 
         messages.display_agents(self.mainMenu.agents.get_agents_db())
 
