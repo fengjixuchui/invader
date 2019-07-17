@@ -1,18 +1,23 @@
 # Invader (Windows/Linux/OSX agent)
 
-    ________                    _________            
-    ____  _/_________   _______ ______  /____________
-     __  / __  __ \_ | / /  __ `/  __  /_  _ \_  ___/
-    __/ /  _  / / /_ |/ // /_/ // /_/ / /  __/  /    
-    /___/  /_/ /_/_____/ \__,_/ \__,_/  \___//_/ 
-    
+                                                             __    __
+                                                            /  \ /| |'-.
+                                                           .\__/ || |   |
+                                                        _ /  `._ \|_|_.-'
+    The Post Exploitation Framework                    | /  \__.`=._) (_
+    ________                    _________              |/ ._/  |"""""""""|
+    ____  _/_________   _______ ______  /____________  |'.  `\ |         |
+     __  / __  __ \_ | / /  __ `/  __  /_  _ \_  ___/  ;"""/ / |         |
+    __/ /  _  / / /_ |/ // /_/ // /_/ / /  __/  /       ) /_/| |.-------.|
+    /___/  /_/ /_/_____/ \__,_/ \__,_/  \___//_/       '  `-`' "         "
+
 ***
 
 # About invader
 
     INFO: Invader (Windows/Linux/OSX agent)
     is a post exploitation framework that includes 
-    a pure-PowerShell2.0 Windows agent,and a pure 
+    a pure-PowerShell2.0 Windows agent, and a pure 
     Python 2.6/2.7 Linux/OSX agent.
     
 ***
