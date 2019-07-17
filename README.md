@@ -10,8 +10,8 @@
 
 # About invader
 
-    INFO: Invader is a PowerShell and 
-    Python Post-Exploitation Framework. 
+    INFO: Invader is a Windows PowerShell 
+    post exploitation framework.
     
 ***
 
