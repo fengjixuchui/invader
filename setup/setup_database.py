@@ -20,7 +20,9 @@ punctuation = '!#%&()*+,-./:;<=>?@[]^_{|}~'
 
 # otherwise prompt the user for a set value to hash for the negotiation password
 if STAGING_KEY == "BLANK":
-    choice = raw_input("\n[*] Set server password> ")
+    BS='\033[0;34m'
+    CE='\033[0m'
+    choice = raw_input("\n"+BS+"[*] Set server password> "+CE)
     if choice == "":
         # if no password is entered, generation something random
         STAGING_KEY = ''.join(random.sample(string.ascii_letters + string.digits + punctuation, 32))
