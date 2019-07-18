@@ -1,4 +1,4 @@
-# Invader (Windows/Linux/OSX agent)
+# Invader Framework
 
     ________                    _________           
     ____  _/_________   _______ ______  /____________   
@@ -8,12 +8,11 @@
 
 ***
 
-# About invader
+# About invader framework
 
-    INFO: Invader (Windows/Linux/OSX agent)
-    is a post exploitation framework that includes 
-    a pure-PowerShell2.0 Windows agent, and a pure 
-    Python 2.6/2.7 Linux/OSX agent.
+    INFO: Invader Framework is a post exploitation 
+    framework that includes a pure-PowerShell2.0 Windows 
+    agent, and a pure Python 2.6/2.7 Linux/OSX agent.
     
 ***
 
