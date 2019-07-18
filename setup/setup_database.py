@@ -20,7 +20,7 @@ punctuation = '!#%&()*+,-./:;<=>?@[]^_{|}~'
 
 # otherwise prompt the user for a set value to hash for the negotiation password
 if STAGING_KEY == "BLANK":
-    BS='\033[0;34m'
+    BS='\033[1;34m'
     CE='\033[0m'
     choice = raw_input("\n"+BS+"[*] Set server password> "+CE)
     if choice == "":
