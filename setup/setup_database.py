@@ -176,5 +176,6 @@ conn.commit()
 conn.close()
 
 GNS='\033[1;32m'
+CE='\033[0m'
 
-print(GNS+"[*] Database setup completed!")
+print(GNS+"[*] Database setup completed!"+CE)
