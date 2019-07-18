@@ -1,6 +1,6 @@
 """
 
-Main agent handling functionality for invader.
+Main agent handling functionality for Invader.
 
 The Agents() class in instantiated in ./invader.py by the main menu and includes:
 
