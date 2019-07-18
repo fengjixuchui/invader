@@ -91,7 +91,6 @@ class MainMenu(cmd.Cmd):
         (self.isroot, self.installPath, self.ipWhiteList, self.ipBlackList, self.obfuscate, self.obfuscateCommand) = helpers.get_config('rootuser, install_path,ip_whitelist,ip_blacklist,obfuscate,obfuscate_command')
 
         # change the default prompt for the user
-	print("")
         self.prompt = '(Invader)> '
         self.do_help.__func__.__doc__ = '''Displays the help menu.'''
         self.doc_header = 'Commands'
@@ -356,7 +355,7 @@ class MainMenu(cmd.Cmd):
 	            print ("        --="+helpers.color(str(infoget), "green")+" "+helpers.color(str(info), "green")+" Post Exploitation Framework")
 		    print ("+---**---=="+helpers.color(str(infoget), "green")+" Available Modules: "+helpers.color(str(num_modules), "green")+"")
 	            print ("+---**---=="+helpers.color(str(infoget), "green")+" Active Listeners: "+helpers.color(str(num_listeners), "green")+"")
-		    print ("        --="+helpers.color(str(infoget), "green")+" Active Agents: "+helpers.color(str(num_agents), "green")+"")
+		    print ("        --="+helpers.color(str(infoget), "green")+" Active Agents: "+helpers.color(str(num_agents), "green")+"\n")
 
 		    if len(self.resourceQueue) > 0:
 	    		self.cmdqueue.append(self.resourceQueue.pop(0))
