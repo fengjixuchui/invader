@@ -14,14 +14,11 @@ then
 sleep 1
 echo ""$BS"[*] Installing update..."$CE""
 {
+cd
 rm -r ~/invader
-rm /bin/invader
-rm /usr/local/bin/invader
 cd ~
 git clone https://github.com/entynetproject/invader.git
 cd invader
-chmod +x install.sh
-./install.sh
 } &> /dev/null
 echo ""$GNS"[*] Successfully updated..."$CE""
 sleep 1
