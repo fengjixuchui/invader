@@ -351,8 +351,9 @@ class MainMenu(cmd.Cmd):
                         num_listeners = 0
 		    info = 'Invader'
 		    infoget = '['
+		    infof = 'Framework'
 
-	            print ("        --="+helpers.color(str(infoget), "green")+" "+helpers.color(str(info), "green")+" Post Exploitation Framework")
+	            print ("        --="+helpers.color(str(infoget), "green")+" "+helpers.color(str(info), "green")+" Post Exploitation "+helpers.color(str(infof), "green")+"")
 		    print ("+---**---=="+helpers.color(str(infoget), "green")+" Available Modules: "+helpers.color(str(num_modules), "green")+"")
 	            print ("+---**---=="+helpers.color(str(infoget), "green")+" Active Listeners: "+helpers.color(str(num_listeners), "green")+"")
 		    print ("        --="+helpers.color(str(infoget), "green")+" Active Agents: "+helpers.color(str(num_agents), "green")+"\n")
