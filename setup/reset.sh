@@ -35,7 +35,7 @@ fi
 
 # start up invader if not in docker otherwise return
 if [ -f /.dockerenv ]; then
-    echo "[*] Invader reset complete returning back to Docker"
+    echo "\033[1;32m[*] Invader reset complete returning back to Docker\033[0m"
 else
     ./invader
 fi
