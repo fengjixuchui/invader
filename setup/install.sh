@@ -194,4 +194,4 @@ cp bin/invader /bin
 chmod +x /bin/invader
 } &> /dev/null
 
-echo -e '[*] Setup complete!'
+echo -e '[*] Setup complete!\033[0m'
