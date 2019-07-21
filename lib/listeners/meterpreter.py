@@ -18,7 +18,7 @@ class Listener:
             'Comments': []
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
@@ -65,7 +65,7 @@ class Listener:
         return True
 
 
-    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', stagerRetries='0', language=None, safeChecks='', listenerName=None):
+    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', payloadRetries='0', language=None, safeChecks='', listenerName=None):
         """
         Generate a basic launcher for the specified listener.
         """
@@ -109,11 +109,11 @@ class Listener:
             print helpers.color("[!] listeners/meterpreter generate_launcher(): invalid listener name specification!")
 
 
-    def generate_stager(self, encode=False, encrypt=True, obfuscate=False, obfuscationCommand="", language=None):
+    def generate_payload(self, encode=False, encrypt=True, obfuscate=False, obfuscationCommand="", language=None):
         """
         Nothing to actually generate here for foreign listeners.
         """
-        print "generate_stager() not applicable for listeners/meterpreter"
+        print "generate_payload() not applicable for listeners/meterpreter"
         pass
 
 
@@ -121,7 +121,7 @@ class Listener:
         """
         Nothing to actually generate here for foreign listeners.
         """
-        print "generate_stager() not applicable for listeners/meterpreter"
+        print "generate_payload() not applicable for listeners/meterpreter"
         pass
 
 

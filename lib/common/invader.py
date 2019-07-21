@@ -33,7 +33,7 @@ import messages
 import agents
 import listeners
 import modules
-import stagers
+import payloads
 import credentials
 import plugins
 from events import log_event
@@ -100,10 +100,10 @@ class MainMenu(cmd.Cmd):
 
         # parse/handle any passed command line arguments
         self.args = args
-        # instantiate the agents, listeners, and stagers objects
+        # instantiate the agents, listeners, and payloads objects
         self.agents = agents.Agents(self, args=args)
         self.credentials = credentials.Credentials(self, args=args)
-        self.stagers = stagers.Stagers(self, args=args)
+        self.payloads = payloads.payloads(self, args=args)
         self.modules = modules.Modules(self, args=args)
         self.listeners = listeners.Listeners(self, args=args)
         self.resourceQueue = []
@@ -218,8 +218,8 @@ class MainMenu(cmd.Cmd):
 	    resourceFile = self.args.resource[0]
 	    self.do_resource(resourceFile)
 
-        if self.args.listener or self.args.stager:
-            # if we're displaying listeners/stagers or generating a stager
+        if self.args.listener or self.args.payload:
+            # if we're displaying listeners/payloads or generating a payload
             if self.args.listener:
                 if self.args.listener == 'list':
                     messages.display_listeners(self.listeners.activeListeners)
@@ -237,21 +237,21 @@ class MainMenu(cmd.Cmd):
                         print helpers.color("\n[!] No active listeners with name '%s'\n" % (self.args.listener))
 
             else:
-                if self.args.stager == 'list':
-                    print "\nStagers:\n"
+                if self.args.payload == 'list':
+                    print "\npayloads:\n"
                     print "  Name             Description"
                     print "  ----             -----------"
-                    for stagerName, stager in self.stagers.stagers.iteritems():
-                        print "  %s%s" % ('{0: <17}'.format(stagerName), stager.info['Description'])
+                    for payloadName, payload in self.payloads.payloads.iteritems():
+                        print "  %s%s" % ('{0: <17}'.format(payloadName), payload.info['Description'])
                     print "\n"
                 else:
-                    stagerName = self.args.stager
+                    payloadName = self.args.payload
                     try:
-                        targetStager = self.stagers.stagers[stagerName]
-                        menu = StagerMenu(self, stagerName)
+                        targetpayload = self.payloads.payloads[payloadName]
+                        menu = payloadMenu(self, payloadName)
 
-                        if self.args.stager_options:
-                            for option in self.args.stager_options:
+                        if self.args.payload_options:
+                            for option in self.args.payload_options:
                                 if '=' not in option:
                                     print helpers.color("\n[!] Invalid option: '%s'" % (option))
                                     print helpers.color("[!] Please use Option=Value format\n")
@@ -259,19 +259,19 @@ class MainMenu(cmd.Cmd):
                                         self.conn.close()
                                     sys.exit()
 
-                                # split the passed stager options by = and set the appropriate option
+                                # split the passed payload options by = and set the appropriate option
                                 optionName, optionValue = option.split('=')
                                 menu.do_set("%s %s" % (optionName, optionValue))
 
-                            # generate the stager
+                            # generate the payload
                             menu.do_generate('')
 
                         else:
-                            messages.display_stager(targetStager)
+                            messages.display_payload(targetpayload)
 
                     except Exception as e:
                         print e
-                        print helpers.color("\n[!] No current stager with name '%s'\n" % (stagerName))
+                        print helpers.color("\n[!] No current payload with name '%s'\n" % (payloadName))
 
             # shutdown the database connection object
             if self.conn:
@@ -532,28 +532,28 @@ class MainMenu(cmd.Cmd):
             raise e
 
 
-    def do_usestager(self, line):
-        "Use an invader stager."
+    def do_usepayload(self, line):
+        "Use an invader payload."
 
         try:
             parts = line.split(' ')
 
-            if parts[0] not in self.stagers.stagers:
-                print helpers.color("[!] Error: invalid stager module")
+            if parts[0] not in self.payloads.payloads:
+                print helpers.color("[!] Error: invalid payload module")
 
             elif len(parts) == 1:
-                stager_menu = StagerMenu(self, parts[0])
-                stager_menu.cmdloop()
+                payload_menu = payloadMenu(self, parts[0])
+                payload_menu.cmdloop()
             elif len(parts) == 2:
                 listener = parts[1]
                 if not self.listeners.is_listener_valid(listener):
                     print helpers.color("[!] Please enter a valid listener name or ID")
                 else:
-                    self.stagers.set_stager_option('Listener', listener)
-                    stager_menu = StagerMenu(self, parts[0])
-                    stager_menu.cmdloop()
+                    self.payloads.set_payload_option('Listener', listener)
+                    payload_menu = payloadMenu(self, parts[0])
+                    payload_menu.cmdloop()
             else:
-                print helpers.color("[!] Error in MainMenu's do_userstager()")
+                print helpers.color("[!] Error in MainMenu's do_userpayload()")
         except Exception as e:
             raise e
 
@@ -1013,22 +1013,22 @@ class MainMenu(cmd.Cmd):
         return [s[offs:] for s in module_names if s.startswith(mline)]
 
 
-    def complete_usestager(self, text, line, begidx, endidx):
-        "Tab-complete an invader stager module path."
+    def complete_usepayload(self, text, line, begidx, endidx):
+        "Tab-complete an invader payload module path."
 
-        stagerNames = self.stagers.stagers.keys()
+        payloadNames = self.payloads.payloads.keys()
 
-        if line.split(' ')[1].lower() in stagerNames:
+        if line.split(' ')[1].lower() in payloadNames:
             listenerNames = self.listeners.get_listener_names()
             endLine = ' '.join(line.split(' ')[1:])
             mline = endLine.partition(' ')[2]
             offs = len(mline) - len(text)
             return [s[offs:] for s in listenerNames if s.startswith(mline)]
         else:
-            # otherwise tab-complate the stager names
+            # otherwise tab-complate the payload names
             mline = line.partition(' ')[2]
             offs = len(mline) - len(text)
-            return [s[offs:] for s in stagerNames if s.startswith(mline)]
+            return [s[offs:] for s in payloadNames if s.startswith(mline)]
 
     def complete_setlist(self, text, line, begidx, endidx):
         "Tab-complete a global list option"
@@ -1624,27 +1624,27 @@ class AgentsMenu(SubMenu):
                 print helpers.color("[!] Invalid agent name")
 
 
-    def do_usestager(self, line):
-        "Use an invader stager."
+    def do_usepayload(self, line):
+        "Use an invader payload."
 
         parts = line.split(' ')
 
-        if parts[0] not in self.mainMenu.stagers.stagers:
-            print helpers.color("[!] Error: invalid stager module")
+        if parts[0] not in self.mainMenu.payloads.payloads:
+            print helpers.color("[!] Error: invalid payload module")
 
         elif len(parts) == 1:
-            stager_menu = StagerMenu(self.mainMenu, parts[0])
-            stager_menu.cmdloop()
+            payload_menu = payloadMenu(self.mainMenu, parts[0])
+            payload_menu.cmdloop()
         elif len(parts) == 2:
             listener = parts[1]
             if not self.mainMenu.listeners.is_listener_valid(listener):
                 print helpers.color("[!] Please enter a valid listener name or ID")
             else:
-                self.mainMenu.stagers.set_stager_option('Listener', listener)
-                stager_menu = StagerMenu(self.mainMenu, parts[0])
-                stager_menu.cmdloop()
+                self.mainMenu.payloads.set_payload_option('Listener', listener)
+                payload_menu = payloadMenu(self.mainMenu, parts[0])
+                payload_menu.cmdloop()
         else:
-            print helpers.color("[!] Error in AgentsMenu's do_userstager()")
+            print helpers.color("[!] Error in AgentsMenu's do_userpayload()")
 
 
     def do_usemodule(self, line):
@@ -1749,9 +1749,9 @@ class AgentsMenu(SubMenu):
         return self.mainMenu.complete_usemodule(text, line, begidx, endidx)
 
 
-    def complete_usestager(self, text, line, begidx, endidx):
-        "Tab-complete an invader stager module path."
-        return self.mainMenu.complete_usestager(text, line, begidx, endidx)
+    def complete_usepayload(self, text, line, begidx, endidx):
+        "Tab-complete an invader payload module path."
+        return self.mainMenu.complete_usepayload(text, line, begidx, endidx)
 
 
     def complete_creds(self, text, line, begidx, endidx):
@@ -3549,27 +3549,27 @@ class ListenersMenu(SubMenu):
         else:
             self.mainMenu.listeners.delete_listener(listener_id)
 
-    def do_usestager(self, line):
-        "Use an invader stager."
+    def do_usepayload(self, line):
+        "Use an invader payload."
 
         parts = line.split(' ')
 
-        if parts[0] not in self.mainMenu.stagers.stagers:
-            print helpers.color("[!] Error: invalid stager module")
+        if parts[0] not in self.mainMenu.payloads.payloads:
+            print helpers.color("[!] Error: invalid payload module")
 
         elif len(parts) == 1:
-            stager_menu = StagerMenu(self.mainMenu, parts[0])
-            stager_menu.cmdloop()
+            payload_menu = payloadMenu(self.mainMenu, parts[0])
+            payload_menu.cmdloop()
         elif len(parts) == 2:
             listener = parts[1]
             if not self.mainMenu.listeners.is_listener_valid(listener):
                 print helpers.color("[!] Please enter a valid listener name or ID")
             else:
-                self.mainMenu.stagers.set_stager_option('Listener', listener)
-                stager_menu = StagerMenu(self.mainMenu, parts[0])
-                stager_menu.cmdloop()
+                self.mainMenu.payloads.set_payload_option('Listener', listener)
+                payload_menu = payloadMenu(self.mainMenu, parts[0])
+                payload_menu.cmdloop()
         else:
-            print helpers.color("[!] Error in ListenerMenu's do_userstager()")
+            print helpers.color("[!] Error in ListenerMenu's do_userpayload()")
 
 
     def do_uselistener(self, line):
@@ -3610,30 +3610,30 @@ class ListenersMenu(SubMenu):
             try:
                 # set the listener value for the launcher
                 listenerOptions = self.mainMenu.listeners.activeListeners[listenerName]
-                stager = self.mainMenu.stagers.stagers['multi/launcher']
-                stager.options['Listener']['Value'] = listenerName
-                stager.options['Language']['Value'] = language
-                stager.options['Base64']['Value'] = "True"
+                payload = self.mainMenu.payloads.payloads['multi/launcher']
+                payload.options['Listener']['Value'] = listenerName
+                payload.options['Language']['Value'] = language
+                payload.options['Base64']['Value'] = "True"
                 try:
-                    stager.options['Proxy']['Value'] = listenerOptions['options']['Proxy']['Value']
-                    stager.options['ProxyCreds']['Value'] = listenerOptions['options']['ProxyCreds']['Value']
+                    payload.options['Proxy']['Value'] = listenerOptions['options']['Proxy']['Value']
+                    payload.options['ProxyCreds']['Value'] = listenerOptions['options']['ProxyCreds']['Value']
                 except:
                     pass
                 if self.mainMenu.obfuscate:
-                    stager.options['Obfuscate']['Value'] = "True"
+                    payload.options['Obfuscate']['Value'] = "True"
                 else:
-                    stager.options['Obfuscate']['Value'] = "False"
+                    payload.options['Obfuscate']['Value'] = "False"
 
                 # dispatch this event
                 message = "[*] Generated launcher"
                 signal = json.dumps({
                     'print': False,
                     'message': message,
-                    'options': stager.options
+                    'options': payload.options
                 })
                 dispatcher.send(signal, sender="invader")
 
-                print stager.generate()
+                print payload.generate()
             except Exception as e:
                 print helpers.color("[!] Error generating launcher: %s" % (e))
 
@@ -3687,9 +3687,9 @@ class ListenersMenu(SubMenu):
         if arguments[0] in self.mainMenu.listeners.activeListeners.keys():
             print helpers.color("[*] This change will not take effect until the listener is restarted")
 
-    def complete_usestager(self, text, line, begidx, endidx):
-        "Tab-complete an invader stager module path."
-        return self.mainMenu.complete_usestager(text, line, begidx, endidx)
+    def complete_usepayload(self, text, line, begidx, endidx):
+        "Tab-complete an invader payload module path."
+        return self.mainMenu.complete_usepayload(text, line, begidx, endidx)
 
 
     def complete_kill(self, text, line, begidx, endidx):
@@ -3739,7 +3739,7 @@ class ListenersMenu(SubMenu):
             offs = len(mline) - len(text)
             return [s[offs:] for s in listenerNames if s.startswith(mline)]
         else:
-            # otherwise tab-complate the stager names
+            # otherwise tab-complate the payload names
             mline = line.partition(' ')[2]
             offs = len(mline) - len(text)
             return [s[offs:] for s in languages if s.startswith(mline)]
@@ -3806,13 +3806,13 @@ class ListenerMenu(SubMenu):
         try:
             # set the listener value for the launcher
             listenerOptions = self.mainMenu.listeners.activeListeners[self.listenerName]
-            stager = self.mainMenu.stagers.stagers['multi/launcher']
-            stager.options['Listener']['Value'] = self.listenerName
-            stager.options['Language']['Value'] = parts[0]
-            stager.options['Base64']['Value'] = "True"
+            payload = self.mainMenu.payloads.payloads['multi/launcher']
+            payload.options['Listener']['Value'] = self.listenerName
+            payload.options['Language']['Value'] = parts[0]
+            payload.options['Base64']['Value'] = "True"
             try:
-                stager.options['Proxy']['Value'] = listenerOptions['options']['Proxy']['Value']
-                stager.options['ProxyCreds']['Value'] = listenerOptions['options']['ProxyCreds']['Value']
+                payload.options['Proxy']['Value'] = listenerOptions['options']['Proxy']['Value']
+                payload.options['ProxyCreds']['Value'] = listenerOptions['options']['ProxyCreds']['Value']
             except:
                 pass
 
@@ -3821,11 +3821,11 @@ class ListenerMenu(SubMenu):
             signal = json.dumps({
                 'print': False,
                 'message': message,
-                'options': stager.options
+                'options': payload.options
             })
             dispatcher.send(signal, sender="invader")
 
-            print stager.generate()
+            print payload.generate()
         except Exception as e:
             print helpers.color("[!] Error generating launcher: %s" % (e))
 
@@ -4308,36 +4308,36 @@ class ModuleMenu(SubMenu):
         return [s[offs:] for s in names if s.startswith(mline)]
 
 
-class StagerMenu(SubMenu):
+class payloadMenu(SubMenu):
     """
-    The main class used by invader to drive the 'stager' menu.
+    The main class used by invader to drive the 'payload' menu.
     """
-    def __init__(self, mainMenu, stagerName, listener=None):
+    def __init__(self, mainMenu, payloadName, listener=None):
         SubMenu.__init__(self, mainMenu)
-        self.doc_header = 'Stager Menu'
+        self.doc_header = 'payload Menu'
 
-        # get the current stager name
-        self.stagerName = stagerName
-        self.stager = self.mainMenu.stagers.stagers[stagerName]
+        # get the current payload name
+        self.payloadName = payloadName
+        self.payload = self.mainMenu.payloads.payloads[payloadName]
 
         # set the prompt text
-        self.prompt = '(Invader: ' + helpers.color("stager/" + self.stagerName, color="blue") + ')> '
+        self.prompt = '(Invader: ' + helpers.color("payload/" + self.payloadName, color="blue") + ')> '
 
         # if this menu is being called from an listener menu
         if listener:
             # resolve the listener ID to a name, if applicable
             listener = self.mainMenu.listeners.get_listener(listener)
-            self.stager.options['Listener']['Value'] = listener
+            self.payload.options['Listener']['Value'] = listener
 
     def validate_options(self):
-        "Make sure all required stager options are completed."
+        "Make sure all required payload options are completed."
 
-        for option, values in self.stager.options.iteritems():
+        for option, values in self.payload.options.iteritems():
             if values['Required'] and ((not values['Value']) or (values['Value'] == '')):
-                print helpers.color("[!] Error: Required stager option missing.")
+                print helpers.color("[!] Error: Required payload option missing.")
                 return False
 
-        listenerName = self.stager.options['Listener']['Value']
+        listenerName = self.payload.options['Listener']['Value']
 
         if not self.mainMenu.listeners.is_listener_valid(listenerName):
             print helpers.color("[!] Invalid listener ID or name.")
@@ -4357,30 +4357,30 @@ class StagerMenu(SubMenu):
 
 
     def do_info(self, line):
-        "Display stager options."
-        messages.display_stager(self.stager)
+        "Display payload options."
+        messages.display_payload(self.payload)
 
 
     def do_options(self, line):
-        "Display stager options."
-        messages.display_stager(self.stager)
+        "Display payload options."
+        messages.display_payload(self.payload)
 
 
     def do_set(self, line):
-        "Set a stager option."
+        "Set a payload option."
 
         parts = line.split()
 
         try:
             option = parts[0]
-            if option not in self.stager.options:
+            if option not in self.payload.options:
                 print helpers.color("[!] Invalid option specified.")
 
             elif len(parts) == 1:
                 # "set OPTION"
                 # check if we're setting a switch
-                if self.stager.options[option]['Description'].startswith("Switch."):
-                    self.stager.options[option]['Value'] = "True"
+                if self.payload.options[option]['Description'].startswith("Switch."):
+                    self.payload.options[option]['Value'] = "True"
                 else:
                     print helpers.color("[!] Please specify an option value.")
             else:
@@ -4391,35 +4391,35 @@ class StagerMenu(SubMenu):
                 if value == '""' or value == "''":
                     value = ""
 
-                self.stager.options[option]['Value'] = value
+                self.payload.options[option]['Value'] = value
         except:
             print helpers.color("[!] Error in setting option, likely invalid option name.")
 
 
     def do_unset(self, line):
-        "Unset a stager option."
+        "Unset a payload option."
 
         option = line.split()[0]
 
         if line.lower() == "all":
-            for option in self.stager.options:
-                self.stager.options[option]['Value'] = ''
-        if option not in self.stager.options:
+            for option in self.payload.options:
+                self.payload.options[option]['Value'] = ''
+        if option not in self.payload.options:
             print helpers.color("[!] Invalid option specified.")
         else:
-            self.stager.options[option]['Value'] = ''
+            self.payload.options[option]['Value'] = ''
 
 
     def do_generate(self, line):
-        "Generate/execute the given invader stager."
+        "Generate/execute the given invader payload."
         if not self.validate_options():
             return
 
-        stagerOutput = self.stager.generate()
+        payloadOutput = self.payload.generate()
 
         savePath = ''
-        if 'OutFile' in self.stager.options:
-            savePath = self.stager.options['OutFile']['Value']
+        if 'OutFile' in self.payload.options:
+            savePath = self.payload.options['OutFile']['Value']
 
         if savePath != '':
             # make the base directory if it doesn't exist
@@ -4429,33 +4429,33 @@ class StagerMenu(SubMenu):
             # if we need to write binary output for a .dll
             if ".dll" in savePath:
                 out_file = open(savePath, 'wb')
-                out_file.write(bytearray(stagerOutput))
+                out_file.write(bytearray(payloadOutput))
                 out_file.close()
             else:
                 # otherwise normal output
                 out_file = open(savePath, 'w')
-                out_file.write(stagerOutput)
+                out_file.write(payloadOutput)
                 out_file.close()
 
             # if this is a bash script, make it executable
             if ".sh" in savePath:
                 os.chmod(savePath, 777)
 
-            print "\n" + helpers.color("[*] Stager output written out to: %s\n" % (savePath))
+            print "\n" + helpers.color("[*] payload output written out to: %s\n" % (savePath))
             # dispatch this event
-            message = "[*] Generated stager"
+            message = "[*] Generated payload"
             signal = json.dumps({
                 'print': False,
                 'message': message,
-                'options': self.stager.options
+                'options': self.payload.options
             })
             dispatcher.send(signal, sender="invader")
         else:
-            print stagerOutput
+            print payloadOutput
 
 
     def do_execute(self, line):
-        "Generate/execute the given invader stager."
+        "Generate/execute the given invader payload."
         self.do_generate(line)
 
 
@@ -4474,9 +4474,9 @@ class StagerMenu(SubMenu):
 
 
     def complete_set(self, text, line, begidx, endidx):
-        "Tab-complete a stager option to set."
+        "Tab-complete a payload option to set."
 
-        options = self.stager.options.keys()
+        options = self.payload.options.keys()
 
         if line.split(' ')[1].lower() == "listener":
             # if we're tab-completing a listener name, return all the names
@@ -4494,7 +4494,7 @@ class StagerMenu(SubMenu):
             return [s[offs:] for s in languages if s.startswith(mline)]
 
         elif line.split(' ')[1].lower().endswith("path"):
-            # tab-complete any stager option that ends with 'path'
+            # tab-complete any payload option that ends with 'path'
             return helpers.complete_path(text, line, arg=True)
 
         # otherwise we're tab-completing an option name
@@ -4504,9 +4504,9 @@ class StagerMenu(SubMenu):
 
 
     def complete_unset(self, text, line, begidx, endidx):
-        "Tab-complete a stager option to unset."
+        "Tab-complete a payload option to unset."
 
-        options = self.stager.options.keys() + ["all"]
+        options = self.payload.options.keys() + ["all"]
 
         mline = line.partition(' ')[2]
         offs = len(mline) - len(text)

@@ -1,6 +1,6 @@
 from lib.common import helpers
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -12,22 +12,22 @@ class Stager:
             'Description': ('Generates a bunny script that runs a one-liner stage0 launcher for invader.'),
 
             'Comments': [
-                'This stager is modification of the ducky stager by @harmj0y,',
+                'This payload is modification of the ducky payload by @harmj0y,',
                 'Current other language (keyboard layout) support is trough DuckyInstall from https://github.com/hak5/bashbunny-payloads'
             ]
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
             'Language' : {
-                'Description'   :   'Language of the stager to generate.',
+                'Description'   :   'Language of the payload to generate.',
                 'Required'      :   True,
                 'Value'         :   'powershell'
             },
@@ -41,8 +41,8 @@ class Stager:
                 'Required'      :   False,
                 'Value'         :   'powershell'
             },
-            'StagerRetries' : {
-                'Description'   :   'Times for the stager to retry connecting.',
+            'payloadRetries' : {
+                'Description'   :   'Times for the payload to retry connecting.',
                 'Required'      :   False,
                 'Value'         :   '0'
             },
@@ -89,10 +89,10 @@ class Stager:
         userAgent = self.options['UserAgent']['Value']
         proxy = self.options['Proxy']['Value']
         proxyCreds = self.options['ProxyCreds']['Value']
-        stagerRetries = self.options['StagerRetries']['Value']
+        payloadRetries = self.options['payloadRetries']['Value']
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language=language, encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, stagerRetries=stagerRetries)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language=language, encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, payloadRetries=payloadRetries)
         
 
         if launcher == "":

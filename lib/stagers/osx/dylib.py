@@ -1,7 +1,7 @@
 from lib.common import helpers
 import os
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -17,17 +17,17 @@ class Stager:
             ]
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
             'Language' : {
-                'Description'   :   'Language of the stager to generate.',
+                'Description'   :   'Language of the payload to generate.',
                 'Required'      :   True,
                 'Value'         :   'python'
             },
@@ -82,7 +82,7 @@ class Stager:
             return ""
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language=language, userAgent=userAgent,  safeChecks=safeChecks)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language=language, userAgent=userAgent,  safeChecks=safeChecks)
 
         if launcher == "":
             print helpers.color("[!] Error in launcher command generation.")
@@ -90,6 +90,6 @@ class Stager:
 
         else:
             launcher = launcher.strip('echo').strip(' | /usr/bin/python &').strip("\"")
-            dylib = self.mainMenu.stagers.generate_dylib(launcherCode=launcher, arch=arch, hijacker=hijacker)
+            dylib = self.mainMenu.payloads.generate_dylib(launcherCode=launcher, arch=arch, hijacker=hijacker)
             return dylib
 

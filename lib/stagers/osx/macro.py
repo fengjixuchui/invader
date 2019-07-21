@@ -1,7 +1,7 @@
 from lib.common import helpers
 import re
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -17,17 +17,17 @@ class Stager:
             ]
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
             'Language' : {
-                'Description'   :   'Language of the stager to generate.',
+                'Description'   :   'Language of the payload to generate.',
                 'Required'      :   True,
                 'Value'         :   'python'
             },
@@ -90,7 +90,7 @@ class Stager:
             raise TypeError('Invalid version provided. Accepts "new" and "old"')
 
         # generate the python launcher code
-        pylauncher = self.mainMenu.stagers.generate_launcher(listenerName, language="python", encode=True, userAgent=userAgent, safeChecks=safeChecks)
+        pylauncher = self.mainMenu.payloads.generate_launcher(listenerName, language="python", encode=True, userAgent=userAgent, safeChecks=safeChecks)
 
         if pylauncher == "":
             print helpers.color("[!] Error in python launcher command generation.")

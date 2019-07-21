@@ -294,27 +294,27 @@ def display_listener_module(listener):
     print "\n"
 
 
-def display_stager(stager):
+def display_payload(payload):
     """
-    Displays a stager's information structure.
+    Displays a payload's information structure.
     """
 
-    print "\nName: " + stager.info['Name']
+    print "\nName: " + payload.info['Name']
 
     print "\nDescription:"
-    desc = wrap_string(stager.info['Description'], width=50, indent=2, indentAll=True)
+    desc = wrap_string(payload.info['Description'], width=50, indent=2, indentAll=True)
     if len(desc.splitlines()) == 1:
         print "  " + str(desc)
     else:
         print desc
 
     # print out any options, if present
-    if stager.options:
+    if payload.options:
         print "\nOptions:\n"
         print "  Name             Required    Value             Description"
         print "  ----             --------    -------           -----------"
 
-        for option, values in stager.options.iteritems():
+        for option, values in payload.options.iteritems():
             print "  %s%s%s%s" % ('{0: <17}'.format(option), '{0: <12}'.format(("True" if values['Required'] else "False")), '{0: <18}'.format(values['Value']), wrap_string(values['Description'], indent=49))
 
     print "\n"

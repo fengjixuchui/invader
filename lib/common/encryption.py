@@ -225,7 +225,7 @@ class DiffieHellman(object):
         version 3.0 of the GNU General Public License
         see ./data/licenses/pyDHE_license.txt for license info
 
-    Also used in ./data/agent/stager.py for the Python key-negotiation stager
+    Also used in ./data/agent/payload.py for the Python key-negotiation payload
     """
 
     def __init__(self, generator=2, group=17, keyLength=540):

@@ -2,7 +2,7 @@
 from lib.common import helpers
 import os
 
-class Stager:
+class payload:
 
     def __init__(self, mainMenu, params=[]):
 
@@ -75,7 +75,7 @@ class Stager:
         print helpers.color("[!] Invalid listener: " + listener)
         return ""
       else:
-        launcher = self.mainMenu.stagers.generate_launcher(listener, language='powershell', encode=True)
+        launcher = self.mainMenu.payloads.generate_launcher(listener, language='powershell', encode=True)
 
       def create_directory_structure(outdir):
         os.makedirs(outdir + "_rels")

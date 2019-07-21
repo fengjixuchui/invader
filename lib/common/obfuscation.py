@@ -1,5 +1,5 @@
 """ Contains methods to encrypt, obfuscate, minify, etc. source code, either
-Python or Powershell, for use in agents, stagers, etc.
+Python or Powershell, for use in agents, payloads, etc.
 
 In essence: you should be able to put Python or Powershell code strings into
 any function in this file, and get back a string which has the same
