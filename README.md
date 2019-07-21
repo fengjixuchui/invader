@@ -92,10 +92,10 @@
 
 # Why invader framework?
 
-> Invader is a free software
+> A lot of RAT modules
 
-    INFO: This is a good platform 
-    to start exploring vulnerabilities!
+    INFO: Invader Framework has a lot of python 
+    and powershell modules for full remote control!
     
 > Simple UX/UI interface for beginners
 
