@@ -198,10 +198,3 @@ chmod +x /bin/invader
 
 echo -e '\033[1;32m[*] Setup complete!\033[0m'
 sleep 3
-clear
-printf '\033]2;invader INSTALLER\a'
-sleep 1
-echo -e '[*] Open a NEW terminal and type 'invader' to launch framework'
-sleep 0.5
-echo -e "[*] If you want to update invader, run 'invader -u'"
-sleep 3
