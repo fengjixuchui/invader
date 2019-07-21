@@ -48,6 +48,8 @@
 
 > ./install.sh
 
+<img width="1440" alt="sas2" src="https://user-images.githubusercontent.com/43011806/61594477-ab889f80-abec-11e9-9f94-7065bdede64b.png">
+
 # How to uninstall invader
 
 > cd invader/setup
