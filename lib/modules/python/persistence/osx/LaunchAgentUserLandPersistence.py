@@ -91,7 +91,7 @@ class Module:
         listenerName = self.options['Listener']['Value']
         userAgent = self.options['UserAgent']['Value']
         safeChecks = self.options['SafeChecks']['Value']
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
         launcher = launcher.strip('echo').strip(' | /usr/bin/python &').strip("\"")
 
 

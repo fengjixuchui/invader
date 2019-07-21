@@ -92,7 +92,7 @@ class Module:
         safeChecks = self.options['UserAgent']['Value']
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
 
         if launcher == "":
             print helpers.color("[!] Error in launcher command generation.")

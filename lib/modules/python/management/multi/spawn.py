@@ -81,7 +81,7 @@ class Module:
         userAgent = self.options['UserAgent']['Value']
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python', userAgent=userAgent)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python', userAgent=userAgent)
 
         if launcher == "":
             print helpers.color("[!] Error in launcher command generation.")

