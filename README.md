@@ -26,6 +26,49 @@
 
 ***
 
+# How to execute invader
+
+> invader -h
+
+    usage: invader [-h] [--debug [DEBUG]] [-v] [-r RESOURCE] [-l [LISTENER]]
+                   [-s [PAYLOAD]] [-o [PAYLOAD_OPTIONS [PAYLOAD_OPTIONS ...]]]
+                   [--rest | --headless] [--restport RESTPORT]
+                   [--username USERNAME] [--password PASSWORD]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+
+    General Options:
+      --debug [DEBUG]       Debug level for output (default of 1, 2 for msg
+                            display).
+      -v, --version         Display current invader version.
+      -r RESOURCE, --resource RESOURCE
+                            Run the invader commands in the specified resource
+                            file after startup.
+
+    CLI Payload Options:
+      -l [LISTENER], --listener [LISTENER]
+                            Display listener options. Displays all listeners if
+                            nothing is specified.
+      -s [PAYLOAD], --payload [PAYLOAD]
+                            Specify a payload to generate. Lists all payloads if
+                            none is specified.
+      -o [PAYLOAD_OPTIONS [PAYLOAD_OPTIONS ...]], --payload-options [PAYLOAD_OPTIONS [PAYLOAD_OPTIONS ...]]
+                            Supply options to set for a payload in OPTION=VALUE
+                            format. Lists options if nothing is specified.
+
+    RESTful API Options:
+      --rest                Run invader and the RESTful API.
+      --headless            Run invader and the RESTful API headless without the
+                            usual interface.
+      --restport RESTPORT   Port to run the invader RESTful API on.
+      --username USERNAME   Start the RESTful API with the specified username
+                            instead of pulling from invader.db
+      --password PASSWORD   Start the RESTful API with the specified password
+                            instead of pulling from invader.db
+
+***
+
 # How to build listener
 
     INFO: Invader listener is intended to capture 
