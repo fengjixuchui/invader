@@ -97,7 +97,7 @@
 
 # Why invader framework?
 
-> A lot of RAT modules
+> A lot of Remote Administration Tool modules
 
     INFO: Invader Framework has a lot of python 
     and powershell modules for full remote control!
