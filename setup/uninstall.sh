@@ -1,5 +1,6 @@
 #! /bin/bash
-sleep 1
+printf '\033]2;Uninstalling...\a'
+sleep 5
 
 {
 rm /bin/invader
