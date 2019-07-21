@@ -183,7 +183,7 @@ function Invoke-ExecuteMSBuild
 
 "@
 
-    #When omitting the Command paramter, place your embedded command here. Ideal for invader stagers, Cobalt Strike PowerShell payloads, etc.
+    #When omitting the Command paramter, place your embedded command here. Ideal for invader payloads, Cobalt Strike PowerShell payloads, etc.
     $embeddedCommand = @"
 LAUNCHER
 "@
