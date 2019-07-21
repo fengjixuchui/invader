@@ -19,6 +19,7 @@ rm -r ~/invader
 cd ~
 git clone https://github.com/entynetproject/invader.git
 cd invader
+chmod +x invader
 } &> /dev/null
 echo ""$GNS"[*] Successfully updated..."$CE""
 sleep 1
