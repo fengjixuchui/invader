@@ -17,8 +17,8 @@ namespace cmd
 	{
 		public static void Main(string[] args)
 		{
-			string stager = " YOUR CODE GOES HERE";
-			var decodedScript = Encoding.Unicode.GetString(Convert.FromBase64String(stager));
+			string payload = " YOUR CODE GOES HERE";
+			var decodedScript = Encoding.Unicode.GetString(Convert.FromBase64String(payload));
 
             Runspace runspace = RunspaceFactory.CreateRunspace();
             runspace.Open();

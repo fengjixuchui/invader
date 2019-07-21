@@ -1,4 +1,4 @@
-""" Implements Diffie-Hellman as a Jinja2 partial for use in stagers
+""" Implements Diffie-Hellman as a Jinja2 partial for use in payloads
 DH code from: https://github.com/lowazo/pyDHE """
 
 import os

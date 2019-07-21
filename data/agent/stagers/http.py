@@ -39,7 +39,7 @@ userAgent = parts[1]
 headersRaw = parts[2:]
 
 # global header dictionary
-#   sessionID is set by stager.py
+#   sessionID is set by payload.py
 # headers = {'User-Agent': userAgent, "Cookie": "SESSIONID=%s" % (sessionID)}
 headers = {'User-Agent': userAgent}
 
