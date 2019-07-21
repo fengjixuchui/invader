@@ -6,15 +6,11 @@
     __/ /  _  / / /_ |/ // /_/ // /_/ / /  __/  /        
     /___/  /_/ /_/_____/ \__,_/ \__,_/  \___//_/     
 
-***
-
 # About invader framework
 
     INFO: Invader Framework is a post exploitation 
     framework that includes a pure-PowerShell2.0 Windows 
     agent, and a pure Python 2.6/2.7 Linux/OSX agent.
-    
-***
 
 # How to install invader
 
@@ -24,7 +20,13 @@
 
 > ./install.sh
 
-***
+# How to uninstall invader
+
+> cd invader/setup
+
+> chmod +x uninstall.sh
+
+> ./uninstall.sh
 
 # How to execute invader
 
@@ -67,14 +69,9 @@
       --password PASSWORD   Start the RESTful API with the specified password
                             instead of pulling from invader.db
 
-***
+# Invader framework examples
 
-# How to build listener
-
-    INFO: Invader listener is intended to capture 
-    the remote connection to the victim's computer.
-
-## Windows listener
+## Building powershell listener
 
 > invader
 
@@ -83,7 +80,7 @@
     (Invader: listeners/http)> execute
     (Invader: listeners/http)> launcher powershell
     
-## Linux listener
+## Building python listener
 
 > invader
 
@@ -91,10 +88,8 @@
     (Invader: listeners)> uselistener http
     (Invader: listeners/http)> execute
     (Invader: listeners/http)> launcher python
-    
-***
 
-# Interacting with a session
+## Interacting with a session
 
     INFO: After capturing a remote connection, you 
     need to select an open session to interact with it.
@@ -106,15 +101,11 @@
     (Invader: MachineName)> rename comp1
     (Invader: comp1)> info
 
-***
-
 # Terms of use
 
     This tool is only for educational purposes only.
     Use this tool wisely and never without permission.
     I am not responsible for anything you do with this tool.
-
-***
 
 # Invader MIT license
 
@@ -139,10 +130,5 @@
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
-    
-***
 
 # Thats all!
-
-    
-
