@@ -9,6 +9,8 @@ from OpenSSL import SSL
 import ssl
 import ast
 
+os.system("printf '\033]2;Invader Framework\a'")
+
 # invader imports
 from lib.common import invader, helpers
 
