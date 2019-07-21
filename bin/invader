@@ -34,6 +34,7 @@ then
 {
 cd ~/invader
 } &> /dev/null
+chmod +x invader
 ./invader $1 $2 $3 $4 $5 $6 $7 $8 $9
 else
 {
@@ -46,6 +47,7 @@ cd ~
 git clone https://github.com/entynetproject/invader.git
 cd ~/invader
 } &> /dev/null
+chmod +x invader
 ./invader $1 $2 $3 $4 $5 $6 $7 $8 $9
 else
 cd ~
