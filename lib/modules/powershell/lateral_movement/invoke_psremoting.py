@@ -9,7 +9,7 @@ class Module:
 
             'Author': ['@harmj0y'],
 
-            'Description': ('Executes a stager on remote hosts using PSRemoting.'),
+            'Description': ('Executes a payload on remote hosts using PSRemoting.'),
 
             'Background' : False,
 
@@ -41,7 +41,7 @@ class Module:
                 'Value'         :   ''                
             },
             'ComputerName' : {
-                'Description'   :   'Host[s] to execute the stager on, comma separated.',
+                'Description'   :   'Host[s] to execute the payload on, comma separated.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
@@ -120,7 +120,7 @@ class Module:
 
         else:
             # generate the PowerShell one-liner with all of the proper options set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
                 
             if launcher == "":
                 return ""

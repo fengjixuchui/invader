@@ -10,7 +10,7 @@ class Module:
             'Author': ['@harmj0y'],
 
             'Description': ("Backs up a service's binary and replaces the original "
-                            "with a binary that launches a stager.bat."),
+                            "with a binary that launches a payload.bat."),
 
             'Background' : True,
 
@@ -104,7 +104,7 @@ class Module:
         script = moduleCode
 
         # generate the .bat launcher code to write out to the specified location
-        l = self.mainMenu.stagers.stagers['windows/launcher_bat']
+        l = self.mainMenu.payloads.payloads['windows/launcher_bat']
         l.options['Listener']['Value'] = self.options['Listener']['Value']
         l.options['UserAgent']['Value'] = self.options['UserAgent']['Value']
         l.options['Proxy']['Value'] = self.options['Proxy']['Value']

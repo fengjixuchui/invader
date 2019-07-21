@@ -133,7 +133,7 @@ class Module:
         #   this is because the System.Diagnostics.ProcessStartInfo method appears
         #   to have a length limit on the arguments passed :(
         
-        l = self.mainMenu.stagers.stagers['windows/launcher_bat']
+        l = self.mainMenu.payloads.payloads['windows/launcher_bat']
         l.options['Listener']['Value'] = self.options['Listener']['Value']
         l.options['UserAgent']['Value'] = self.options['UserAgent']['Value']
         l.options['Proxy']['Value'] = self.options['Proxy']['Value']

