@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-printf '\033]2;Invader INSTALLER\a'
+printf '\033]2;invader INSTALLER\a'
 sleep 1
 # functions
 
