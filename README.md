@@ -67,7 +67,7 @@
 
 ## Building powershell listener
 
-> Invader
+> invader
 
     (Invader)> listeners
     (Invader: listeners)> uselistener http
