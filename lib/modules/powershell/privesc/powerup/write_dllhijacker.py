@@ -27,7 +27,7 @@ class Module:
             'MinLanguageVersion' : '2',
             
             'Comments': [
-                'https://github.com/PowerShellinvader/PowerTools/tree/master/PowerUp'
+                'https://github.com/PowerShellInvader/PowerTools/tree/master/PowerUp'
             ]
         }
 

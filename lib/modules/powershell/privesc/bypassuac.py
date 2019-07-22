@@ -11,7 +11,7 @@ class Module:
 
             'Description': ("Runs a BypassUAC attack to escape from a medium integrity process "
                             "to a high integrity process. This attack was originally discovered by Leo Davidson. "
-                            "invader uses components of MSF's bypassuac injection implementation as well as "
+                            "Invader uses components of MSF's bypassuac injection implementation as well as "
                             "an adapted version of PowerSploit's Invoke--Shellcode.ps1 script for backend lifting."),
 
             'Background' : True,

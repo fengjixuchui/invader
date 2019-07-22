@@ -9,7 +9,7 @@ class Module:
 
             'Author': ['@harmj0y'],
 
-            'Description': ("Modifies a target service to execute an invader payload."),
+            'Description': ("Modifies a target service to execute an Invader payload."),
 
             'Background' : True,
 
@@ -24,7 +24,7 @@ class Module:
             'MinLanguageVersion' : '2',
             
             'Comments': [
-                'https://github.com/PowerShellinvader/PowerTools/tree/master/PowerUp'
+                'https://github.com/PowerShellInvader/PowerTools/tree/master/PowerUp'
             ]
         }
 

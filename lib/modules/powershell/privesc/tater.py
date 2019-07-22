@@ -84,7 +84,7 @@ class Module:
                 'Value'           :   'WPAD'
             },
             'WPADDirectHosts' : {
-                'Description'     :   'Comma separated list of hosts to include as direct in the wpad.dat file. Note that localhost is always listed as direct. Add the invader host to avoid catching invader HTTP traffic.',
+                'Description'     :   'Comma separated list of hosts to include as direct in the wpad.dat file. Note that localhost is always listed as direct. Add the Invader host to avoid catching Invader HTTP traffic.',
                 'Required'        :   False,
                 'Value'           :   ''
             },
@@ -101,7 +101,7 @@ class Module:
             'Taskname' : {
                 'Description'     :   'Scheduled task name to use with trigger 2. If you observe that Tater does not work after multiple trigger 2 runs, try changing the taskname.',
                 'Required'        :   False,
-                'Value'           :   'invader'
+                'Value'           :   'Invader'
             },
             'RunTime' : {
                 'Description'     :   'Run time duration in minutes.',
@@ -139,7 +139,7 @@ class Module:
 
         script = moduleCode
 
-        # set defaults for invader
+        # set defaults for Invader
         scriptEnd = "\n" + 'Invoke-Tater -Tool "2" '
 
 	for option,values in self.options.iteritems():

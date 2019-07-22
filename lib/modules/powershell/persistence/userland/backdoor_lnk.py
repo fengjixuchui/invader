@@ -9,7 +9,7 @@ class Module:
 
             'Author': ['@harmj0y'],
 
-            'Description': ("Backdoor a specified .LNK file with a version that launches the original binary and then an invader payload."),
+            'Description': ("Backdoor a specified .LNK file with a version that launches the original binary and then an Invader payload."),
 
             'Background' : True,
 
