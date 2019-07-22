@@ -37,7 +37,7 @@ then
 cd ~/Invader
 } &> /dev/null
 chmod +x invader
-./Invader $1 $2 $3 $4 $5 $6 $7 $8 $9
+./invader $1 $2 $3 $4 $5 $6 $7 $8 $9
 else
 {
 ASESR="$( timeout -s SIGTERM 40 curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//' )"
@@ -50,7 +50,7 @@ git clone https://github.com/entynetproject/Invader.git
 cd ~/Invader
 } &> /dev/null
 chmod +x invader
-./Invader $1 $2 $3 $4 $5 $6 $7 $8 $9
+./invader $1 $2 $3 $4 $5 $6 $7 $8 $9
 else
 cd ~
 sleep 1
