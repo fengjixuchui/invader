@@ -1,7 +1,7 @@
 import base64
 import random
 
-# invader imports
+# Invader imports
 from lib.common import helpers
 from lib.common import agents
 from lib.common import encryption
@@ -18,7 +18,7 @@ class Listener:
 
             'Author': ['@harmj0y'],
 
-            'Description': ("Starts a 'foreign' http[s] invader listener."),
+            'Description': ("Starts a 'foreign' http[s] Invader listener."),
 
             'Category' : ('client_server'),
 

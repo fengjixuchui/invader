@@ -2,7 +2,7 @@ import base64
 import random
 import copy
 
-# invader imports
+# Invader imports
 from lib.common import helpers
 from lib.common import agents
 from lib.common import encryption

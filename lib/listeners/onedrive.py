@@ -11,7 +11,7 @@ import json
 from pydispatch import dispatcher
 from requests import Request, Session
 
-#invader imports
+#Invader imports
 from lib.common import helpers
 from lib.common import agents
 from lib.common import encryption
@@ -47,7 +47,7 @@ class Listener:
             'BaseFolder' : {
                 'Description'   :   'The base Onedrive folder to use for comms.',
                 'Required'      :   True,
-                'Value'         :   'invader'
+                'Value'         :   'Invader'
             },
             'StagingFolder' : {
                 'Description'   :   'The nested Onedrive staging folder.',
@@ -629,7 +629,7 @@ class Listener:
         setup_folders()
 
         while True:
-            #Wait until invader is aware the listener is running, so we can save our refresh token and payload URL
+            #Wait until Invader is aware the listener is running, so we can save our refresh token and payload URL
             try:
                 if listener_name in self.mainMenu.listeners.activeListeners.keys():
                     upload_payload()

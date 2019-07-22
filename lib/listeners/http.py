@@ -10,7 +10,7 @@ import json
 import sys
 from pydispatch import dispatcher
 from flask import Flask, request, make_response, send_from_directory
-# invader imports
+# Invader imports
 from lib.common import helpers
 from lib.common import agents
 from lib.common import encryption
@@ -1155,7 +1155,7 @@ def send_message(packets=None):
                     proto = ssl.PROTOCOL_SSLv23
 
                 context = ssl.SSLContext(proto)
-                context.load_cert_chain("%s/invader-chain.pem" % (certPath), "%s/invader-priv.key"  % (certPath))
+                context.load_cert_chain("%s/Invader-chain.pem" % (certPath), "%s/Invader-priv.key"  % (certPath))
                 app.run(host=bindIP, port=int(port), threaded=True, ssl_context=context)
             else:
                 app.run(host=bindIP, port=int(port), threaded=True)
