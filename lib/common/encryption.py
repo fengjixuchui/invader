@@ -1,6 +1,6 @@
 """
 
-invader encryption functions.
+Invader encryption functions.
 
 Includes:
 

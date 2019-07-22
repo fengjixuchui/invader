@@ -109,7 +109,7 @@ class payload:
             return ""
         else:
                 code ="<Project ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">"
-                code += "<Target Name=\"invaderpayload\">"
+                code += "<Target Name=\"Invaderpayload\">"
                 code += "<ClassExample />"
                 code += "</Target>"
                 code += "<UsingTask "

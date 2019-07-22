@@ -10,7 +10,7 @@ class payload:
 
             'Author': ['@theguly'],
 
-            'Description': ("Create a .LNK file that launches the invader payload."),
+            'Description': ("Create a .LNK file that launches the Invader payload."),
 
             'Background' : False,
 

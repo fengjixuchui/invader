@@ -1,6 +1,6 @@
 """
 
-Misc. helper functions used in invader.
+Misc. helper functions used in Invader.
 
 Includes:
 
@@ -562,7 +562,7 @@ def get_config(fields):
         i.e. 'version,install_path'
     """
 
-    conn = sqlite3.connect('./data/invader.db', check_same_thread=False)
+    conn = sqlite3.connect('./data/Invader.db', check_same_thread=False)
     conn.isolation_level = None
 
     cur = conn.cursor()
@@ -587,7 +587,7 @@ def get_listener_options(listenerName):
     of the normal menu execution.
     """
     try:
-        conn = sqlite3.connect('./data/invader.db', check_same_thread=False)
+        conn = sqlite3.connect('./data/Invader.db', check_same_thread=False)
         conn.isolation_level = None
         conn.row_factory = dict_factory
         cur = conn.cursor()
@@ -882,7 +882,7 @@ def obfuscate_module(moduleSource, obfuscationCommand="", forceReobfuscation=Fal
     f.close()
 
     # obfuscate and write to obfuscated source path
-    path = os.path.abspath('invader.py').split('invader.py')[0] + "/"
+    path = os.path.abspath('Invader.py').split('Invader.py')[0] + "/"
     obfuscatedCode = obfuscate(path, moduleCode, obfuscationCommand)
     obfuscatedSource = moduleSource.replace("module_source", "obfuscated_module_source")
     try:

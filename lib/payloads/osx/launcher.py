@@ -10,7 +10,7 @@ class payload:
 
             'Author': ['@harmj0y'],
 
-            'Description': ('Generates a one-liner stage0 launcher for invader.'),
+            'Description': ('Generates a one-liner stage0 launcher for Invader.'),
 
             'Comments': [
                 ''

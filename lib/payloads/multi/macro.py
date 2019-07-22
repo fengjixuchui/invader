@@ -10,7 +10,7 @@ class payload:
 
             'Author': ['@enigma0x3', '@harmj0y', '@DisK0nn3cT', '@malcomvetter'],
 
-            'Description': ('Generates a Win/Mac cross platform MS Office macro for invader, compatible with Office 97-2016 including Mac 2011 and 2016 (sandboxed).'),
+            'Description': ('Generates a Win/Mac cross platform MS Office macro for Invader, compatible with Office 97-2016 including Mac 2011 and 2016 (sandboxed).'),
 
             'Comments': [
                 'http://enigma0x3.wordpress.com/2014/01/11/using-a-powershell-payload-in-a-client-side-attack/',

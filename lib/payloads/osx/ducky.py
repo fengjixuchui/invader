@@ -9,7 +9,7 @@ class payload:
 
             'Author': ['@xorrior'],
 
-            'Description': ('Generates a ducky script that runs a one-liner stage0 launcher for invader.'),
+            'Description': ('Generates a ducky script that runs a one-liner stage0 launcher for Invader.'),
 
             'Comments': [
                 ''

@@ -2,9 +2,9 @@
 
 Main agent handling functionality for Invader.
 
-The Agents() class in instantiated in ./invader.py by the main menu and includes:
+The Agents() class in instantiated in ./Invader.py by the main menu and includes:
 
-    get_db_connection()         - returns the invader.py:mainMenu database connection object
+    get_db_connection()         - returns the Invader.py:mainMenu database connection object
     is_agent_present()          - returns True if an agent is present in the self.agents cache
     add_agent()                 - adds an agent to the self.agents cache and the backend database
     remove_agent_db()           - removes an agent from the self.agents cache and the backend database
@@ -64,7 +64,7 @@ from pydispatch import dispatcher
 from zlib_wrapper import compress
 from zlib_wrapper import decompress
 
-# invader imports
+# Invader imports
 import encryption
 import helpers
 import packets
@@ -100,7 +100,7 @@ class Agents:
             agentInfo = {'sessionKey' : agent['session_key'], 'functions' : agent['functions']}
             self.agents[agent['session_id']] = agentInfo
 
-        # pull out common configs from the main menu object in invader.py
+        # pull out common configs from the main menu object in Invader.py
         self.ipWhiteList = self.mainMenu.ipWhiteList
         self.ipBlackList = self.mainMenu.ipBlackList
 
@@ -1518,7 +1518,7 @@ class Agents:
                 'print': False,
                 'message': message
             })
-            dispatcher.send(signal, sender="invader")
+            dispatcher.send(signal, sender="Invader")
             return None
 
         routingPacket = packets.parse_routing_packet(stagingKey, routingPacket)

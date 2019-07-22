@@ -10,7 +10,7 @@ class payload:
 
             'Author': ['Matt @matterpreter Hand'],
 
-            'Description': ('Generates a Teensy script that runs a one-liner stage0 launcher for invader.'),
+            'Description': ('Generates a Teensy script that runs a one-liner stage0 launcher for Invader.'),
 
             'Comments': [
                 ''
@@ -116,7 +116,7 @@ class payload:
             teensyCode += "    Keyboard.send_now();\n"
             teensyCode += "    clearKeys();\n"
             teensyCode += "}\n\n"
-            teensyCode += "void invader(void) {\n"
+            teensyCode += "void Invader(void) {\n"
             teensyCode += "    delay(500);\n"
             teensyCode += "    mac_minWindows();\n"
             teensyCode += "    mac_minWindows();\n"
@@ -132,7 +132,7 @@ class payload:
             teensyCode += "    Keyboard.println(\"exit\");\n"
             teensyCode += "}\n\n"
             teensyCode += "void setup(void) {\n"
-            teensyCode += "    invader();\n"
+            teensyCode += "    Invader();\n"
             teensyCode += "}\n\n"
             teensyCode += "void loop() {}"
 

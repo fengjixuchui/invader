@@ -10,7 +10,7 @@ class payload:
 
             'Author': ['@harmj0y'],
 
-            'Description': ('Generates AppleScript to execute the invader stage0 launcher.'),
+            'Description': ('Generates AppleScript to execute the Invader stage0 launcher.'),
 
             'Comments': [
                 ''

@@ -2,7 +2,7 @@
 
 The main controller class for Invader.
 
-This is what's launched from ./invader.
+This is what's launched from ./Invader.
 Contains the Main, Listener, Agents, Agent, and Module
 menu loops.
 
@@ -27,7 +27,7 @@ import base64
 import threading
 import json
 
-# invader imports
+# Invader imports
 import helpers
 import messages
 import agents
@@ -65,8 +65,8 @@ class NavListeners(Exception):
 
 class MainMenu(cmd.Cmd):
     """
-    The main class used by invader to drive the 'main' menu
-    displayed when invader starts.
+    The main class used by Invader to drive the 'main' menu
+    displayed when Invader starts.
     """
     def __init__(self, args=None):
 
@@ -117,7 +117,7 @@ class MainMenu(cmd.Cmd):
             'print': True,
             'message': message
         })
-        dispatcher.send(signal, sender="invader")
+        dispatcher.send(signal, sender="Invader")
 
     def get_db_connection(self):
         """
@@ -172,7 +172,7 @@ class MainMenu(cmd.Cmd):
 
         # if --debug X is passed, log out all dispatcher signals
         if self.args.debug:
-            with open('invader.debug', 'a') as debug_file:
+            with open('Invader.debug', 'a') as debug_file:
                 debug_file.write("%s %s : %s\n" % (helpers.get_datetime(), sender, signal))
 
             if self.args.debug == '2':
@@ -182,14 +182,14 @@ class MainMenu(cmd.Cmd):
 
     def check_root(self):
         """
-        Check if invader has been run as root, and alert user.
+        Check if Invader has been run as root, and alert user.
         """
         try:
 
             if os.geteuid() != 0:
                 if self.isroot:
                     messages.title(VERSION)
-                    print "[!] Warning: Running invader as non-root, after running as root will likely fail to access prior agents!"
+                    print "[!] Warning: Running Invader as non-root, after running as root will likely fail to access prior agents!"
                     while True:
                         a = raw_input(helpers.color("[?] Are you sure you want to continue (y) or (n): "))
                         if a.startswith("y"):
@@ -291,7 +291,7 @@ class MainMenu(cmd.Cmd):
             'print': True,
             'message': message
         })
-        dispatcher.send(signal, sender="invader")
+        dispatcher.send(signal, sender="Invader")
 
         # enumerate all active servers/listeners and shut them down
         self.listeners.shutdown_listener('all')
@@ -303,11 +303,11 @@ class MainMenu(cmd.Cmd):
 
     def database_connect(self):
         """
-        Connect to the default database at ./data/invader.db.
+        Connect to the default database at ./data/Invader.db.
         """
         try:
             # set the database connectiont to autocommit w/ isolation level
-            self.conn = sqlite3.connect('./data/invader.db', check_same_thread=False)
+            self.conn = sqlite3.connect('./data/Invader.db', check_same_thread=False)
             self.conn.text_factory = str
             self.conn.isolation_level = None
             return self.conn
@@ -449,7 +449,7 @@ class MainMenu(cmd.Cmd):
         print(helpers.color("[*] Use \"plugin <plugin name>\" to load a plugin."))
 
     def do_plugin(self, pluginName):
-        "Load a plugin file to extend invader."
+        "Load a plugin file to extend Invader."
         pluginPath = os.path.abspath("plugins")
         print(helpers.color("[*] Searching for plugins at {}".format(pluginPath)))
         # From walk_packages: "Note that this function must import all packages
@@ -464,7 +464,7 @@ class MainMenu(cmd.Cmd):
                 'print': True,
                 'message': message
             })
-            dispatcher.send(signal, sender="invader")
+            dispatcher.send(signal, sender="Invader")
 
             # 'self' is the mainMenu object
             plugins.load_plugin(self, pluginName)
@@ -481,7 +481,7 @@ class MainMenu(cmd.Cmd):
         pass
 
     def do_resource(self, arg):
-	"Read and execute a list of invader commands from a file."
+	"Read and execute a list of Invader commands from a file."
 	self.resourceQueue.extend(self.buildQueue(arg))
 
     def buildQueue(self, resourceFile, autoRun=False):
@@ -510,7 +510,7 @@ class MainMenu(cmd.Cmd):
 	return cmds
 
     def do_exit(self, line):
-        "Exit invader"
+        "Exit Invader"
         raise KeyboardInterrupt
 
 
@@ -533,7 +533,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_usepayload(self, line):
-        "Use an invader payload."
+        "Use an Invader payload."
 
         try:
             parts = line.split(' ')
@@ -559,7 +559,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_usemodule(self, line):
-        "Use an invader module."
+        "Use an Invader module."
         # Strip asterisks added by MainMenu.complete_usemodule()
         line = line.rstrip("*")
         if line not in self.modules.modules:
@@ -573,7 +573,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_searchmodule(self, line):
-        "Search invader module names/descriptions."
+        "Search Invader module names/descriptions."
         self.modules.search_modules(line.strip())
 
 
@@ -714,7 +714,7 @@ class MainMenu(cmd.Cmd):
                             'print': True,
                             'message': message
                         })
-                        dispatcher.send(signal, sender="invader")
+                        dispatcher.send(signal, sender="Invader")
 
                 elif parts[1].lower() == "false":
                     self.obfuscate = False
@@ -724,7 +724,7 @@ class MainMenu(cmd.Cmd):
                         'print': True,
                         'message': message
                     })
-                    dispatcher.send(signal, sender="invader")
+                    dispatcher.send(signal, sender="Invader")
 
                 else:
                     print helpers.color("[!] Valid options for obfuscate are 'true' or 'false'")
@@ -757,7 +757,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_load(self, line):
-        "Loads invader modules from a non-standard folder."
+        "Loads Invader modules from a non-standard folder."
 
         if line.strip() == '' or not os.path.isdir(line.strip()):
             print helpers.color("[!] Please specify a valid folder to load modules from.")
@@ -766,7 +766,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_reload(self, line):
-        "Reload one (or all) invader modules."
+        "Reload one (or all) Invader modules."
 
         if line.strip().lower() == "all":
             # reload all modules
@@ -900,7 +900,7 @@ class MainMenu(cmd.Cmd):
                         'message': message,
                         'obfuscated_file': os.path.basename(file)
                     })
-                    dispatcher.send(signal, sender="invader")
+                    dispatcher.send(signal, sender="Invader")
                 else:
                     print helpers.color("[*] " + os.path.basename(file) + " was already obfuscated. Not reobfuscating.")
                 helpers.obfuscate_module(file, self.obfuscateCommand, reobfuscate)
@@ -947,7 +947,7 @@ class MainMenu(cmd.Cmd):
                 f.write(row[0]+ ','+ row[1]+ ','+ row[2]+ ','+ row[3]+ ','+ row[4]+'\n')
             f.close()
 
-            # invader Log
+            # Invader Log
             cur.execute("""
             SELECT
                 reporting.time_stamp
@@ -968,7 +968,7 @@ class MainMenu(cmd.Cmd):
             rows = cur.fetchall()
             print helpers.color("[*] Writing data/master.log")
             f = open('data/master.log', 'w')
-            f.write('invader Master Taskings & Results Log by timestamp\n')
+            f.write('Invader Master Taskings & Results Log by timestamp\n')
             f.write('='*50 + '\n\n')
             for row in rows:
                 f.write('\n' + row[0] + ' - ' + row[3] + ' (' + row[2] + ')> ' + unicode(row[5]) + '\n' + unicode(row[6]) + '\n')
@@ -978,7 +978,7 @@ class MainMenu(cmd.Cmd):
             self.lock.release()
 
     def complete_usemodule(self, text, line, begidx, endidx, language=None):
-        "Tab-complete an invader module path."
+        "Tab-complete an Invader module path."
 
         module_names = self.modules.modules.keys()
 
@@ -1004,7 +1004,7 @@ class MainMenu(cmd.Cmd):
 
 
     def complete_reload(self, text, line, begidx, endidx):
-        "Tab-complete an invader PowerShell module path."
+        "Tab-complete an Invader PowerShell module path."
 
         module_names = self.modules.modules.keys() + ["all"]
 
@@ -1014,7 +1014,7 @@ class MainMenu(cmd.Cmd):
 
 
     def complete_usepayload(self, text, line, begidx, endidx):
-        "Tab-complete an invader payload module path."
+        "Tab-complete an Invader payload module path."
 
         payloadNames = self.payloads.payloads.keys()
 
@@ -1146,11 +1146,11 @@ class SubMenu(cmd.Cmd):
         raise NavMain()
 
     def do_resource(self, arg):
-	"Read and execute a list of invader commands from a file."
+	"Read and execute a list of Invader commands from a file."
 	self.mainMenu.resourceQueue.extend(self.mainMenu.buildQueue(arg))
 
     def do_exit(self, line):
-        "Exit invader."
+        "Exit Invader."
         raise KeyboardInterrupt
 
     def do_creds(self, line):
@@ -1173,7 +1173,7 @@ class SubMenu(cmd.Cmd):
 
 class AgentsMenu(SubMenu):
     """
-    The main class used by invader to drive the 'agents' menu.
+    The main class used by Invader to drive the 'agents' menu.
     """
     def __init__(self, mainMenu):
         SubMenu.__init__(self, mainMenu)
@@ -1190,7 +1190,7 @@ class AgentsMenu(SubMenu):
         raise NavMain()
 
     def do_autorun(self, line):
-	"Read and execute a list of invader commands from a file and execute on each new agent \"autorun <resource file> <agent language>\" e.g. \"autorun /root/ps.rc powershell\". Or clear any autorun setting with \"autorun clear\" and show current autorun settings with \"autorun show\""
+	"Read and execute a list of Invader commands from a file and execute on each new agent \"autorun <resource file> <agent language>\" e.g. \"autorun /root/ps.rc powershell\". Or clear any autorun setting with \"autorun clear\" and show current autorun settings with \"autorun show\""
 	line = line.strip()
         if not line:
 	    print helpers.color("[!] You must specify a resource file, show or clear. e.g. 'autorun /root/res.rc powershell' or 'autorun clear'")
@@ -1222,7 +1222,7 @@ class AgentsMenu(SubMenu):
 	    else:
 		#clear all autoruns
 		self.mainMenu.autoRuns.clear()
-	#read in invader commands from the specified resource file
+	#read in Invader commands from the specified resource file
 	else:
 	    self.mainMenu.autoRuns[language] = self.mainMenu.buildQueue(resourceFile, True)
 
@@ -1625,7 +1625,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_usepayload(self, line):
-        "Use an invader payload."
+        "Use an Invader payload."
 
         parts = line.split(' ')
 
@@ -1648,7 +1648,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_usemodule(self, line):
-        "Use an invader PowerShell module."
+        "Use an Invader PowerShell module."
 
         # Strip asterisks added by MainMenu.complete_usemodule()
         module = line.strip().rstrip("*")
@@ -1662,7 +1662,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_searchmodule(self, line):
-        "Search invader module names/descriptions."
+        "Search Invader module names/descriptions."
 
         searchTerm = line.strip()
 
@@ -1745,12 +1745,12 @@ class AgentsMenu(SubMenu):
 
 
     def complete_usemodule(self, text, line, begidx, endidx):
-        "Tab-complete an invader PowerShell module path"
+        "Tab-complete an Invader PowerShell module path"
         return self.mainMenu.complete_usemodule(text, line, begidx, endidx)
 
 
     def complete_usepayload(self, text, line, begidx, endidx):
-        "Tab-complete an invader payload module path."
+        "Tab-complete an Invader payload module path."
         return self.mainMenu.complete_usepayload(text, line, begidx, endidx)
 
 
@@ -1761,7 +1761,7 @@ class AgentsMenu(SubMenu):
 
 class AgentMenu(SubMenu):
     """
-    An abstracted class used by invader to determine which agent menu type
+    An abstracted class used by Invader to determine which agent menu type
     to instantiate.
     """
     def __init__(self, mainMenu, sessionID):
@@ -1780,7 +1780,7 @@ class AgentMenu(SubMenu):
 
 class PowerShellAgentMenu(SubMenu):
     """
-    The main class used by invader to drive an individual 'agent' menu.
+    The main class used by Invader to drive an individual 'agent' menu.
     """
     def __init__(self, mainMenu, sessionID):
 
@@ -2298,7 +2298,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_usemodule(self, line):
-        "Use an invader PowerShell module."
+        "Use an Invader PowerShell module."
 
         # Strip asterisks added by MainMenu.complete_usemodule()
         module = "powershell/%s" %(line.strip().rstrip("*"))
@@ -2311,7 +2311,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_searchmodule(self, line):
-        "Search invader module names/descriptions."
+        "Search Invader module names/descriptions."
 
         search_term = line.strip()
 
@@ -2518,7 +2518,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_spawn(self, line):
-        "Spawns a new invader agent for the given listener name. Ex. spawn <listener>"
+        "Spawns a new Invader agent for the given listener name. Ex. spawn <listener>"
 
         # get the info for the spawn module
         if line:
@@ -2735,7 +2735,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def complete_usemodule(self, text, line, begidx, endidx):
-        "Tab-complete an invader PowerShell module path"
+        "Tab-complete an Invader PowerShell module path"
         return self.mainMenu.complete_usemodule(text, line, begidx, endidx, language='powershell')
 
 
@@ -3308,7 +3308,7 @@ class PythonAgentMenu(SubMenu):
 
 
     def do_usemodule(self, line):
-        "Use an invader Python module."
+        "Use an Invader Python module."
 
         # Strip asterisks added by MainMenu.complete_usemodule()
         module = "python/%s" %(line.strip().rstrip("*"))
@@ -3322,7 +3322,7 @@ class PythonAgentMenu(SubMenu):
 
 
     def do_searchmodule(self, line):
-        "Search invader module names/descriptions."
+        "Search Invader module names/descriptions."
 
         searchTerm = line.strip()
 
@@ -3473,7 +3473,7 @@ except Exception as e:
         return helpers.complete_path(text, line)
 
     def complete_usemodule(self, text, line, begidx, endidx):
-        "Tab-complete an invader Python module path"
+        "Tab-complete an Invader Python module path"
         return self.mainMenu.complete_usemodule(text, line, begidx, endidx, language='python')
 
 
@@ -3488,7 +3488,7 @@ except Exception as e:
 
 class ListenersMenu(SubMenu):
     """
-    The main class used by invader to drive the 'listener' menu.
+    The main class used by Invader to drive the 'listener' menu.
     """
     def __init__(self, mainMenu):
         SubMenu.__init__(self, mainMenu)
@@ -3550,7 +3550,7 @@ class ListenersMenu(SubMenu):
             self.mainMenu.listeners.delete_listener(listener_id)
 
     def do_usepayload(self, line):
-        "Use an invader payload."
+        "Use an Invader payload."
 
         parts = line.split(' ')
 
@@ -3573,7 +3573,7 @@ class ListenersMenu(SubMenu):
 
 
     def do_uselistener(self, line):
-        "Use an invader listener module."
+        "Use an Invader listener module."
 
         parts = line.split(' ')
 
@@ -3631,7 +3631,7 @@ class ListenersMenu(SubMenu):
                     'message': message,
                     'options': payload.options
                 })
-                dispatcher.send(signal, sender="invader")
+                dispatcher.send(signal, sender="Invader")
 
                 print payload.generate()
             except Exception as e:
@@ -3659,7 +3659,7 @@ class ListenersMenu(SubMenu):
             self.mainMenu.listeners.enable_listener(listenerID)
 
     def do_disable(self, line):
-        "Disables (stops) one or all listeners. The listener(s) will not start automatically with invader"
+        "Disables (stops) one or all listeners. The listener(s) will not start automatically with Invader"
 
         listenerID = line.strip()
 
@@ -3688,7 +3688,7 @@ class ListenersMenu(SubMenu):
             print helpers.color("[*] This change will not take effect until the listener is restarted")
 
     def complete_usepayload(self, text, line, begidx, endidx):
-        "Tab-complete an invader payload module path."
+        "Tab-complete an Invader payload module path."
         return self.mainMenu.complete_usepayload(text, line, begidx, endidx)
 
 
@@ -3823,7 +3823,7 @@ class ListenerMenu(SubMenu):
                 'message': message,
                 'options': payload.options
             })
-            dispatcher.send(signal, sender="invader")
+            dispatcher.send(signal, sender="Invader")
 
             print payload.generate()
         except Exception as e:
@@ -3924,7 +3924,7 @@ class ListenerMenu(SubMenu):
 
 class ModuleMenu(SubMenu):
     """
-    The main class used by invader to drive the 'module' menu.
+    The main class used by Invader to drive the 'module' menu.
     """
     def __init__(self, mainMenu, moduleName, agent=None):
 
@@ -4071,7 +4071,7 @@ class ModuleMenu(SubMenu):
 
 
     def do_usemodule(self, line):
-        "Use an invader PowerShell module."
+        "Use an Invader PowerShell module."
 
         # Strip asterisks added by MainMenu.complete_usemodule()
         module = line.strip().rstrip("*")
@@ -4094,7 +4094,7 @@ class ModuleMenu(SubMenu):
 
 
     def do_execute(self, line):
-        "Execute the given invader module."
+        "Execute the given Invader module."
 
         prompt = True
         if line == "noprompt":
@@ -4171,7 +4171,7 @@ class ModuleMenu(SubMenu):
                             self.mainMenu.agents.add_agent_task_db(sessionID, taskCommand, moduleData)
 
                             # update the agent log
-                            # dispatcher.send("[*] Tasked agent "+sessionID+" to run module " + self.moduleName, sender="invader")
+                            # dispatcher.send("[*] Tasked agent "+sessionID+" to run module " + self.moduleName, sender="Invader")
                             message = "[*] Tasked agent {} to run module {}".format(sessionID, self.moduleName)
                             signal = json.dumps({
                                 'print': True,
@@ -4216,7 +4216,7 @@ class ModuleMenu(SubMenu):
 
 
     def do_run(self, line):
-        "Execute the given invader module."
+        "Execute the given Invader module."
         self.do_execute(line)
 
 
@@ -4289,7 +4289,7 @@ class ModuleMenu(SubMenu):
 
 
     def complete_usemodule(self, text, line, begidx, endidx):
-        "Tab-complete an invader PowerShell module path."
+        "Tab-complete an Invader PowerShell module path."
         return self.mainMenu.complete_usemodule(text, line, begidx, endidx)
 
 
@@ -4310,7 +4310,7 @@ class ModuleMenu(SubMenu):
 
 class payloadMenu(SubMenu):
     """
-    The main class used by invader to drive the 'payload' menu.
+    The main class used by Invader to drive the 'payload' menu.
     """
     def __init__(self, mainMenu, payloadName, listener=None):
         SubMenu.__init__(self, mainMenu)
@@ -4411,7 +4411,7 @@ class payloadMenu(SubMenu):
 
 
     def do_generate(self, line):
-        "Generate/execute the given invader payload."
+        "Generate/execute the given Invader payload."
         if not self.validate_options():
             return
 
@@ -4449,13 +4449,13 @@ class payloadMenu(SubMenu):
                 'message': message,
                 'options': self.payload.options
             })
-            dispatcher.send(signal, sender="invader")
+            dispatcher.send(signal, sender="Invader")
         else:
             print payloadOutput
 
 
     def do_execute(self, line):
-        "Generate/execute the given invader payload."
+        "Generate/execute the given Invader payload."
         self.do_generate(line)
 
 

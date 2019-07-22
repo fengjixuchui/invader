@@ -1,6 +1,6 @@
 """
 
-Common terminal messages used across invader.
+Common terminal messages used across Invader.
 
 Titles, agent displays, listener displays, etc.
 
@@ -10,7 +10,7 @@ import os
 import time
 import textwrap
 
-# invader imports
+# Invader imports
 import helpers
 
 

@@ -1,6 +1,6 @@
 """
 
-Packet handling functionality for invader.
+Packet handling functionality for Invader.
 
 Defines packet types, builds tasking packets and parses result packets.
 
@@ -67,7 +67,7 @@ import hmac
 import json
 from pydispatch import dispatcher
 
-# invader imports
+# Invader imports
 import encryption
 
 # 0         -> error
@@ -208,7 +208,7 @@ def parse_result_packet(packet, offset=0):
             'print': True,
             'message': message
         })
-        dispatcher.send(signal, sender="invader")
+        dispatcher.send(signal, sender="Invader")
 
         return (None, None, None, None, None, None, None)
 
@@ -288,7 +288,7 @@ def parse_routing_packet(stagingKey, data):
                         'print': True,
                         'message': message
                     })
-                    dispatcher.send(signal, sender="invader")
+                    dispatcher.send(signal, sender="Invader")
                     encData = None
                 else:
                     encData = data[(20+offset):(20+offset+length)]
@@ -310,7 +310,7 @@ def parse_routing_packet(stagingKey, data):
                 'print': True,
                 'message': message
             })
-            dispatcher.send(signal, sender="invader")
+            dispatcher.send(signal, sender="Invader")
             return None
 
     else:
@@ -319,7 +319,7 @@ def parse_routing_packet(stagingKey, data):
             'print': True,
             'message': message
         })
-        dispatcher.send(signal, sender="invader")
+        dispatcher.send(signal, sender="Invader")
         return None
 
 

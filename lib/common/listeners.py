@@ -1,7 +1,7 @@
 
 """
 
-Listener handling functionality for invader.
+Listener handling functionality for Invader.
 
 """
 import sys

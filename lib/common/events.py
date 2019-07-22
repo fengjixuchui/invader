@@ -1,6 +1,6 @@
 """
 Event handling system
-Every "major" event in invader (loosely defined as everything you'd want to
+Every "major" event in Invader (loosely defined as everything you'd want to
 go into a report) is logged to the database. This file contains functions
 which help manage those events - logging them, fetching them, etc.
 """

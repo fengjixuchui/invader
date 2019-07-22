@@ -9,7 +9,7 @@ class payload:
 
             'Author': ['@harmj0y', '@enigma0x3'],
 
-            'Description': ('Generates a .vbs launcher for invader.'),
+            'Description': ('Generates a .vbs launcher for Invader.'),
 
             'Comments': [
                 'https://github.com/enigma0x3/Powershell-Infection'

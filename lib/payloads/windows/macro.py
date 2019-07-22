@@ -10,7 +10,7 @@ class payload:
 
             'Author': ['@enigma0x3', '@harmj0y'],
 
-            'Description': ('Generates an office macro for invader, compatible with office 97-2003, and 2007 file types.'),
+            'Description': ('Generates an office macro for Invader, compatible with office 97-2003, and 2007 file types.'),
 
             'Comments': [
                 'http://enigma0x3.wordpress.com/2014/01/11/using-a-powershell-payload-in-a-client-side-attack/'

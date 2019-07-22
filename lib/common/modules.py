@@ -1,6 +1,6 @@
 """
 
-Module handling functionality for invader.
+Module handling functionality for Invader.
 
 Right now, just loads up all modules from the
 install path in the common config.
@@ -33,7 +33,7 @@ class Modules:
 
     def load_modules(self, rootPath=''):
         """
-        Load invader modules from a specified path, default to
+        Load Invader modules from a specified path, default to
         installPath + "/lib/modules/*"
         """
         

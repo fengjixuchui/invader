@@ -1,9 +1,9 @@
 """
 
-HTTP related methods used by invader.
+HTTP related methods used by Invader.
 
 Includes URI validation/checksums, as well as the base
-http server (invaderServer) and its modified request
+http server (InvaderServer) and its modified request
 handler (RequestHandler).
 
 These are the first places URI requests are processed.
@@ -16,7 +16,7 @@ from pydispatch import dispatcher
 import re
 import json
 
-# invader imports
+# Invader imports
 import encryption
 import helpers
 
@@ -40,7 +40,7 @@ def default_page():
 
 def host2lhost(s):
     """
-    Return lhost for invader's native listener from Host value
+    Return lhost for Invader's native listener from Host value
     """
     reg = r'(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
     res = re.findall( reg, s)
@@ -105,7 +105,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             'print': True,
             'message': message
         })
-        dispatcher.send(signal, sender="invader")
+        dispatcher.send(signal, sender="Invader")
 
         # get the appropriate response from the agent handler
         (code, responsedata) = self.server.agents.process_get(self.server.server_port, clientIP, sessionID, resource)
@@ -143,7 +143,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             'print': True,
             'message': message
         })
-        dispatcher.send(signal, sender="invader")
+        dispatcher.send(signal, sender="Invader")
 
         # read in the length of the POST data
         if self.headers.getheader('content-length'):
@@ -165,7 +165,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         pass
 
 
-class invaderServer(threading.Thread):
+class InvaderServer(threading.Thread):
     """
     Version of a simple HTTP[S] Server with specifiable port and
     SSL cert. Defaults to HTTP is no cert is specified.
@@ -205,7 +205,7 @@ class invaderServer(threading.Thread):
                 'print': True,
                 'message': message
             })
-            dispatcher.send(signal, sender="invader")
+            dispatcher.send(signal, sender="Invader")
 
         except Exception as e:
             self.success = False
@@ -215,7 +215,7 @@ class invaderServer(threading.Thread):
                 'print': True,
                 'message': message
             })
-            dispatcher.send(signal, sender="invader")
+            dispatcher.send(signal, sender="Invader")
 
 
     def base_server(self):

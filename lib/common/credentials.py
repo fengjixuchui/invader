@@ -1,6 +1,6 @@
 """
 
-Credential handling functionality for invader.
+Credential handling functionality for Invader.
 
 """
 

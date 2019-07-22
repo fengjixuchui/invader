@@ -10,7 +10,7 @@ class payload:
 
             'Author': ['@xorrior'],
 
-            'Description': ('Generates an invader Application.'),
+            'Description': ('Generates an Invader Application.'),
 
             'Comments': [
                 ''
@@ -42,7 +42,7 @@ class payload:
                 'Value'         :   ''
             },
             'OutFile' : {
-                'Description'   :   'path to output invader application. The application will be saved to a zip file.',
+                'Description'   :   'path to output Invader application. The application will be saved to a zip file.',
                 'Required'      :   True,
                 'Value'         :   '/tmp/out.zip'
             },

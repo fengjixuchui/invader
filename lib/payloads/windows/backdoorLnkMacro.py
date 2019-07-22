@@ -13,9 +13,9 @@ class payload:
 
             'Author': ['@G0ldenGunSec'],
 
-            'Description': ('Generates a macro that backdoors .lnk files on the users desktop, backdoored lnk files in turn attempt to download & execute an invader launcher when the user clicks on them. Usage: Three files will be spawned from this, an xls document (either new or containing existing contents) that data will be placed into, a macro that should be placed in the spawned xls document, and an xml that should be placed on a web server accessible by the remote system (as defined during payload generation).  By default this xml is written to /var/www/html, which is the webroot on debian-based systems such as kali.'),
+            'Description': ('Generates a macro that backdoors .lnk files on the users desktop, backdoored lnk files in turn attempt to download & execute an Invader launcher when the user clicks on them. Usage: Three files will be spawned from this, an xls document (either new or containing existing contents) that data will be placed into, a macro that should be placed in the spawned xls document, and an xml that should be placed on a web server accessible by the remote system (as defined during payload generation).  By default this xml is written to /var/www/html, which is the webroot on debian-based systems such as kali.'),
 
-            'Comments': ['Two-stage macro attack vector used for bypassing tools that perform monitor parent processes and flag / block process launches from unexpected programs, such as office. The initial run of the macro is vbscript and spawns no child processes, instead it backdoors targeted shortcuts on the users desktop to do a direct run of powershell next time they are clicked.  The second step occurs when the user clicks on the shortcut, the powershell download stub that runs will attempt to download & execute an invader launcher from an xml file hosted on a pre-defined webserver, which will in turn grant a full shell.  Credits to @harmJ0y and @enigma0x3 for designing the macro payload that this was originally based on, @subTee for research pertaining to the xml.xmldocument cradle, and @curi0usJack for info on using cell embeds to evade AV.']
+            'Comments': ['Two-stage macro attack vector used for bypassing tools that perform monitor parent processes and flag / block process launches from unexpected programs, such as office. The initial run of the macro is vbscript and spawns no child processes, instead it backdoors targeted shortcuts on the users desktop to do a direct run of powershell next time they are clicked.  The second step occurs when the user clicks on the shortcut, the powershell download stub that runs will attempt to download & execute an Invader launcher from an xml file hosted on a pre-defined webserver, which will in turn grant a full shell.  Credits to @harmJ0y and @enigma0x3 for designing the macro payload that this was originally based on, @subTee for research pertaining to the xml.xmldocument cradle, and @curi0usJack for info on using cell embeds to evade AV.']
         }
 	#random name our xml will default to in payload options
 	xmlVar = ''.join(random.sample(string.ascii_uppercase + string.ascii_lowercase, random.randint(5,9)))
@@ -231,7 +231,7 @@ class payload:
 	    print helpers.color("xls written to " + xlsOut + "  please remember to add macro code to xls prior to use\n\n", color="green")
 
 
-	    #encrypt the second stage code that will be dropped into the XML - this is the full invader payload that gets pulled once the user clicks on the backdoored shortcut
+	    #encrypt the second stage code that will be dropped into the XML - this is the full Invader payload that gets pulled once the user clicks on the backdoored shortcut
 	    ivBuf = ""
 	    for z in range(0,16):
 		ivBuf = ivBuf + chr(encIV + z)

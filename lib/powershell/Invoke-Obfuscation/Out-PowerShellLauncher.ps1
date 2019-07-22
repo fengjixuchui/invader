@@ -215,7 +215,7 @@ http://www.danielbohannon.com
         }
         Else
         {
-            # Before adding layered escaping for special characters for cmd.exe, preserve escaping of ^ used NOT as an escape character (like as part of an invader key).
+            # Before adding layered escaping for special characters for cmd.exe, preserve escaping of ^ used NOT as an escape character (like as part of an Invader key).
             If($ExtractedToken.Contains('^'))
             {
                 $ExtractedTokenSplit = $ExtractedToken.Split('^')

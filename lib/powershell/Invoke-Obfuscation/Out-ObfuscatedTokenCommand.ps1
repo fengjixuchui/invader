@@ -895,7 +895,7 @@ http://www.danielbohannon.com
     
     # Check if the command is already prepended with an invocation operator. If it is then do not add an invocation operator.
     # E.g. & powershell -Sta -Command $cmd
-    # E.g. https://github.com/adaptivethreat/invader/blob/master/data/module_source/situational_awareness/host/Invoke-WinEnum.ps1#L139
+    # E.g. https://github.com/adaptivethreat/Invader/blob/master/data/module_source/situational_awareness/host/Invoke-WinEnum.ps1#L139
     $SubStringLength = 15
     If($Token.Start -lt $SubStringLength)
     {

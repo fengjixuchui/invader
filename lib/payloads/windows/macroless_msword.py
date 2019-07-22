@@ -34,7 +34,7 @@ class payload:
 						'OutputDocx' : {
 								'Description'		:		'MSOffice document name.',
 								'Required'			:		True,
-								'Value'					:		'invader.docx'
+								'Value'					:		'Invader.docx'
 						},
 						'OutputPath' : {
 								'Description'		:		'Output path for the files.',

@@ -9,7 +9,7 @@ class payload:
 
             'Author': ['@harmj0y'],
 
-            'Description': ('Generates a self-deleting .bat launcher for invader.'),
+            'Description': ('Generates a self-deleting .bat launcher for Invader.'),
 
             'Comments': [
                 ''

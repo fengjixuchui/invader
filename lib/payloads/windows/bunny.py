@@ -9,7 +9,7 @@ class payload:
 
             'Author': ['@kisasondi','@harmj0y'],
 
-            'Description': ('Generates a bunny script that runs a one-liner stage0 launcher for invader.'),
+            'Description': ('Generates a bunny script that runs a one-liner stage0 launcher for Invader.'),
 
             'Comments': [
                 'This payload is modification of the ducky payload by @harmj0y,',
