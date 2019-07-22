@@ -600,7 +600,7 @@ function Invoke-MailSearch {
 
 
     #All of this multithreading magic is taken directly from harmj0y and his child, powerview
-    #https://github.com/PowerShellinvader/PowerTools/blob/master/PowerView/powerview.ps1#L5672
+    #https://github.com/PowerShellInvader/PowerTools/blob/master/PowerView/powerview.ps1#L5672
     $sessionState = [System.Management.Automation.Runspaces.InitialSessionState]::CreateDefault()
     $sessionState.ApartmentState = [System.Threading.Thread]::CurrentThread.GetApartmentState()
 
@@ -871,7 +871,7 @@ function Invoke-SearchGAL {
 
     $Regex = [regex]"\b($Term)\b"
     #All of this multithreading magic is taken directly from harmj0y and his child, powerview
-    #https://github.com/PowerShellinvader/PowerTools/blob/master/PowerView/powerview.ps1#L5672
+    #https://github.com/PowerShellInvader/PowerTools/blob/master/PowerView/powerview.ps1#L5672
     $sessionState = [System.Management.Automation.Runspaces.InitialSessionState]::CreateDefault()
     $sessionState.ApartmentState = [System.Threading.Thread]::CurrentThread.GetApartmentState()
 

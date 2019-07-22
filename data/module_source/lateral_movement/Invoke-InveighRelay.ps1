@@ -138,8 +138,8 @@ IP address of system to target for SMB relay.
 
 .PARAMETER Tool
 Default = 0: (0/1/2) Enable/Disable features for better operation through external tools such as Meterpreter's
-PowerShell extension, Metasploit's Interactive PowerShell Sessions payloads and invader.
-0 = None, 1 = Metasploit/Meterpreter, 2 = invader 
+PowerShell extension, Metasploit's Interactive PowerShell Sessions payloads and Invader.
+0 = None, 1 = Metasploit/Meterpreter, 2 = Invader 
 
 .PARAMETER Usernames
 Default = All Usernames: Comma separated list of usernames to use for relay attacks. Accepts both username and
@@ -323,7 +323,7 @@ if($Tool -eq 1) # Metasploit Interactive PowerShell Payloads and Meterpreter's P
     $inveigh.newline = ""
     $ConsoleOutput = "N"
 }
-elseif($Tool -eq 2) # PowerShell invader
+elseif($Tool -eq 2) # PowerShell Invader
 {
     $inveigh.tool = 2
     $inveigh.output_stream_only = $true

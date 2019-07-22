@@ -70,7 +70,7 @@ Default = Enabled: (Y/N) Enable/Disable the help messages at startup.
 
 .PARAMETER Tool
 Default = 0: (0,1,2) Enable/Disable features for better operation through external tools such as Metasploit's
-Interactive Powershell Sessions and invader. 0 = None, 1 = Metasploit, 2 = invader
+Interactive Powershell Sessions and Invader. 0 = None, 1 = Metasploit, 2 = Invader
 
 .EXAMPLE
 Invoke-Tater -Command "net user Tater Spring2016 /add && net localgroup administrators Tater /add"
@@ -148,7 +148,7 @@ if($Tool -eq 1) # Metasploit Interactive Powershell
     $tater.newline = ""
     $ConsoleOutput = "N"
 }
-elseif($Tool -eq 2) # PowerShell invader
+elseif($Tool -eq 2) # PowerShell Invader
 {
     $tater.tool = 2
     $tater.console_input = $false

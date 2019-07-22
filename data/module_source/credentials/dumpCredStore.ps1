@@ -2,7 +2,7 @@
 This modules is a modified and stripped down version of CredMan.ps1, written by "JimmyJoeBob Alooba". A link to
 the original script can be found below.
 
-BeetleChunks has modified and stripped this script to work in Powershell invader.
+BeetleChunks has modified and stripped this script to work in Powershell Invader.
 
 Original Script: https://gallery.technet.microsoft.com/scriptcenter/PowerShell-Credentials-d44c3cde
 #>

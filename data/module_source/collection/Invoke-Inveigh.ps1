@@ -245,8 +245,8 @@ Default = Unlimited: (Integer) Number of NTLMv1/NTLMv2/cleartext captures to per
 
 .PARAMETER Tool
 Default = 0: (0/1/2) Enable/Disable features for better operation through external tools such as Meterpreter's
-PowerShell extension, Metasploit's Interactive PowerShell Sessions payloads and invader.
-0 = None, 1 = Metasploit/Meterpreter, 2 = invader   
+PowerShell extension, Metasploit's Interactive PowerShell Sessions payloads and Invader.
+0 = None, 1 = Metasploit/Meterpreter, 2 = Invader   
 
 .PARAMETER WPADAuth
 Default = NTLM: (Anonymous/Basic/NTLM/NTLMNoESS) HTTP/HTTPS listener authentication type for wpad.dat requests.
@@ -621,7 +621,7 @@ if($Tool -eq 1) # Metasploit Interactive PowerShell Payloads and Meterpreter's P
     $ConsoleOutput = "N"
 
 }
-elseif($Tool -eq 2) # PowerShell invader
+elseif($Tool -eq 2) # PowerShell Invader
 {
     $inveigh.tool = 2
     $inveigh.output_stream_only = $true
