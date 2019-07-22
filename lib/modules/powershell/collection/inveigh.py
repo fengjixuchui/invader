@@ -11,7 +11,7 @@ class Module:
 
             'Description': ('Inveigh is a Windows PowerShell LLMNR/mDNS/NBNS spoofer/man-in-the-middle tool. Note '
                             'that this module exposes only a subset of Inveigh\'s parameters. Inveigh can be used '
-                            'through invader\'s scriptimport and scriptcmd if additional parameters are needed.'),
+                            'through Invader\'s scriptimport and scriptcmd if additional parameters are needed.'),
 
             'Background' : True,
 
@@ -45,7 +45,7 @@ class Module:
                 'Value'         :   ''
             },
             'ConsoleStatus' : {
-                'Description'   :   'Interval in minutes for displaying all unique captured hashes and credentials. This will display a clean list of captures in invader.',
+                'Description'   :   'Interval in minutes for displaying all unique captured hashes and credentials. This will display a clean list of captures in Invader.',
                 'Required'      :   False,
                 'Value'         :   ''
             },
@@ -216,7 +216,7 @@ class Module:
 
         script = moduleCode
 
-        # set defaults for invader
+        # set defaults for Invader
         scriptEnd = "\n" + 'Invoke-Inveigh -Tool "2"'
 
         for option,values in self.options.iteritems():

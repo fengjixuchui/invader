@@ -26,7 +26,7 @@ class Module:
             'MinLanguageVersion' : '2',
             
             'Comments': [
-                'Deploys an invader agent to a windows Jenkins server with unauthenticated access to script console.'
+                'Deploys an Invader agent to a windows Jenkins server with unauthenticated access to script console.'
             ]
         }
 

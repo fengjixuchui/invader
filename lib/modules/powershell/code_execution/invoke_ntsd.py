@@ -10,7 +10,7 @@ class Module:
 
             'Author': ['james fitts'],
 
-            'Description': ("Use NT Symbolic Debugger to execute invader launcher code"),
+            'Description': ("Use NT Symbolic Debugger to execute Invader launcher code"),
 
             'Background' : True,
 

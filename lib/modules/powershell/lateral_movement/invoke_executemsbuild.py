@@ -13,7 +13,7 @@ class Module:
             'Author': ['@xorrior'],
 
             # more verbose multi-line description of the module
-            'Description': ('This module utilizes WMI and MSBuild to compile and execute an xml file containing an invader launcher'),
+            'Description': ('This module utilizes WMI and MSBuild to compile and execute an xml file containing an Invader launcher'),
 
             # True if the module needs to run in the background
             'Background' : False,

