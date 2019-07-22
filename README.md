@@ -113,7 +113,7 @@
     INFO: Control your computer remotely using only 
     Invader Framework Remote Administration Tool.
     
-<img width="1440" alt="sas3" src="https://user-images.githubusercontent.com/43011806/61594588-c871a280-abed-11e9-9d1e-3690bb16721c.png">
+<img width="1440" alt="sas2" src="https://user-images.githubusercontent.com/43011806/61638872-99653a80-ac9a-11e9-924a-fa08137a4d22.png">
 
 # System requirements
 
