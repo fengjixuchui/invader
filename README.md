@@ -42,7 +42,7 @@
 
 # How to install invader
 
-> cd Invader/setup
+> cd invader/setup
 
 > chmod +x install.sh
 
@@ -52,7 +52,7 @@
 
 # How to uninstall invader
 
-> cd Invader/setup
+> cd invader/setup
 
 > chmod +x uninstall.sh
 
