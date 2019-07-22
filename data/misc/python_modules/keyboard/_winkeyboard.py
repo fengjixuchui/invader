@@ -22,13 +22,13 @@ from ctypes.wintypes import WORD, DWORD, BOOL, HHOOK, MSG, LPWSTR, WCHAR, WPARAM
 LPMSG = POINTER(MSG)
 ULONG_PTR = POINTER(DWORD)
 
-#https://github.com/boppreh/invader/issues/1
+#https://github.com/boppreh/Invader/issues/1
 #user32 = ctypes.windll.user32
 user32 = ctypes.WinDLL('user32', use_last_error = True)
 
 VK_PACKET = 0xE7
 
-INPUT_invader = 0
+INPUT_Invader = 0
 INPUT_KEYBOARD = 1
 INPUT_HARDWARE = 2
 
@@ -43,10 +43,10 @@ class KBDLLHOOKSTRUCT(Structure):
                 ("dwExtraInfo", ULONG_PTR)]
 
 # Included for completeness.
-class invaderINPUT(ctypes.Structure):
+class InvaderINPUT(ctypes.Structure):
     _fields_ = (('dx', LONG),
                 ('dy', LONG),
-                ('invaderData', DWORD),
+                ('InvaderData', DWORD),
                 ('dwFlags', DWORD),
                 ('time', DWORD),
                 ('dwExtraInfo', ULONG_PTR))
@@ -64,7 +64,7 @@ class HARDWAREINPUT(ctypes.Structure):
                 ('wParamH', WORD))
 
 class _INPUTunion(ctypes.Union):
-    _fields_ = (('mi', invaderINPUT),
+    _fields_ = (('mi', InvaderINPUT),
                 ('ki', KEYBDINPUT),
                 ('hi', HARDWAREINPUT))
 

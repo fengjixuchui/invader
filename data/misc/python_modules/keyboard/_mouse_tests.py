@@ -2,10 +2,10 @@
 import unittest
 import time
 
-from ._invader_event import MoveEvent, ButtonEvent, WheelEvent, LEFT, RIGHT, MIDDLE, X, X2, UP, DOWN, DOUBLE
-from keyboard import invader
+from ._Invader_event import MoveEvent, ButtonEvent, WheelEvent, LEFT, RIGHT, MIDDLE, X, X2, UP, DOWN, DOUBLE
+from keyboard import Invader
 
-class FakeOsinvader(object):
+class FakeOsInvader(object):
     def __init__(self):
         self.append = None
         self.position = (0, 0)
@@ -35,25 +35,25 @@ class FakeOsinvader(object):
     def move_relative(self, x, y):
         self.position = (self.position[0] + x, self.position[1] + y)
 
-class Testinvader(unittest.TestCase):
+class TestInvader(unittest.TestCase):
     @staticmethod
     def setUpClass():
-        invader._os_invader= FakeOsinvader()
-        invader._listener.start_if_necessary()
-        assert invader._os_invader.listening
+        Invader._os_Invader= FakeOsInvader()
+        Invader._listener.start_if_necessary()
+        assert Invader._os_Invader.listening
 
     def setUp(self):
         self.events = []
-        invader._pressed_events.clear()
-        invader._os_invader.append = self.events.append
+        Invader._pressed_events.clear()
+        Invader._os_Invader.append = self.events.append
 
     def tearDown(self):
-        invader.unhook_all()
+        Invader.unhook_all()
         # Make sure there's no spill over between tests.
         self.wait_for_events_queue()
 
     def wait_for_events_queue(self):
-        invader._listener.queue.join()
+        Invader._listener.queue.join()
 
     def flush_events(self):
         self.wait_for_events_queue()
@@ -63,15 +63,15 @@ class Testinvader(unittest.TestCase):
         return events
 
     def press(self, button=LEFT):
-        invader._os_invader.queue.put(ButtonEvent(DOWN, button, time.time()))
+        Invader._os_Invader.queue.put(ButtonEvent(DOWN, button, time.time()))
         self.wait_for_events_queue()
 
     def release(self, button=LEFT):
-        invader._os_invader.queue.put(ButtonEvent(UP, button, time.time()))
+        Invader._os_Invader.queue.put(ButtonEvent(UP, button, time.time()))
         self.wait_for_events_queue()
 
     def double_click(self, button=LEFT):
-        invader._os_invader.queue.put(ButtonEvent(DOUBLE, button, time.time()))
+        Invader._os_Invader.queue.put(ButtonEvent(DOUBLE, button, time.time()))
         self.wait_for_events_queue()
 
     def click(self, button=LEFT):
@@ -79,71 +79,71 @@ class Testinvader(unittest.TestCase):
         self.release(button)
 
     def wheel(self, delta=1):
-        invader._os_invader.queue.put(WheelEvent(delta, time.time()))
+        Invader._os_Invader.queue.put(WheelEvent(delta, time.time()))
         self.wait_for_events_queue()
 
     def move(self, x=0, y=0):
-        invader._os_invader.queue.put(MoveEvent(x, y, time.time()))
+        Invader._os_Invader.queue.put(MoveEvent(x, y, time.time()))
         self.wait_for_events_queue()
 
     def test_hook(self):
         events = []
         self.press()
-        invader.hook(events.append)
+        Invader.hook(events.append)
         self.press()
-        invader.unhook(events.append)
+        Invader.unhook(events.append)
         self.press()
         self.assertEqual(len(events), 1)
 
     def test_is_pressed(self):
-        self.assertFalse(invader.is_pressed())
+        self.assertFalse(Invader.is_pressed())
         self.press()
-        self.assertTrue(invader.is_pressed())
+        self.assertTrue(Invader.is_pressed())
         self.release()
         self.press(X2)
-        self.assertFalse(invader.is_pressed())
+        self.assertFalse(Invader.is_pressed())
 
-        self.assertTrue(invader.is_pressed(X2))
+        self.assertTrue(Invader.is_pressed(X2))
         self.press(X2)
-        self.assertTrue(invader.is_pressed(X2))
+        self.assertTrue(Invader.is_pressed(X2))
         self.release(X2)
         self.release(X2)
-        self.assertFalse(invader.is_pressed(X2))
+        self.assertFalse(Invader.is_pressed(X2))
 
     def test_buttons(self):
-        invader.press()
+        Invader.press()
         self.assertEqual(self.flush_events(), [(DOWN, LEFT)])
-        invader.release()
+        Invader.release()
         self.assertEqual(self.flush_events(), [(UP, LEFT)])
-        invader.click()
+        Invader.click()
         self.assertEqual(self.flush_events(), [(DOWN, LEFT), (UP, LEFT)])
-        invader.double_click()
+        Invader.double_click()
         self.assertEqual(self.flush_events(), [(DOWN, LEFT), (UP, LEFT), (DOWN, LEFT), (UP, LEFT)])
-        invader.right_click()
+        Invader.right_click()
         self.assertEqual(self.flush_events(), [(DOWN, RIGHT), (UP, RIGHT)])
-        invader.click(RIGHT)
+        Invader.click(RIGHT)
         self.assertEqual(self.flush_events(), [(DOWN, RIGHT), (UP, RIGHT)])
-        invader.press(X2)
+        Invader.press(X2)
         self.assertEqual(self.flush_events(), [(DOWN, X2)])
 
     def test_position(self):
-        self.assertEqual(invader.get_position(), invader._os_invader.get_position())
+        self.assertEqual(Invader.get_position(), Invader._os_Invader.get_position())
 
     def test_move(self):
-        invader.move(0, 0)
-        self.assertEqual(invader._os_invader.get_position(), (0, 0))
-        invader.move(100, 500)
-        self.assertEqual(invader._os_invader.get_position(), (100, 500))
-        invader.move(1, 2, False)
-        self.assertEqual(invader._os_invader.get_position(), (101, 502))
+        Invader.move(0, 0)
+        self.assertEqual(Invader._os_Invader.get_position(), (0, 0))
+        Invader.move(100, 500)
+        self.assertEqual(Invader._os_Invader.get_position(), (100, 500))
+        Invader.move(1, 2, False)
+        self.assertEqual(Invader._os_Invader.get_position(), (101, 502))
 
-        invader.move(0, 0)
-        invader.move(100, 499, True, duration=0.01)
-        self.assertEqual(invader._os_invader.get_position(), (100, 499))
-        invader.move(100, 1, False, duration=0.01)
-        self.assertEqual(invader._os_invader.get_position(), (200, 500))
-        invader.move(0, 0, False, duration=0.01)
-        self.assertEqual(invader._os_invader.get_position(), (200, 500))
+        Invader.move(0, 0)
+        Invader.move(100, 499, True, duration=0.01)
+        self.assertEqual(Invader._os_Invader.get_position(), (100, 499))
+        Invader.move(100, 1, False, duration=0.01)
+        self.assertEqual(Invader._os_Invader.get_position(), (200, 500))
+        Invader.move(0, 0, False, duration=0.01)
+        self.assertEqual(Invader._os_Invader.get_position(), (200, 500))
 
     def triggers(self, fn, events, **kwargs):
         self.triggered = False
@@ -161,38 +161,38 @@ class Testinvader(unittest.TestCase):
             elif event_type == 'WHEEL':
                 self.wheel()
 
-        invader._listener.remove_handler(handler)
+        Invader._listener.remove_handler(handler)
         return self.triggered
 
     def test_on_button(self):
-        self.assertTrue(self.triggers(invader.on_button, [(DOWN, LEFT)]))
-        self.assertTrue(self.triggers(invader.on_button, [(DOWN, RIGHT)]))
-        self.assertTrue(self.triggers(invader.on_button, [(DOWN, X)]))
+        self.assertTrue(self.triggers(Invader.on_button, [(DOWN, LEFT)]))
+        self.assertTrue(self.triggers(Invader.on_button, [(DOWN, RIGHT)]))
+        self.assertTrue(self.triggers(Invader.on_button, [(DOWN, X)]))
 
-        self.assertFalse(self.triggers(invader.on_button, [('WHEEL', '')]))
+        self.assertFalse(self.triggers(Invader.on_button, [('WHEEL', '')]))
 
-        self.assertFalse(self.triggers(invader.on_button, [(DOWN, X)], buttons=MIDDLE))
-        self.assertTrue(self.triggers(invader.on_button, [(DOWN, MIDDLE)], buttons=MIDDLE))
-        self.assertTrue(self.triggers(invader.on_button, [(DOWN, MIDDLE)], buttons=MIDDLE))
-        self.assertFalse(self.triggers(invader.on_button, [(DOWN, MIDDLE)], buttons=MIDDLE, types=UP))
-        self.assertTrue(self.triggers(invader.on_button, [(UP, MIDDLE)], buttons=MIDDLE, types=UP))
+        self.assertFalse(self.triggers(Invader.on_button, [(DOWN, X)], buttons=MIDDLE))
+        self.assertTrue(self.triggers(Invader.on_button, [(DOWN, MIDDLE)], buttons=MIDDLE))
+        self.assertTrue(self.triggers(Invader.on_button, [(DOWN, MIDDLE)], buttons=MIDDLE))
+        self.assertFalse(self.triggers(Invader.on_button, [(DOWN, MIDDLE)], buttons=MIDDLE, types=UP))
+        self.assertTrue(self.triggers(Invader.on_button, [(UP, MIDDLE)], buttons=MIDDLE, types=UP))
 
-        self.assertTrue(self.triggers(invader.on_button, [(UP, MIDDLE)], buttons=[MIDDLE, LEFT], types=[UP, DOWN]))
-        self.assertTrue(self.triggers(invader.on_button, [(DOWN, LEFT)], buttons=[MIDDLE, LEFT], types=[UP, DOWN]))
-        self.assertFalse(self.triggers(invader.on_button, [(UP, X)], buttons=[MIDDLE, LEFT], types=[UP, DOWN]))
+        self.assertTrue(self.triggers(Invader.on_button, [(UP, MIDDLE)], buttons=[MIDDLE, LEFT], types=[UP, DOWN]))
+        self.assertTrue(self.triggers(Invader.on_button, [(DOWN, LEFT)], buttons=[MIDDLE, LEFT], types=[UP, DOWN]))
+        self.assertFalse(self.triggers(Invader.on_button, [(UP, X)], buttons=[MIDDLE, LEFT], types=[UP, DOWN]))
 
     def test_ons(self):
-        self.assertTrue(self.triggers(invader.on_click, [(UP, LEFT)]))
-        self.assertFalse(self.triggers(invader.on_click, [(UP, RIGHT)]))
-        self.assertFalse(self.triggers(invader.on_click, [(DOWN, LEFT)]))
-        self.assertFalse(self.triggers(invader.on_click, [(DOWN, RIGHT)]))
+        self.assertTrue(self.triggers(Invader.on_click, [(UP, LEFT)]))
+        self.assertFalse(self.triggers(Invader.on_click, [(UP, RIGHT)]))
+        self.assertFalse(self.triggers(Invader.on_click, [(DOWN, LEFT)]))
+        self.assertFalse(self.triggers(Invader.on_click, [(DOWN, RIGHT)]))
 
-        self.assertTrue(self.triggers(invader.on_double_click, [(DOUBLE, LEFT)]))
-        self.assertFalse(self.triggers(invader.on_double_click, [(DOUBLE, RIGHT)]))
-        self.assertFalse(self.triggers(invader.on_double_click, [(DOWN, RIGHT)]))
+        self.assertTrue(self.triggers(Invader.on_double_click, [(DOUBLE, LEFT)]))
+        self.assertFalse(self.triggers(Invader.on_double_click, [(DOUBLE, RIGHT)]))
+        self.assertFalse(self.triggers(Invader.on_double_click, [(DOWN, RIGHT)]))
 
-        self.assertTrue(self.triggers(invader.on_right_click, [(UP, RIGHT)]))
-        self.assertTrue(self.triggers(invader.on_middle_click, [(UP, MIDDLE)]))
+        self.assertTrue(self.triggers(Invader.on_right_click, [(UP, RIGHT)]))
+        self.assertTrue(self.triggers(Invader.on_middle_click, [(UP, MIDDLE)]))
 
     def test_wait(self):
         # If this fails it blocks. Unfortunately, but I see no other way of testing.
@@ -200,7 +200,7 @@ class Testinvader(unittest.TestCase):
         lock = Lock()
         lock.acquire()
         def t():
-            invader.wait()
+            Invader.wait()
             lock.release()
         Thread(target=t).start()
         self.press()
@@ -211,7 +211,7 @@ class Testinvader(unittest.TestCase):
         lock = Lock()
         lock.acquire()
         def t():
-            self.recorded = invader.record(RIGHT)
+            self.recorded = Invader.record(RIGHT)
             lock.release()
         Thread(target=t).start()
         self.click()
@@ -227,7 +227,7 @@ class Testinvader(unittest.TestCase):
         self.assertEqual(self.recorded[3]._replace(time=None), MoveEvent(100, 50, None))
         self.assertEqual(self.recorded[4]._replace(time=None), ButtonEvent(DOWN, RIGHT, None))
 
-        invader.play(self.recorded, speed_factor=0)
+        Invader.play(self.recorded, speed_factor=0)
         events = self.flush_events()
         self.assertEqual(len(events), 5)
         self.assertEqual(events[0], (DOWN, LEFT))
@@ -236,7 +236,7 @@ class Testinvader(unittest.TestCase):
         self.assertEqual(events[3], ('move', (100, 50)))
         self.assertEqual(events[4], (DOWN, RIGHT))
 
-        invader.play(self.recorded)
+        Invader.play(self.recorded)
         events = self.flush_events()
         self.assertEqual(len(events), 5)
         self.assertEqual(events[0], (DOWN, LEFT))
@@ -245,13 +245,13 @@ class Testinvader(unittest.TestCase):
         self.assertEqual(events[3], ('move', (100, 50)))
         self.assertEqual(events[4], (DOWN, RIGHT))
 
-        invader.play(self.recorded, include_clicks=False)
+        Invader.play(self.recorded, include_clicks=False)
         events = self.flush_events()
         self.assertEqual(len(events), 2)
         self.assertEqual(events[0], ('wheel', 5))
         self.assertEqual(events[1], ('move', (100, 50)))
 
-        invader.play(self.recorded, include_moves=False)
+        Invader.play(self.recorded, include_moves=False)
         events = self.flush_events()
         self.assertEqual(len(events), 4)
         self.assertEqual(events[0], (DOWN, LEFT))
@@ -259,7 +259,7 @@ class Testinvader(unittest.TestCase):
         self.assertEqual(events[2], ('wheel', 5))
         self.assertEqual(events[3], (DOWN, RIGHT))
 
-        invader.play(self.recorded, include_wheel=False)
+        Invader.play(self.recorded, include_wheel=False)
         events = self.flush_events()
         self.assertEqual(len(events), 4)
         self.assertEqual(events[0], (DOWN, LEFT))

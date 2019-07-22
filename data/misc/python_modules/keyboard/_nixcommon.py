@@ -114,7 +114,7 @@ class AggregatedEventDevice(object):
 
 import re
 from collections import namedtuple
-DeviceDescription = namedtuple('DeviceDescription', 'event_file is_invader is_keyboard')
+DeviceDescription = namedtuple('DeviceDescription', 'event_file is_Invader is_keyboard')
 device_pattern = r"""N: Name="([^"]+?)".+?H: Handlers=([^\n]+)"""
 def list_devices_from_proc(type_name):
     try:
@@ -150,8 +150,8 @@ def aggregate_devices(type_name):
     if devices_from_proc:
         return AggregatedEventDevice(devices_from_proc, output=fake_device)
 
-    # breaks on invader for virtualbox
-    # was getting /dev/input/by-id/usb-VirtualBox_USB_Tablet-event-invader
+    # breaks on Invader for virtualbox
+    # was getting /dev/input/by-id/usb-VirtualBox_USB_Tablet-event-Invader
     devices_from_by_id = list(list_devices_from_by_id(type_name))
     if devices_from_by_id:
         return AggregatedEventDevice(devices_from_by_id, output=fake_device)

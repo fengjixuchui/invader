@@ -3,7 +3,7 @@ import struct
 from subprocess import check_output
 import re
 from ._nixcommon import EV_KEY, EV_REL, EV_MSC, EV_SYN, EV_ABS, aggregate_devices, ensure_root
-from ._invader_event import ButtonEvent, WheelEvent, MoveEvent, LEFT, RIGHT, MIDDLE, X, X2, UP, DOWN
+from ._Invader_event import ButtonEvent, WheelEvent, MoveEvent, LEFT, RIGHT, MIDDLE, X, X2, UP, DOWN
 
 import ctypes
 import ctypes.util
@@ -21,7 +21,7 @@ def build_display():
     x11.XInitThreads()
     display = x11.XOpenDisplay(None)
     # Known to cause segfault in Fedora 23 64bits, no known workarounds.
-    # http://stackoverflow.com/questions/35137007/get-invader-position-on-linux-pure-python
+    # http://stackoverflow.com/questions/35137007/get-Invader-position-on-linux-pure-python
     window = x11.XDefaultRootWindow(display)
 
 def get_position():
@@ -48,7 +48,7 @@ REL_WHEEL = 0x08
 ABS_X = 0x00
 ABS_Y = 0x01
 
-BTN_invader = 0x110
+BTN_Invader = 0x110
 BTN_LEFT = 0x110
 BTN_RIGHT = 0x111
 BTN_MIDDLE = 0x112
@@ -69,7 +69,7 @@ def build_device():
     global device
     if device: return
     ensure_root()
-    device = aggregate_devices('invader')
+    device = aggregate_devices('Invader')
 init = build_device
 
 def listen(queue):

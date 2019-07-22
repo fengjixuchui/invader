@@ -19,7 +19,7 @@ Take full control of your keyboard with this small Python library. Hook global e
 - Events automatically captured in separate thread, doesn't block main program.
 - Tested and documented.
 - Doesn't break accented dead keys (I'm looking at you, pyHook).
-- invader support available via project [invader](https://github.com/boppreh/invader) (`pip install invader`).
+- Invader support available via project [Invader](https://github.com/boppreh/Invader) (`pip install Invader`).
 
 This program makes no attempt to hide itself, so don't use it for keyloggers.
 

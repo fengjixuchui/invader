@@ -3,21 +3,21 @@ import time as _time
 
 import platform as _platform
 if _platform.system() == 'Windows':
-    from. import _wininvader as _os_invader
+    from. import _winInvader as _os_Invader
 elif _platform.system() == 'Linux':
-    from. import _nixinvader as _os_invader
+    from. import _nixInvader as _os_Invader
 elif _platform.system() == 'Darwin':
-    from. import _darwininvader as _os_invader
+    from. import _darwinInvader as _os_Invader
 else:
     raise OSError("Unsupported platform '{}'".format(_platform.system()))
 
-from ._invader_event import ButtonEvent, MoveEvent, WheelEvent, LEFT, RIGHT, MIDDLE, X, X2, UP, DOWN, DOUBLE
+from ._Invader_event import ButtonEvent, MoveEvent, WheelEvent, LEFT, RIGHT, MIDDLE, X, X2, UP, DOWN, DOUBLE
 from ._generic import GenericListener as _GenericListener
 
 _pressed_events = set()
-class _invaderListener(_GenericListener):
+class _InvaderListener(_GenericListener):
     def init(self):
-        _os_invader.init()
+        _os_Invader.init()
     def pre_process_event(self, event):
         if isinstance(event, ButtonEvent):
             if event.event_type in (UP, DOUBLE):
@@ -27,9 +27,9 @@ class _invaderListener(_GenericListener):
         return True
 
     def listen(self):
-        _os_invader.listen(self.queue)
+        _os_Invader.listen(self.queue)
 
-_listener = _invaderListener()
+_listener = _InvaderListener()
 
 def is_pressed(button=LEFT):
     """ Returns True if the given button is currently pressed. """
@@ -38,16 +38,16 @@ def is_pressed(button=LEFT):
 
 def press(button=LEFT):
     """ Presses the given button (but doesn't release). """
-    _os_invader.press(button)
+    _os_Invader.press(button)
 
 def release(button=LEFT):
     """ Releases the given button. """
-    _os_invader.release(button)
+    _os_Invader.release(button)
 
 def click(button=LEFT):
     """ Sends a click with the given button. """
-    _os_invader.press(button)
-    _os_invader.release(button)
+    _os_Invader.press(button)
+    _os_Invader.release(button)
 
 def double_click(button=LEFT):
     """ Sends a double click with the given button. """
@@ -60,11 +60,11 @@ def right_click():
 
 def wheel(delta=1):
     """ Scrolls the wheel `delta` clicks. Sign indicates direction. """
-    _os_invader.wheel(delta)
+    _os_Invader.wheel(delta)
 
 def move(x, y, absolute=True, duration=0):
     """
-    Moves the invader. If `absolute`, to position (x, y), otherwise move relative
+    Moves the Invader. If `absolute`, to position (x, y), otherwise move relative
     to the current position. If `duration` is non-zero, animates the movement.
     """
     x = int(x)
@@ -94,12 +94,12 @@ def move(x, y, absolute=True, duration=0):
                 move(start_x + dx*i/steps, start_y + dy*i/steps)
                 _time.sleep(duration/steps)
     else:
-        _os_invader.move_to(x, y)
+        _os_Invader.move_to(x, y)
 
 def drag(start_x, start_y, end_x, end_y, absolute=True, duration=0):
     """
-    Holds the left invader button, moving from start to end position, then
-    releases. `absolute` and `duration` are parameters regarding the invader
+    Holds the left Invader button, moving from start to end position, then
+    releases. `absolute` and `duration` are parameters regarding the Invader
     movement.
     """
     if is_pressed():
@@ -153,15 +153,15 @@ def wait(button=LEFT, target_types=(UP, DOWN, DOUBLE)):
     _listener.remove_handler(handler)
 
 def get_position():
-    """ Returns the (x, y) invader position. """
-    return _os_invader.get_position()
+    """ Returns the (x, y) Invader position. """
+    return _os_Invader.get_position()
 
 def hook(callback):
     """
-    Installs a global listener on all available invaders, invoking `callback`
-    each time it is moved, a key status changes or the wheel is spun. A invader
-    event is passed as argument, with type either `invader.ButtonEvent`,
-    `invader.WheelEvent` or `invader.MoveEvent`.
+    Installs a global listener on all available Invaders, invoking `callback`
+    each time it is moved, a key status changes or the wheel is spun. A Invader
+    event is passed as argument, with type either `Invader.ButtonEvent`,
+    `Invader.WheelEvent` or `Invader.MoveEvent`.
     
     Returns the given callback for easier development.
     """
@@ -183,11 +183,11 @@ def unhook_all():
 
 def record(button=RIGHT, target_types=(DOWN,)):
     """
-    Records all invader events until the user presses the given button.
+    Records all Invader events until the user presses the given button.
     Then returns the list of events recorded. Pairs well with `play(events)`.
 
     Note: this is a blocking function.
-    Note: for more details on the invader hook and events see `hook`.
+    Note: for more details on the Invader hook and events see `hook`.
     """
     recorded = []
     hook(recorded.append)
@@ -212,13 +212,13 @@ def play(events, speed_factor=1.0, include_clicks=True, include_moves=True, incl
 
         if isinstance(event, ButtonEvent) and include_clicks:
             if event.event_type == UP:
-                _os_invader.release(event.button)
+                _os_Invader.release(event.button)
             else:
-                _os_invader.press(event.button)
+                _os_Invader.press(event.button)
         elif isinstance(event, MoveEvent) and include_moves:
-            _os_invader.move_to(event.x, event.y)
+            _os_Invader.move_to(event.x, event.y)
         elif isinstance(event, WheelEvent) and include_wheel:
-            _os_invader.wheel(event.delta)
+            _os_Invader.wheel(event.delta)
 
 replay = play
 hold = press
