@@ -525,7 +525,7 @@ class ZipImportError(ImportError):
 # and searches for the respective module or package
 
 class CFinder(object):
-    """Import Hook for invader"""
+    """Import Hook for Invader"""
     def __init__(self, repoName):
         self.repoName = repoName
 

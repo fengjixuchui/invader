@@ -1,8 +1,8 @@
 
-function Invoke-invader {
+function Invoke-Invader {
     <#
         .SYNOPSIS
-        The main functionality of the invader agent.
+        The main functionality of the Invader agent.
         Additional functionality can be loaded dynamically.
 
         Author: @harmj0y

