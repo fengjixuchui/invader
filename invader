@@ -12,7 +12,7 @@ import ast
 os.system("printf '\033]2;Invader Framework\a'")
 
 # Invader imports
-from lib.common import invader, helpers
+from lib.common import Invader, helpers
 
 # set global utf8 encoding
 reload(sys)
