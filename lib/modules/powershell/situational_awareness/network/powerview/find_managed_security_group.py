@@ -27,7 +27,7 @@ class Module:
             
             'Comments': [
                 'https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/'
-                'https://github.com/PowerShellinvader/invader/pull/119'
+                'https://github.com/PowerShellInvader/Invader/pull/119'
             ]
         }
 
