@@ -12,7 +12,7 @@ class Module:
             'Author': ['@xorrior'],
 
             # more verbose multi-line description of the module
-            'Description': ('Installs an invader launchDaemon.'),
+            'Description': ('Installs an Invader launchDaemon.'),
 
             # True if the module needs to run in the background
             'Background' : False,
@@ -67,7 +67,7 @@ class Module:
                 'Value'         :   'com.proxy.initialize'
             },
             'DaemonLocation' : {
-                'Description'   :   'The full path of where the invader launch daemon should be located.',
+                'Description'   :   'The full path of where the Invader launch daemon should be located.',
                 'Required'      :   True,
                 'Value'         :   ''
             }
@@ -160,7 +160,7 @@ process = subprocess.Popen('mv /tmp/%s /Library/LaunchDaemons/%s', stdout=subpro
 process.communicate()
 
 print "\\n[+] Persistence has been installed: /Library/LaunchDaemons/%s"
-print "\\n[+] invader daemon has been written to %s"
+print "\\n[+] Invader daemon has been written to %s"
 
 """ % (encBytes,plistSettings, programname, plistfilename, plistfilename, plistfilename, plistfilename, plistfilename, plistfilename, plistfilename, programname)
 

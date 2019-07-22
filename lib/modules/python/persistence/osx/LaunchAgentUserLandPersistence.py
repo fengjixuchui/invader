@@ -12,7 +12,7 @@ class Module:
             'Author': ['@xorrior','@n0pe_sled'],
 
             # more verbose multi-line description of the module
-            'Description': ('Installs an invader launchAgent.'),
+            'Description': ('Installs an Invader launchAgent.'),
 
             # True if the module needs to run in the background
             'Background' : False,

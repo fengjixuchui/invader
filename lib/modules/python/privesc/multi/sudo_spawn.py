@@ -14,7 +14,7 @@ class Module:
             'Author': ['@harmj0y'],
 
             # more verbose multi-line description of the module
-            'Description': ('Spawns a new invader agent using sudo.'),
+            'Description': ('Spawns a new Invader agent using sudo.'),
 
             # True if the module needs to run in the background
             'Background' : False,

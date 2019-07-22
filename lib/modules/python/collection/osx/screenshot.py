@@ -75,7 +75,7 @@ class Module:
 # take a screenshot using screencapture
 run_command('screencapture -x %s')
 # base64 up resulting file, delete the file, return the base64 of the png output
-#   mocked from the invader screenshot module
+#   mocked from the Invader screenshot module
 f = open('%s', 'rb')
 data = f.read()
 f.close()

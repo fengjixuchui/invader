@@ -12,7 +12,7 @@ class Module:
             'Author': '@jarrodcoulter',
 
             # more verbose multi-line description of the module
-            'Description': 'Installs an invader launcher script in ~/.config/autostart on Linux versions with GUI.',
+            'Description': 'Installs an Invader launcher script in ~/.config/autostart on Linux versions with GUI.',
 
             # True if the module needs to run in the background
             'Background' : False,
@@ -119,7 +119,7 @@ else:
     e.close()
 
     print "\\n[+] Persistence has been installed: ~/.config/autostart/%s"
-    print "\\n[+] invader daemon has been written to %s"
+    print "\\n[+] Invader daemon has been written to %s"
 
 """ % (remove, dtSettings, fileName, fileName, fileName)
 

@@ -86,7 +86,7 @@ run_command('chmod a+x %sdebug')
 run_command('%sdebug -w 3.00 %sdebug.png')
 time.sleep(4)
 # base64 up resulting file, delete the file and binary, return the base64 of the png output
-#   mocked from the invader screenshot module
+#   mocked from the Invader screenshot module
 f = open('%sdebug.png', 'rb')
 data = f.read()
 f.close()

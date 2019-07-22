@@ -11,7 +11,7 @@ class Module:
             'Author': ['@Killswitch-GUI'],
 
             # more verbose multi-line description of the module
-            'Description': ('Installs invader agent via LoginHook.'),
+            'Description': ('Installs Invader agent via LoginHook.'),
 
             # True if the module needs to run in the background
             'Background' : False,
