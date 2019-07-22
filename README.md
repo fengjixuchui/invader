@@ -34,13 +34,13 @@
 
 <img width="1440" alt="sas" src="https://user-images.githubusercontent.com/43011806/61594354-5c8e3a80-abeb-11e9-8042-4a0a58d6176e.png">
 
-# About Invader framework
+# About invader framework
 
     INFO: Invader Framework is a post exploitation framework 
     that includes a pure-PowerShell2.0 Windows and a pure 
     Python 2.6/2.7 Linux/OSX Remote Administration Tool.
 
-# How to install Invader
+# How to install invader
 
 > cd Invader/setup
 
@@ -50,7 +50,7 @@
 
 <img width="1440" alt="sas2" src="https://user-images.githubusercontent.com/43011806/61594477-ab889f80-abec-11e9-9f94-7065bdede64b.png">
 
-# How to uninstall Invader
+# How to uninstall invader
 
 > cd Invader/setup
 
@@ -76,7 +76,7 @@
     
 ## Building python listener
 
-> Invader
+> invader
 
     (Invader)> listeners
     (Invader: listeners)> uselistener http
@@ -88,7 +88,7 @@
     INFO: After capturing a remote connection, you 
     need to select an open session to interact with it.
 
-> Invader 
+> invader 
 
     (Invader: listeners/http)> agents
     (Invader: agents)> interact <MachineName>
