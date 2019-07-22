@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-printf '\033]2;invader INSTALLER\a'
+printf '\033]2;Invader INSTALLER\a'
 sleep 1
 # functions
 
@@ -187,13 +187,13 @@ chmod +x cert.sh
 
 cd ..
 cd
-cd invader
-chmod +x invader
+cd Invader
+chmod +x Invader
 {
-cp bin/invader /usr/local/bin
-chmod +x /usr/local/bin/invader
-cp bin/invader /bin
-chmod +x /bin/invader
+cp bin/Invader /usr/local/bin
+chmod +x /usr/local/bin/Invader
+cp bin/Invader /bin
+chmod +x /bin/Invader
 } &> /dev/null
 
 echo -e '\033[1;32m[*] Setup complete!\033[0m'

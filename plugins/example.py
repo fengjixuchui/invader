@@ -17,7 +17,7 @@ class Plugin(Plugin):
         print("Custom loading behavior happens now.")
 
         # you can store data here that will persist until the plugin
-        # is unloaded (i.e. invader closes)
+        # is unloaded (i.e. Invader closes)
         self.calledTimes = 0
 
     def register(self, mainMenu):
@@ -28,7 +28,7 @@ class Plugin(Plugin):
     def do_test(self, args):
         "An example of a plugin function."
         print("This is executed from a plugin!")
-        print(helpers.color("[*] It can even import invader functionality!"))
+        print(helpers.color("[*] It can even import Invader functionality!"))
 
         # you can also store data in the plugin (see onLoad)
         self.calledTimes += 1

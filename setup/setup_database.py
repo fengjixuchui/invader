@@ -44,7 +44,7 @@ IP_WHITELIST = ""
 IP_BLACKLIST = ""
 
 # default credentials used to log into the RESTful API
-API_USERNAME = "invaderadmin"
+API_USERNAME = "Invaderadmin"
 API_PASSWORD = ''.join(random.sample(string.ascii_letters + string.digits + punctuation, 32))
 
 # the 'permanent' API token (doesn't change)
@@ -61,7 +61,7 @@ OBFUSCATE_COMMAND = r'Token\All\1'
 #
 ###################################################
 
-conn = sqlite3.connect('%s/data/invader.db'%INSTALL_PATH)
+conn = sqlite3.connect('%s/data/Invader.db'%INSTALL_PATH)
 
 c = conn.cursor()
 

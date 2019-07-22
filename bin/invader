@@ -19,11 +19,11 @@ sleep 1
 echo ""$BS"[*] Installing update..."$CE""
 {
 cd
-rm -r ~/invader
+rm -r ~/Invader
 cd ~
-git clone https://github.com/entynetproject/invader.git
-cd invader
-chmod +x invader
+git clone https://github.com/entynetproject/Invader.git
+cd Invader
+chmod +x Invader
 } &> /dev/null
 echo ""$GNS"[*] Successfully updated..."$CE""
 sleep 1
@@ -31,13 +31,13 @@ exit
 fi
 
 cd ~
-if [[ -d ~/invader ]]
+if [[ -d ~/Invader ]]
 then
 {
-cd ~/invader
+cd ~/Invader
 } &> /dev/null
-chmod +x invader
-./invader $1 $2 $3 $4 $5 $6 $7 $8 $9
+chmod +x Invader
+./Invader $1 $2 $3 $4 $5 $6 $7 $8 $9
 else
 {
 ASESR="$( timeout -s SIGTERM 40 curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//' )"
@@ -46,11 +46,11 @@ if [[ "$ASESR" != "" ]]
 then 
 cd ~
 {
-git clone https://github.com/entynetproject/invader.git
-cd ~/invader
+git clone https://github.com/entynetproject/Invader.git
+cd ~/Invader
 } &> /dev/null
-chmod +x invader
-./invader $1 $2 $3 $4 $5 $6 $7 $8 $9
+chmod +x Invader
+./Invader $1 $2 $3 $4 $5 $6 $7 $8 $9
 else
 cd ~
 sleep 1

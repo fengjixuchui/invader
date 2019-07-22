@@ -13,18 +13,18 @@ then
 fi
 
 # reset the database
-if [ -e ../data/invader.db ]
+if [ -e ../data/Invader.db ]
 then
-	rm ../data/invader.db
+	rm ../data/Invader.db
 fi
 
 python ./setup_database.py
 cd ..
 
 # remove the debug file if it exists
-if [ -e invader.debug ]
+if [ -e Invader.debug ]
 then
-	rm invader.debug
+	rm Invader.debug
 fi
 
 # remove the download folders
@@ -33,9 +33,9 @@ then
 	rm -rf ./downloads/
 fi
 
-# start up invader if not in docker otherwise return
+# start up Invader if not in docker otherwise return
 if [ -f /.dockerenv ]; then
     echo "\033[1;32m[*] Invader reset complete returning back to Docker\033[0m"
 else
-    ./invader
+    ./Invader
 fi

@@ -12,20 +12,20 @@
   <a href="http://entynetproject.simplesite.com/">
     <img src="https://img.shields.io/badge/entynetproject-Ivan%20Nikolsky-blue.svg">
   </a> 
-  <a href="https://github.com/entynetproject/invader/releases">
-    <img src="https://img.shields.io/github/release/entynetproject/invader.svg">
+  <a href="https://github.com/entynetproject/Invader/releases">
+    <img src="https://img.shields.io/github/release/entynetproject/Invader.svg">
   </a>
   <a href="https://ru.m.wikipedia.org/wiki/python">
     <img src="https://img.shields.io/badge/language-python-blue.svg">
  </a>
-  <a href="https://github.com/entynetproject/invader">
+  <a href="https://github.com/entynetproject/Invader">
     <img src="https://img.shields.io/badge/tool-RAT-red.svg">
  </a>
-  <a href="https://github.com/entynetproject/invader/issues?q=is%3Aissue+is%3Aclosed">
-      <img src="https://img.shields.io/github/issues/entynetproject/invader.svg">
+  <a href="https://github.com/entynetproject/Invader/issues?q=is%3Aissue+is%3Aclosed">
+      <img src="https://img.shields.io/github/issues/entynetproject/Invader.svg">
   </a>
-  <a href="https://github.com/entynetproject/invader/wiki">
-      <img src="https://img.shields.io/badge/wiki%20-invader-lightgrey.svg">
+  <a href="https://github.com/entynetproject/Invader/wiki">
+      <img src="https://img.shields.io/badge/wiki%20-Invader-lightgrey.svg">
  </a>
   <a href="https://mobile.twitter.com/entynetproject">
     <img src="https://img.shields.io/badge/twitter-entynetproject-blue.svg">
@@ -34,15 +34,15 @@
 
 <img width="1440" alt="sas" src="https://user-images.githubusercontent.com/43011806/61594354-5c8e3a80-abeb-11e9-8042-4a0a58d6176e.png">
 
-# About invader framework
+# About Invader framework
 
     INFO: Invader Framework is a post exploitation framework 
     that includes a pure-PowerShell2.0 Windows and a pure 
     Python 2.6/2.7 Linux/OSX Remote Administration Tool.
 
-# How to install invader
+# How to install Invader
 
-> cd invader/setup
+> cd Invader/setup
 
 > chmod +x install.sh
 
@@ -50,9 +50,9 @@
 
 <img width="1440" alt="sas2" src="https://user-images.githubusercontent.com/43011806/61594477-ab889f80-abec-11e9-9f94-7065bdede64b.png">
 
-# How to uninstall invader
+# How to uninstall Invader
 
-> cd invader/setup
+> cd Invader/setup
 
 > chmod +x uninstall.sh
 
@@ -67,7 +67,7 @@
 
 ## Building powershell listener
 
-> invader
+> Invader
 
     (Invader)> listeners
     (Invader: listeners)> uselistener http
@@ -76,7 +76,7 @@
     
 ## Building python listener
 
-> invader
+> Invader
 
     (Invader)> listeners
     (Invader: listeners)> uselistener http
@@ -88,14 +88,14 @@
     INFO: After capturing a remote connection, you 
     need to select an open session to interact with it.
 
-> invader 
+> Invader 
 
     (Invader: listeners/http)> agents
     (Invader: agents)> interact <MachineName>
     (Invader: MachineName)> rename comp1
     (Invader: comp1)> info
 
-# Why invader framework?
+# Why Invader framework?
 
 > A lot of Remote Administration Tool modules
 

@@ -1,17 +1,17 @@
 # NOTE: Only use this when you want to build image locally
-#       else use `docker pull entynetproject\invader:{VERSION}`
-#       all image versions can be found at: https://hub.docker.com/r/entynetproject/invader/
+#       else use `docker pull entynetproject\Invader:{VERSION}`
+#       all image versions can be found at: https://hub.docker.com/r/entynetproject/Invader/
 
 # -----BUILD COMMANDS----
-# 1) build command: `docker build -t entynetproject/invader .`
-# 2) create volume storage: `docker create -v /opt/invader --name data entynetproject/invader`
-# 3) run out container: `docker run -ti --volumes-from data entynetproject/invader /bin/bash`
+# 1) build command: `docker build -t entynetproject/Invader .`
+# 2) create volume storage: `docker create -v /opt/Invader --name data entynetproject/Invader`
+# 3) run out container: `docker run -ti --volumes-from data entynetproject/Invader /bin/bash`
 
 # -----RELEASE COMMANDS----
 # 1) `USERNAME=entynetproject`
-# 2) `IMAGE=invader`
+# 2) `IMAGE=Invader`
 # 3) `git pull`
-# 4) `export VERSION="$(curl -s https://raw.githubusercontent.com/entynetproject/invader/master/lib/common/invader.py | grep "VERSION =" | cut -d '"' -f2)"`
+# 4) `export VERSION="$(curl -s https://raw.githubusercontent.com/entynetproject/Invader/master/lib/common/Invader.py | grep "VERSION =" | cut -d '"' -f2)"`
 # 5) `docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION`
 # 1) `docker push $USERNAME/$IMAGE:latest`
 # 2) `docker push $USERNAME/$IMAGE:$VERSION`
@@ -26,7 +26,7 @@ ARG empirversion
 
 # extra metadata
 LABEL maintainer="entynetproject"
-LABEL description="Dockerfile base for invader server."
+LABEL description="Dockerfile base for Invader server."
 LABEL version=${empirversion}
 
 # env setup
@@ -49,12 +49,12 @@ RUN apt-get update && apt-get install -qy \
   && ln -sf /usr/bin/python2.7 /usr/bin/python \  
   && rm -rf /var/lib/apt/lists/*
 
-# build invader from source
+# build Invader from source
 # TODO: When we merge to master set branch to master
-RUN git clone --depth=1 -b dev https://github.com/entynetproject/invader.git /opt/invader && \
-    cd /opt/invader/setup/ && \
+RUN git clone --depth=1 -b dev https://github.com/entynetproject/Invader.git /opt/Invader && \
+    cd /opt/Invader/setup/ && \
     ./install.sh && \
-    rm -rf /opt/invader/data/invader*
-RUN python2.7 /opt/invader/setup/setup_database.py
-WORKDIR "/opt/invader"
-CMD ["python2.7", "invader"]
+    rm -rf /opt/Invader/data/Invader*
+RUN python2.7 /opt/Invader/setup/setup_database.py
+WORKDIR "/opt/Invader"
+CMD ["python2.7", "Invader"]
