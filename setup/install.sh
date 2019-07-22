@@ -188,12 +188,12 @@ chmod +x cert.sh
 cd ..
 cd
 cd Invader
-chmod +x Invader
+chmod +x invader
 {
-cp bin/Invader /usr/local/bin
-chmod +x /usr/local/bin/Invader
-cp bin/Invader /bin
-chmod +x /bin/Invader
+cp bin/invader /usr/local/bin
+chmod +x /usr/local/bin/invader
+cp bin/invader /bin
+chmod +x /bin/invader
 } &> /dev/null
 
 echo -e '\033[1;32m[*] Setup complete!\033[0m'
