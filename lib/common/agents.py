@@ -1065,7 +1065,7 @@ class Agents:
             print helpers.color("[!] Agent %s not active." % (agentName))
         else:
             if sessionID:
-                message = "[*] Tasked {} to run {}".format(sessionID, taskName)
+                message = "\n[*] Tasked {} to run {}".format(sessionID, taskName)
                 signal = json.dumps({
                     'print': True,
                     'message': message
