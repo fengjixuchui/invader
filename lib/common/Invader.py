@@ -1337,7 +1337,7 @@ class AgentsMenu(SubMenu):
                 self.mainMenu.agents.add_agent_task_db(sessionID, 'TASK_SHELL', 'Set-Delay ' + str(delay) + ' ' + str(jitter))
 
                 # dispatch this event
-                message = "[*] Tasked agent to delay sleep/jitter {}/{}".format(delay, jitter)
+                message = "\n[*] Tasked agent to delay sleep/jitter {}/{}".format(delay, jitter)
                 signal = json.dumps({
                     'print': True,
                     'message': message
