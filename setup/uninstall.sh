@@ -3,8 +3,8 @@ printf '\033]2;Uninstalling...\a'
 sleep 5
 
 {
-rm /bin/Invader
-rm /usr/local/bin/Invader
+rm /bin/invader
+rm /usr/local/bin/invader
 rm -r ~/Invader
 } &> /dev/null
 
