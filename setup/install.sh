@@ -22,10 +22,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+cd ~
+if [[ -d ~/Invader ]]
+then
+sleep 0.5
+else
+cd ~
+{
+git clone https://github.com/entynetproject/Invader.git
+cd ~/Invader/setup
+} &> /dev/null
+chmod +x install.sh
+fi
+
 clear
 printf '\033]2;invader INSTALLER\a'
 sleep 1
 # functions
+
+
 
 # Install Powershell on Linux
 function install_powershell() {
