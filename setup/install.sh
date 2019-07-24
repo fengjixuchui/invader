@@ -26,10 +26,6 @@ cd ~
 if [[ -d ~/Invader ]]
 then
 sleep 0.5
-{
-cd
-rm -r invader
-} &> /dev/null
 else
 cd ~
 {
