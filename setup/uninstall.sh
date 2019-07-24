@@ -23,6 +23,7 @@
 # SOFTWARE.
 
 printf '\033]2;Uninstalling...\a'
+echo -e "\033[1;34m[*] Uninstalling Invader Framework...\033[0m"
 sleep 5
 
 {
@@ -32,3 +33,5 @@ rm -r ~/invader
 } &> /dev/null
 
 echo -e "\033[1;32m[*] Uninstallation completed!\033[0m"
+sleep 1
+exit
