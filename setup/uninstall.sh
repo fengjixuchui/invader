@@ -28,7 +28,7 @@ sleep 5
 {
 rm /bin/invader
 rm /usr/local/bin/invader
-rm -r ~/Invader
+rm -r ~/invader
 } &> /dev/null
 
 echo -e "\033[1;32m[*] Uninstallation completed!\033[0m"
