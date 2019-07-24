@@ -32,6 +32,6 @@ rm /usr/local/bin/invader
 rm -r ~/invader
 } &> /dev/null
 
-echo -e "\033[1;32m[*] Uninstallation completed!\033[0m"
+echo -e "\033[1;32m[*] Successfully uninstalled...\033[0m"
 sleep 1
 exit
