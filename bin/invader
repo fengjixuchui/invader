@@ -37,8 +37,6 @@ cd ~
 if [[ -d ~/Invader ]]
 then
 {
-cd
-rm -r invader
 cd ~/Invader
 } &> /dev/null
 chmod +x invader
