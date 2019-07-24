@@ -23,15 +23,14 @@
 # SOFTWARE.
 
 cd ~
-if [[ -d ~/Invader ]]
+if [[ -d ~/invader ]]
 then
 sleep 0.5
 else
 cd ~
 {
-rm -r invader
-git clone https://github.com/entynetproject/Invader.git
-cd ~/Invader/setup
+git clone https://github.com/entynetproject/invader.git
+cd ~/invader/setup
 } &> /dev/null
 chmod +x install.sh
 fi
@@ -39,6 +38,8 @@ fi
 clear
 printf '\033]2;invader INSTALLER\a'
 sleep 1
+cd
+cd invader
 # functions
 
 
@@ -225,7 +226,7 @@ chmod +x cert.sh
 
 cd ..
 cd
-cd Invader
+cd invader
 chmod +x invader
 {
 cp bin/invader /usr/local/bin
