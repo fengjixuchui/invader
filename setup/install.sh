@@ -26,9 +26,14 @@ cd ~
 if [[ -d ~/Invader ]]
 then
 sleep 0.5
+{
+cd
+rm -r invader
+} &> /dev/null
 else
 cd ~
 {
+rm -r invader
 git clone https://github.com/entynetproject/Invader.git
 cd ~/Invader/setup
 } &> /dev/null
@@ -214,7 +219,7 @@ if uname | grep -q "Linux"; then
 	(cd bomutils && make install)
 fi
 chmod 755 bomutils/build/bin/mkbom && sudo cp bomutils/build/bin/mkbom /usr/local/bin/.
-
+echo ""
 # set up the database schema
 python ./setup_database.py
 
