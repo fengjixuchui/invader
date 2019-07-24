@@ -24,7 +24,10 @@ cd ~
 git clone https://github.com/entynetproject/Invader.git
 cd Invader
 chmod +x invader
+cd Invader/setup
 } &> /dev/null
+sleep 1
+python setup_database.py
 echo ""$GNS"[*] Successfully updated..."$CE""
 sleep 1
 exit
@@ -34,6 +37,8 @@ cd ~
 if [[ -d ~/Invader ]]
 then
 {
+cd
+rm -r invader
 cd ~/Invader
 } &> /dev/null
 chmod +x invader
@@ -46,6 +51,7 @@ if [[ "$ASESR" != "" ]]
 then 
 cd ~
 {
+rm -r invader
 git clone https://github.com/entynetproject/Invader.git
 cd ~/Invader
 } &> /dev/null
