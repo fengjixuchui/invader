@@ -24,7 +24,6 @@ cd ~
 git clone https://github.com/entynetproject/invader.git
 cd invader
 chmod +x invader
-cd invader/setup
 } &> /dev/null
 sleep 1
 echo ""$GNS"[*] Successfully updated..."$CE""
