@@ -1091,7 +1091,7 @@ def send_message(packets=None):
                             sessionKey = self.mainMenu.agents.agents[sessionID]['sessionKey']
 
                             listenerName = self.options['Name']['Value']
-                            message = "\n[*] Sending agent (stage 2) to {} at {}".format(sessionID, clientIP)
+                            message = "[*] Sending agent (stage 2) to {} at {}".format(sessionID, clientIP)
                             signal = json.dumps({
                                 'print': True,
                                 'message': message
