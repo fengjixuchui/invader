@@ -1127,7 +1127,7 @@ def send_message(packets=None):
                             message = ""
                             signal = json.dumps({
                                 'print': True,
-                                'message': message
+                                
                             })
                             dispatcher.send(signal, sender="listeners/http/{}".format(listenerName))
                             return make_response(self.default_response(), 404)
