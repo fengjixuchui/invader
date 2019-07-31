@@ -714,7 +714,7 @@ class Listener:
 
                                 # step 2 of negotiation -> return payload.ps1 (stage 1)
                                 listenerName = self.options['Name']['Value']
-                                message = "[*] Sending {} payload (stage 1) to {}".format(language, clientIP)
+                                message = "\n[*] Sending {} payload (stage 1) to {}".format(language, clientIP)
                                 signal = json.dumps({
                                     'print': True,
                                     'message': message
