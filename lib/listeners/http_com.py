@@ -817,7 +817,7 @@ class Listener:
                             return make_response(self.default_response(), 200)
                         elif results == 'VALID':
                             listenerName = self.options['Name']['Value']
-                            message = ""
+                            message = "[*] Press 'ENTER' to continue..."
                             signal = json.dumps({
                                 'print': True,
                                 'message': message
