@@ -1007,7 +1007,7 @@ def send_message(packets=None):
 
                                 # step 2 of negotiation -> return payload.ps1 (stage 1)
                                 listenerName = self.options['Name']['Value']
-                                message = "[*] Sending {} payload (stage 1) to {}".format(language, clientIP)
+                                message = "\n[*] Sending {} payload (stage 1) to {}".format(language, clientIP)
                                 signal = json.dumps({
                                     'print': True,
                                     'message': message
@@ -1091,7 +1091,7 @@ def send_message(packets=None):
                             sessionKey = self.mainMenu.agents.agents[sessionID]['sessionKey']
 
                             listenerName = self.options['Name']['Value']
-                            message = "[*] Sending agent (stage 2) to {} at {}".format(sessionID, clientIP)
+                            message = "\n[*] Sending agent (stage 2) to {} at {}".format(sessionID, clientIP)
                             signal = json.dumps({
                                 'print': True,
                                 'message': message
