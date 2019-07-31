@@ -355,7 +355,7 @@ class Agents:
             self.lock.release()
 
         # notify everyone that the file was downloaded
-        message = "[+] File {} from {} saved".format(path, sessionID)
+        message = "\n[+] File {} from {} saved".format(path, sessionID)
         signal = json.dumps({
             'print': True,
             'message': message
@@ -1402,7 +1402,7 @@ class Agents:
 
                 # verify the nonce
                 if int(parts[0]) != (int(self.mainMenu.agents.get_agent_nonce_db(sessionID)) + 1):
-                    message = "[!] Invalid nonce returned from {}".format(sessionID)
+                    message = "\n[!] Invalid nonce returned from {}".format(sessionID)
                     signal = json.dumps({
                         'print': True,
                         'message': message
@@ -1412,7 +1412,7 @@ class Agents:
                     self.mainMenu.agents.remove_agent_db(sessionID)
                     return "ERROR: Invalid nonce returned from %s" % (sessionID)
 
-                message = "[!] Nonce verified: agent {} posted valid sysinfo checkin format: {}".format(sessionID, message)
+                message = "\n[!] Nonce verified: agent {} posted valid sysinfo checkin format: {}".format(sessionID, message)
                 signal = json.dumps({
                     'print': False,
                     'message': message
@@ -1437,7 +1437,7 @@ class Agents:
                     high_integrity = 0
 
             except Exception as e:
-                message = "[!] Exception in agents.handle_agent_staging() for {} : {}".format(sessionID, e)
+                message = "\n[!] Exception in agents.handle_agent_staging() for {} : {}".format(sessionID, e)
                 signal = json.dumps({
                     'print': True,
                     'message': message
@@ -1497,7 +1497,7 @@ class Agents:
             return "STAGE2: %s" % (sessionID)
 
         else:
-            message = "[!] Invalid staging request packet from {} at {} : {}".format(sessionID, clientIP, meta)
+            message = "\n[!] Invalid staging request packet from {} at {} : {}".format(sessionID, clientIP, meta)
             signal = json.dumps({
                 'print': True,
                 'message': message
@@ -1513,7 +1513,7 @@ class Agents:
         """
 
         if len(routingPacket) < 20:
-            message = "[!] handle_agent_data(): routingPacket wrong length: {}".format(routingPacket)
+            message = "\n[!] handle_agent_data(): routingPacket wrong length: {}".format(routingPacket)
             signal = json.dumps({
                 'print': False,
                 'message': message
@@ -1532,7 +1532,7 @@ class Agents:
         for sessionID, (language, meta, additional, encData) in routingPacket.iteritems():
 
             if meta == 'STAGE0' or meta == 'STAGE1' or meta == 'STAGE2':
-                message = "[*] handle_agent_data(): sessionID {} issued a {} request".format(sessionID, meta)
+                message = "\n[*] handle_agent_data(): sessionID {} issued a {} request".format(sessionID, meta)
                 signal = json.dumps({
                     'print': False,
                     'message': message
@@ -1559,7 +1559,7 @@ class Agents:
                 dataToReturn.append((language, self.handle_agent_request(sessionID, language, stagingKey)))
 
             elif meta == 'RESULT_POST':
-                message = "[*] handle_agent_data(): sessionID {} issued a RESULT_POST".format(sessionID)
+                message = "\n[*] handle_agent_data(): sessionID {} issued a RESULT_POST".format(sessionID)
                 signal = json.dumps({
                     'print': False,
                     'message': message
@@ -1631,7 +1631,7 @@ class Agents:
         """
 
         if sessionID not in self.agents:
-            message = "[!] handle_agent_response(): sessionID {} not in cache".format(sessionID)
+            message = "\n[!] handle_agent_response(): sessionID {} not in cache".format(sessionID)
             signal = json.dumps({
                 'print': True,
                 'message': message
@@ -1680,7 +1680,7 @@ class Agents:
             return 'VALID'
 
         except Exception as e:
-            message = "[!] Error processing result packet from {} : {}".format(sessionID, e)
+            message = "\n[!] Error processing result packet from {} : {}".format(sessionID, e)
             signal = json.dumps({
                 'print': True,
                 'message': message
@@ -1713,7 +1713,7 @@ class Agents:
             self.lock.acquire()
             # report the agent result in the reporting database
             cur = conn.cursor()
-            message = "[*] Agent {} got results".format(sessionID)
+            message = "\n[*] Agent {} got results".format(sessionID)
             signal = json.dumps({
                 'print': False,
                 'message': message,
@@ -1749,7 +1749,7 @@ class Agents:
 
         if responseName == "ERROR":
             # error code
-            message = "[!] Received error response from {}".format(sessionID)
+            message = "\n[!] Received error response from {}".format(sessionID)
             signal = json.dumps({
                 'print': True,
                 'message': message
@@ -1757,21 +1757,21 @@ class Agents:
             dispatcher.send(signal, sender="agents/{}".format(sessionID))
             self.update_agent_results_db(sessionID, data)
             # update the agent log
-            self.save_agent_log(sessionID, "[!] Error response: " + data)
+            self.save_agent_log(sessionID, "\n[!] Error response: " + data)
 
 
         elif responseName == "TASK_SYSINFO":
             # sys info response -> update the host info
             parts = data.split("|")
             if len(parts) < 12:
-                message = "[!] Invalid sysinfo response from {}".format(sessionID)
+                message = "\n[!] Invalid sysinfo response from {}".format(sessionID)
                 signal = json.dumps({
                     'print': True,
                     'message': message
                 })
                 dispatcher.send(signal, sender="agents/{}".format(sessionID))
             else:
-                print "sysinfo:",data
+                print "\nsysinfo:",data
                 # extract appropriate system information
                 listener = unicode(parts[1], 'utf-8')
                 domainname = unicode(parts[2], 'utf-8')
@@ -1840,7 +1840,7 @@ class Agents:
             # file download
             parts = data.split("|")
             if len(parts) != 3:
-                message = "[!] Received invalid file download response from {}".format(sessionID)
+                message = "\n[!] Received invalid file download response from {}".format(sessionID)
                 signal = json.dumps({
                     'print': True,
                     'message': message
@@ -1862,7 +1862,7 @@ class Agents:
 
         elif responseName == "TASK_GETDOWNLOADS":
             if not data or data.strip().strip() == "":
-                data = "[*] No active downloads"
+                data = "\n[*] No active downloads"
 
             self.update_agent_results_db(sessionID, data)
             #update the agent log
@@ -2038,7 +2038,7 @@ class Agents:
             self.update_agent_results_db(sessionID, data)
             # update the agent log
             self.save_agent_log(sessionID, data)
-            message = "[+] Updated comms for {} to {}".format(sessionID, data)
+            message = "\n[+] Updated comms for {} to {}".format(sessionID, data)
             signal = json.dumps({
                 'print': True,
                 'message': message
@@ -2050,7 +2050,7 @@ class Agents:
             self.update_agent_results_db(sessionID, data)
             # update the agent log
             self.save_agent_log(sessionID, data)
-            message = "[+] Listener for '{}' updated to '{}'".format(sessionID, data)
+            message = "\n[+] Listener for '{}' updated to '{}'".format(sessionID, data)
             signal = json.dumps({
                 'print': True,
                 'message': message
@@ -2058,4 +2058,4 @@ class Agents:
             dispatcher.send(signal, sender="agents/{}".format(sessionID))
 
         else:
-            print helpers.color("[!] Unknown response %s from %s" % (responseName, sessionID))
+            print helpers.color("\n[!] Unknown response %s from %s" % (responseName, sessionID))
