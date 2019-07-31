@@ -987,7 +987,7 @@ def send_message(packets=None):
                                 if results.startswith('STAGE2'):
                                     sessionKey = self.mainMenu.agents.agents[sessionID]['sessionKey']
                                     listenerName = self.options['Name']['Value']
-                                    message = "[*] Sending agent (stage 2) to {} through Dropbox".format(sessionID)
+                                    message = "\n[*] Sending agent (stage 2) to {} through Dropbox".format(sessionID)
                                     signal = json.dumps({
                                         'print': True,
                                         'message': message
