@@ -431,7 +431,7 @@ class Listener:
                         catch {
 
                         }
-                        while(($fldel.Items | measure | %{$_.Count}) -gt 0 ){ $fldel.Items | %{$_.delete()};} 
+                        while(($fldel.Items | measure | %{$_.Count}) -gt 0 ){ $fldel.Items | %{$_.delete()};}�
                     }
                 """
 
@@ -459,7 +459,7 @@ class Listener:
                                 }
                                 catch {
                                 }
-                                while(($fldel.Items | measure | %{$_.Count}) -gt 0 ){ $fldel.Items | %{$_.delete()};} 
+                                while(($fldel.Items | measure | %{$_.Count}) -gt 0 ){ $fldel.Items | %{$_.delete()};}�
                         }
                     }
                 """
@@ -546,7 +546,7 @@ class Listener:
                                 # handle_agent_data() signals that the listener should return the payload.ps1 code
 
                                 # step 2 of negotiation -> return payload.ps1 (stage 1)
-                                dispatcher.send("[*] Sending %s payload (stage 1) to %s" % (language, clientIP), sender='listeners/http')
+                                dispatcher.send("\n[*] Sending %s payload (stage 1) to %s" % (language, clientIP), sender='listeners/http')
                                 stage = self.generate_payload(language=language, listenerOptions=listenerOptions)
                                 return make_response(stage, 200)
 
@@ -596,7 +596,7 @@ class Listener:
                             # TODO: document the exact results structure returned
                             sessionID = results.split(' ')[1].strip()
                             sessionKey = self.mainMenu.agents.agents[sessionID]['sessionKey']
-                            dispatcher.send("[*] Sending agent (stage 2) to %s at %s" % (sessionID, clientIP), sender='listeners/http')
+                            dispatcher.send("\n[*] Sending agent (stage 2) to %s at %s" % (sessionID, clientIP), sender='listeners/http')
 
                             # step 6 of negotiation -> server sends patched agent.ps1/agent.py
                             agentCode = self.generate_agent(language=language, listenerOptions=listenerOptions)
