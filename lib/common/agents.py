@@ -1669,10 +1669,10 @@ class Agents:
                 theSender += "PsKeyLogger"
             if results:
                 # signal that this agent returned results
-                message = ""
+                message = "[*] Agent {} returned results.".format(sessionID)
                 signal = json.dumps({
                     'print': True,
-                    
+                    'message': message
                 })
                 dispatcher.send(signal, sender="agents/{}".format(sessionID))
 
