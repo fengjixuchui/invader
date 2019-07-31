@@ -5,6 +5,7 @@ import socket
 import subprocess
 
 def get_sysinfo(nonce='00000000'):
+    print "\n"
     # NOTE: requires global variable "server" to be set
 
     # nonce | listener | domainname | username | hostname | internal_ip | os_details | os_details | high_integrity | process_name | process_id | language | language_version
