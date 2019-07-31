@@ -1124,10 +1124,10 @@ def send_message(packets=None):
                             return make_response(self.default_response(), 404)
                         elif results == 'VALID':
                             listenerName = self.options['Name']['Value']
-                            message = ""
+                            message = "[*] Press 'ENTER' to continue..."
                             signal = json.dumps({
                                 'print': True,
-                                
+                                'message': message
                             })
                             dispatcher.send(signal, sender="listeners/http/{}".format(listenerName))
                             return make_response(self.default_response(), 404)
