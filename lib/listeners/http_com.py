@@ -792,7 +792,7 @@ class Listener:
                             sessionKey = self.mainMenu.agents.agents[sessionID]['sessionKey']
 
                             listenerName = self.options['Name']['Value']
-                            message = "[*] Sending agent (stage 2) to {} at {}".format(sessionID, clientIP)
+                            message = "\n[*] Sending agent (stage 2) to {} at {}".format(sessionID, clientIP)
                             signal = json.dumps({
                                 'print': True,
                                 'message': message
