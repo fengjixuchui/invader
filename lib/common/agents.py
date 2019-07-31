@@ -1672,7 +1672,7 @@ class Agents:
                 message = ""
                 signal = json.dumps({
                     'print': True,
-                    'message': message
+                    
                 })
                 dispatcher.send(signal, sender="agents/{}".format(sessionID))
 
