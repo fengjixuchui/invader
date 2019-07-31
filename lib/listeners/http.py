@@ -1124,7 +1124,7 @@ def send_message(packets=None):
                             return make_response(self.default_response(), 404)
                         elif results == 'VALID':
                             listenerName = self.options['Name']['Value']
-                            message = "[*] Valid results returned by {}".format(clientIP)
+                            message = ""
                             signal = json.dumps({
                                 'print': True,
                                 'message': message
