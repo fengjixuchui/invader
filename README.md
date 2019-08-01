@@ -32,7 +32,7 @@
  </a>
 </p>
 
-<img width="1440" alt="sas1" src="https://user-images.githubusercontent.com/43011806/61638217-3f17aa00-ac99-11e9-8fec-f090ca5c6ddc.png">
+<img width="1440" alt="alias" src="https://user-images.githubusercontent.com/43011806/62296271-07fe8100-b46f-11e9-9691-c9fb2e192b33.png">
 
 # About invader framework
 
