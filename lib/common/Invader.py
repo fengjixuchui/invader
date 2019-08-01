@@ -1190,7 +1190,7 @@ class AgentsMenu(SubMenu):
         raise NavMain()
 
     def do_autorun(self, line):
-	"Read and execute a list of Invader commands from a file and execute on each new agent \"autorun <resource file> <agent language>\" e.g. \"autorun /root/ps.rc powershell\". Or clear any autorun setting with \"autorun clear\" and show current autorun settings with \"autorun show\""
+	"Read and execute a list of Invader commands from a file."
 	line = line.strip()
         if not line:
 	    print helpers.color("[!] You must specify a resource file, show or clear. e.g. 'autorun /root/res.rc powershell' or 'autorun clear'")
