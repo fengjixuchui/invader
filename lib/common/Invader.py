@@ -3356,7 +3356,7 @@ class PythonAgentMenu(SubMenu):
             print helpers.color("[!] python/collection/osx/screenshot module not loaded")
 
     def do_cat(self, line):
-        "View the contents of a file"
+        "View the contents of a file."
 
         if line != "":
 
