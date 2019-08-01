@@ -1497,13 +1497,13 @@ class AgentsMenu(SubMenu):
                 print helpers.color("[!] Invalid agent name")
 
 
-    def do_workinghours(self, line):
-        "Set the workinghours for one or more agents (workinghours [agent/all] 9:00-17:00)."
+    def do_wkhours(self, line):
+        "Set the workinghours for one or more agents."
 
         parts = line.strip().split(' ')
 
         if len(parts) == 1:
-            print helpers.color("[!] Usage: 'workinghours [agent/all] [9:00-17:00]'")
+            print helpers.color("[!] Usage: 'wkhours [agent/all] [9:00-17:00]'")
 
         elif parts[0].lower() == 'all':
             hours = parts[1]
@@ -1738,8 +1738,8 @@ class AgentsMenu(SubMenu):
         return self.complete_clear(text, line, begidx, endidx)
 
 
-    def complete_workinghours(self, text, line, begidx, endidx):
-        "Tab-complete a workinghours command"
+    def complete_wkhours(self, text, line, begidx, endidx):
+        "Tab-complete a wkhours command"
 
         return self.complete_clear(text, line, begidx, endidx)
 
