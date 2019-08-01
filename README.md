@@ -70,7 +70,7 @@
 > invader
 
     (Invader)> listeners
-    (Invader: listeners)> uselistener http
+    (Invader: listeners)> listener http
     (Invader: listeners/http)> execute
     (Invader: listeners/http)> launcher powershell
     
@@ -79,7 +79,7 @@
 > invader
 
     (Invader)> listeners
-    (Invader: listeners)> uselistener http
+    (Invader: listeners)> listener http
     (Invader: listeners/http)> execute
     (Invader: listeners/http)> launcher python
 
