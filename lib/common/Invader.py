@@ -1889,7 +1889,7 @@ class PowerShellAgentMenu(SubMenu):
             print helpers.color("[!] Please enter a new name for the agent")
 
     def do_info(self, line):
-        "Display information about this agent"
+        "Display information about this agent."
 
         # get the agent name, if applicable
         agent = self.mainMenu.agents.get_agent_db(self.sessionID)
