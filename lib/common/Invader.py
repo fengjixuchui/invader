@@ -2617,7 +2617,7 @@ class PowerShellAgentMenu(SubMenu):
             module_menu.do_execute('')
 
 
-    def do_steal_token(self, line):
+    def do_stkn(self, line):
         "Use credentials/tokens to impersonate a token for a given process ID."
 
         processID = line.strip()
