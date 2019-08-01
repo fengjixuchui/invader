@@ -510,7 +510,7 @@ class MainMenu(cmd.Cmd):
 	return cmds
 
     def do_exit(self, line):
-        "Exit Invader"
+        "Exit from the Invader."
         raise KeyboardInterrupt
 
 
@@ -533,7 +533,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_payload(self, line):
-        "Use an Invader payload."
+        "Select an Invader payload."
 
         try:
             parts = line.split(' ')
@@ -573,7 +573,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_search(self, line):
-        "Search Invader module names/descriptions."
+        "Search an Invader module (names/descriptions)."
         self.modules.search_modules(line.strip())
 
 
@@ -850,7 +850,7 @@ class MainMenu(cmd.Cmd):
             print helpers.color("[!] Please enter a valid agent name")
 
     def do_preobfuscate(self, line):
-        "Preobfuscate PowerShell module_source files"
+        "Preobfuscate PowerShell module_source files."
 
         if not helpers.is_powershell_installed():
             print helpers.color("[!] PowerShell is not installed and is required to use obfuscation, please install it first.")
@@ -906,7 +906,7 @@ class MainMenu(cmd.Cmd):
                 helpers.obfuscate_module(file, self.obfuscateCommand, reobfuscate)
 
     def do_report(self, line):
-        "Produce report CSV and log files: sessions.csv, credentials.csv, master.log"
+        "Produce report CSV and LOG files."
         conn = self.get_db_connection()
         try:
             self.lock.acquire()
@@ -1014,7 +1014,7 @@ class MainMenu(cmd.Cmd):
 
 
     def complete_payload(self, text, line, begidx, endidx):
-        "Tab-complete an Invader payload module path."
+        "Tab-complete an Invader payload path."
 
         payloadNames = self.payloads.payloads.keys()
 
@@ -1031,7 +1031,7 @@ class MainMenu(cmd.Cmd):
             return [s[offs:] for s in payloadNames if s.startswith(mline)]
 
     def complete_setlist(self, text, line, begidx, endidx):
-        "Tab-complete a global list option"
+        "Tab-complete a global list option."
 
         options = ["listeners", "agents"]
 
@@ -1082,7 +1082,7 @@ class MainMenu(cmd.Cmd):
         return [s[offs:] for s in commands if s.startswith(mline)]
 
     def complete_interact(self, text, line, begidx, endidx):
-        "Tab-complete an interact command"
+        "Tab-complete an interact command."
 
         names = self.agents.get_agent_names_db()
 
@@ -1091,12 +1091,12 @@ class MainMenu(cmd.Cmd):
         return [s[offs:] for s in names if s.startswith(mline)]
 
     def complete_list(self, text, line, begidx, endidx):
-        "Tab-complete list"
+        "Tab-complete a list command."
 
         return self.complete_setlist(text, line, begidx, endidx)
 
     def complete_preobfuscate(self, text, line, begidx, endidx):
-        "Tab-complete an interact command"
+        "Tab-complete an interact command."
         options = [ (option[len('data/module_source/'):]) for option in helpers.get_module_source_files() ]
         options.append('all')
 
@@ -1130,7 +1130,7 @@ class SubMenu(cmd.Cmd):
 
 
     def do_back(self, line):
-        "Go back a menu."
+        "Go back to a previous menu."
         return True
 
     def do_listeners(self, line):
@@ -1150,7 +1150,7 @@ class SubMenu(cmd.Cmd):
 	self.mainMenu.resourceQueue.extend(self.mainMenu.buildQueue(arg))
 
     def do_exit(self, line):
-        "Exit Invader."
+        "Exit from the Invader."
         raise KeyboardInterrupt
 
     def do_creds(self, line):
@@ -1313,7 +1313,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_sleep(self, line):
-        "Task one or more agents to 'sleep [agent/all] interval [jitter]'"
+        "Task one or more agents to sleep."
 
         parts = line.strip().split(' ')
 
@@ -1381,7 +1381,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_lostlimit(self, line):
-        "Task one or more agents to 'lostlimit [agent/all] [number of missed callbacks] '"
+        "Task one or more agents to lostlimit."
 
         parts = line.strip().split(' ')
 
@@ -1439,7 +1439,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_killdate(self, line):
-        "Set the killdate for one or more agents (killdate [agent/all] 01/01/2016)."
+        "Set the killdate for one or more agents."
 
         parts = line.strip().split(' ')
 
@@ -1498,7 +1498,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_workinghours(self, line):
-        "Set the workinghours for one or more agents (workinghours [agent/all] 9:00-17:00)."
+        "Set the workinghours for one or more agents."
 
         parts = line.strip().split(' ')
 
@@ -1625,7 +1625,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_payload(self, line):
-        "Use an Invader payload."
+        "Select an Invader payload."
 
         parts = line.split(' ')
 
@@ -1662,7 +1662,7 @@ class AgentsMenu(SubMenu):
 
 
     def do_search(self, line):
-        "Search Invader module names/descriptions."
+        "Search an Invader module (names/descriptions)."
 
         searchTerm = line.strip()
 
@@ -1673,7 +1673,7 @@ class AgentsMenu(SubMenu):
 
 
     def complete_interact(self, text, line, begidx, endidx):
-        "Tab-complete an interact command"
+        "Tab-complete an interact command."
 
         names = self.mainMenu.agents.get_agent_names_db()
 
@@ -1683,13 +1683,13 @@ class AgentsMenu(SubMenu):
 
 
     def complete_rename(self, text, line, begidx, endidx):
-        "Tab-complete a rename command"
+        "Tab-complete a rename command."
 
         return self.complete_interact(text, line, begidx, endidx)
 
 
     def complete_clear(self, text, line, begidx, endidx):
-        "Tab-complete a clear command"
+        "Tab-complete a clear command."
 
         names = self.mainMenu.agents.get_agent_names_db() + ["all", "autorun"]
         mline = line.partition(' ')[2]
@@ -1698,7 +1698,7 @@ class AgentsMenu(SubMenu):
 
 
     def complete_remove(self, text, line, begidx, endidx):
-        "Tab-complete a remove command"
+        "Tab-complete a remove command."
 
         names = self.mainMenu.agents.get_agent_names_db() + ["all", "stale"]
         mline = line.partition(' ')[2]
@@ -1706,7 +1706,7 @@ class AgentsMenu(SubMenu):
         return [s[offs:] for s in names if s.startswith(mline)]
 
     def complete_list(self, text, line, begidx, endidx):
-        "Tab-complete a list command"
+        "Tab-complete a list command."
 
         options = ["stale"]
         mline = line.partition(' ')[2]
@@ -1715,37 +1715,37 @@ class AgentsMenu(SubMenu):
 
 
     def complete_kill(self, text, line, begidx, endidx):
-        "Tab-complete a kill command"
+        "Tab-complete a kill command."
 
         return self.complete_clear(text, line, begidx, endidx)
 
 
     def complete_sleep(self, text, line, begidx, endidx):
-        "Tab-complete a sleep command"
+        "Tab-complete a sleep command."
 
         return self.complete_clear(text, line, begidx, endidx)
 
 
     def complete_lostlimit(self, text, line, begidx, endidx):
-        "Tab-complete a lostlimit command"
+        "Tab-complete a lostlimit command."
 
         return self.complete_clear(text, line, begidx, endidx)
 
 
     def complete_killdate(self, text, line, begidx, endidx):
-        "Tab-complete a killdate command"
+        "Tab-complete a killdate command."
 
         return self.complete_clear(text, line, begidx, endidx)
 
 
     def complete_workinghours(self, text, line, begidx, endidx):
-        "Tab-complete a workinghours command"
+        "Tab-complete a workinghours command."
 
         return self.complete_clear(text, line, begidx, endidx)
 
 
     def complete_use(self, text, line, begidx, endidx):
-        "Tab-complete an Invader PowerShell module path"
+        "Tab-complete an Invader PowerShell module path."
         return self.mainMenu.complete_use(text, line, begidx, endidx)
 
 
@@ -1826,7 +1826,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def default(self, line):
-        "Default handler"
+        "Default handler."
 
         line = line.strip()
         parts = line.split(' ')
@@ -1962,7 +1962,7 @@ class PowerShellAgentMenu(SubMenu):
             self.mainMenu.agents.save_agent_log(self.sessionID, "Tasked agent to stop job " + str(jobID))
 
     def do_sleep(self, line):
-        "Task an agent to 'sleep interval [jitter]'"
+        "Task an agent to sleep."
 
         parts = line.strip().split(' ')
 
@@ -1992,7 +1992,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_lostlimit(self, line):
-        "Task an agent to change the limit on lost agent detection"
+        "Task an agent to change the limit on lost agent detection."
 
         parts = line.strip().split(' ')
         if len(parts) > 0 and parts[0] != "":
@@ -2126,7 +2126,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_shell(self, line):
-        "Task an agent to use a shell command."
+        "Task an agent to execute a shell command."
 
         line = line.strip()
 
@@ -2237,7 +2237,7 @@ class PowerShellAgentMenu(SubMenu):
                 print helpers.color("[!] Please enter a valid file path to upload")
 
 
-    def do_scriptimport(self, line):
+    def do_sci(self, line):
         "Imports a PowerShell script and keeps it in memory in the agent."
 
         path = line.strip()
@@ -2277,7 +2277,7 @@ class PowerShellAgentMenu(SubMenu):
             print helpers.color("[!] Please enter a valid script path")
 
 
-    def do_scriptcmd(self, line):
+    def do_scmd(self, line):
         "Execute a function in the currently imported PowerShell script."
 
         command = line.strip()
@@ -2311,7 +2311,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_search(self, line):
-        "Search Invader module names/descriptions."
+        "Search an Invader module (names/descriptions)."
 
         search_term = line.strip()
 
@@ -2321,7 +2321,7 @@ class PowerShellAgentMenu(SubMenu):
             self.mainMenu.modules.search_modules(search_term)
 
 
-    def do_updateprofile(self, line):
+    def do_upp(self, line):
         "Update an agent connection profile."
 
         # profile format:
@@ -2363,8 +2363,8 @@ class PowerShellAgentMenu(SubMenu):
         else:
             print helpers.color("[*] Profile format is \"TaskURI1,TaskURI2,...|UserAgent|OptionalHeader2:Val1|OptionalHeader2:Val2...\"")
 
-    def do_updatecomms(self, line):
-        "Dynamically update the agent comms to another listener"
+    def do_upc(self, line):
+        "Dynamically update the agent comms to another listener."
 
         # generate comms for the listener selected
         if line:
@@ -2389,7 +2389,7 @@ class PowerShellAgentMenu(SubMenu):
             print helpers.color("[!] Please enter a valid listenername.")
 
     def do_psinject(self, line):
-        "Inject a launcher into a remote process. Ex. psinject <listener> <pid/process_name>"
+        "Inject a launcher into a remote process."
 
         # get the info for the psinject module
         if line:
@@ -2425,7 +2425,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_shinject(self, line):
-        "Inject non-meterpreter listener shellcode into a remote process. Ex. shinject <listener> <pid>"
+        "Inject non-meterpreter listener shellcode into a remote process."
 
         if line:
             if self.mainMenu.modules.modules['powershell/management/shinject']:
@@ -2455,8 +2455,8 @@ class PowerShellAgentMenu(SubMenu):
         else:
             print helpers.color("[!] Injection requires you to specify listener")
 
-    def do_injectshellcode(self, line):
-        "Inject listener shellcode into a remote process. Ex. injectshellcode <meter_listener> <pid>"
+    def do_injectsh(self, line):
+        "Inject listener shellcode into a remote process."
 
         # get the info for the inject module
         if line:
@@ -2491,7 +2491,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_sc(self, line):
-        "Takes a screenshot, default is PNG. Giving a ratio means using JPEG. Ex. sc [1-100]"
+        "Takes a screenshot, default is PNG."
 
         # get the info for the psinject module
         if len(line.strip()) > 0:
@@ -2518,7 +2518,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_spawn(self, line):
-        "Spawns a new Invader agent for the given listener name. Ex. spawn <listener>"
+        "Spawns a new Invader agent for the given listener name."
 
         # get the info for the spawn module
         if line:
@@ -2548,7 +2548,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_bypassuac(self, line):
-        "Runs BypassUAC, spawning a new high-integrity agent for a listener. Ex. spawn <listener>"
+        "Runs BypassUAC, spawning a new high-integrity agent for a listener."
 
         # get the info for the bypassuac module
         if line:
@@ -2618,7 +2618,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_steal_token(self, line):
-        "Uses credentials/tokens to impersonate a token for a given process ID."
+        "Use credentials/tokens to impersonate a token for a given process ID."
 
         processID = line.strip()
 
@@ -2648,7 +2648,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_revtoself(self, line):
-        "Uses credentials/tokens to revert token privileges."
+        "Use credentials/tokens to revert token privileges."
 
         if self.mainMenu.modules.modules['powershell/credentials/tokens']:
             # reload the module to reset the default values
@@ -2674,8 +2674,8 @@ class PowerShellAgentMenu(SubMenu):
         "Display/return credentials from the database."
         self.mainMenu.do_creds(line)
 
-    def complete_updatecomms(self, text, line, begidx, endidx):
-        "Tab-complete updatecomms option values"
+    def complete_upc(self, text, line, begidx, endidx):
+        "Tab-complete upc option values."
 
         return self.complete_psinject(text, line, begidx, endidx)
 
@@ -2692,8 +2692,8 @@ class PowerShellAgentMenu(SubMenu):
         return [s[offs:] for s in self.mainMenu.listeners.get_listener_names() if s.startswith(mline)]
 
 
-    def complete_injectshellcode(self, text, line, begidx, endidx):
-        "Tab-complete injectshellcode option values."
+    def complete_injectsh(self, text, line, begidx, endidx):
+        "Tab-complete injectsh option values."
 
         return self.complete_psinject(text, line, begidx, endidx)
 
@@ -2718,13 +2718,13 @@ class PowerShellAgentMenu(SubMenu):
         return [s[offs:] for s in ["kill"] if s.startswith(mline)]
 
 
-    def complete_scriptimport(self, text, line, begidx, endidx):
-        "Tab-complete a PowerShell script path"
+    def complete_sci(self, text, line, begidx, endidx):
+        "Tab-complete a PowerShell script path."
 
         return helpers.complete_path(text, line)
 
 
-    def complete_scriptcmd(self, text, line, begidx, endidx):
+    def complete_scmd(self, text, line, begidx, endidx):
         "Tab-complete a script cmd set."
 
         functions = self.mainMenu.agents.get_agent_functions(self.sessionID)
@@ -2735,17 +2735,17 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def complete_use(self, text, line, begidx, endidx):
-        "Tab-complete an Invader PowerShell module path"
+        "Tab-complete an Invader PowerShell module path."
         return self.mainMenu.complete_use(text, line, begidx, endidx, language='powershell')
 
 
     def complete_upload(self, text, line, begidx, endidx):
-        "Tab-complete an upload file path"
+        "Tab-complete an upload file path."
         return helpers.complete_path(text, line)
 
 
-    def complete_updateprofile(self, text, line, begidx, endidx):
-        "Tab-complete an updateprofile path"
+    def complete_upp(self, text, line, begidx, endidx):
+        "Tab-complete an upp path."
         return helpers.complete_path(text, line)
 
 
@@ -2801,7 +2801,7 @@ class PythonAgentMenu(SubMenu):
                 print(helpers.color(results))
 
     def default(self, line):
-        "Default handler"
+        "Default handler."
         line = line.strip()
         parts = line.split(' ')
 
@@ -2851,7 +2851,7 @@ class PythonAgentMenu(SubMenu):
 
 
     def do_info(self, line):
-        "Display information about this agent"
+        "Display information about this agent."
 
         # get the agent name, if applicable
         agent = self.mainMenu.agents.get_agent_db(self.sessionID)
@@ -2889,7 +2889,7 @@ class PythonAgentMenu(SubMenu):
 
 
     def do_cd(self, line):
-        "Change an agent's active directory"
+        "Change an agent's active directory."
 
         line = line.strip()
 
@@ -2953,7 +2953,7 @@ class PythonAgentMenu(SubMenu):
 
 
     def do_sleep(self, line):
-        "Task an agent to 'sleep interval [jitter]'"
+        "Task an agent to sleep."
 
         parts = line.strip().split(' ')
         delay = parts[0]
@@ -3013,7 +3013,7 @@ class PythonAgentMenu(SubMenu):
 
 
     def do_lostlimit(self, line):
-        "Task an agent to display change the limit on lost agent detection"
+        "Task an agent to display change the limit on lost agent detection."
 
         parts = line.strip().split(' ')
         lostLimit = parts[0]
@@ -3131,7 +3131,7 @@ class PythonAgentMenu(SubMenu):
 
 
     def do_shell(self, line):
-        "Task an agent to use a shell command."
+        "Task an agent to execute a shell command."
 
         line = line.strip()
 
@@ -3153,7 +3153,7 @@ class PythonAgentMenu(SubMenu):
             self.mainMenu.agents.save_agent_log(self.sessionID, msg)
 
     def do_python(self, line):
-        "Task an agent to run a Python command."
+        "Task an agent to execute a Python command."
 
         line = line.strip()
 
@@ -3174,8 +3174,8 @@ class PythonAgentMenu(SubMenu):
             msg = "Tasked agent to run Python command: %s" % (line)
             self.mainMenu.agents.save_agent_log(self.sessionID, msg)
 
-    def do_pythonscript(self, line):
-        "Load and execute a python script"
+    def do_pys(self, line):
+        "Load and execute a Python script."
         path = line.strip()
 
         if os.path.splitext(path)[-1] == '.py' and os.path.isfile(path):
@@ -3322,7 +3322,7 @@ class PythonAgentMenu(SubMenu):
 
 
     def do_search(self, line):
-        "Search Invader module names/descriptions."
+        "Search an Invader module (names/descriptions)."
 
         searchTerm = line.strip()
 
@@ -3331,8 +3331,8 @@ class PythonAgentMenu(SubMenu):
         else:
             self.mainMenu.modules.search_modules(searchTerm)
 
-    def do_osx_screenshot(self, line):
-        "Use the python-mss module to take a screenshot, and save the image to the server. Not opsec safe"
+    def do_osxsc(self, line):
+        "Use the Python-MSS module to take a screenshot."
 
         if self.mainMenu.modules.modules['python/collection/osx/native_screenshot']:
             module = self.mainMenu.modules.modules['python/collection/osx/native_screenshot']
@@ -3387,8 +3387,8 @@ except Exception as e:
             msg = "Tasked agent to cat file %s" % (line)
             self.mainMenu.agents.save_agent_log(self.sessionID, msg)
 
-    def do_loadpymodule(self, line):
-        "Import zip file containing a .py module or package with an __init__.py"
+    def do_loadpy(self, line):
+        "Import zip file containing a .py module."
 
         path = line.strip()
         #check the file ext and confirm that the path given is a file
@@ -3423,8 +3423,8 @@ except Exception as e:
             print helpers.color("[!] Please provide a valid zipfile path", color="red")
 
             
-    def do_viewrepo(self, line):
-        "View the contents of a repo. if none is specified, all files will be returned"
+    def do_repo(self, line):
+        "View the contents of a repo."
         repoName = line.strip()
 
         # dispatch this event
@@ -3442,8 +3442,8 @@ except Exception as e:
 
         self.mainMenu.agents.add_agent_task_db(self.sessionID, "TASK_VIEW_MODULE", repoName)
 
-    def do_removerepo(self, line):
-        "Remove a repo"
+    def do_rmrepo(self, line):
+        "Remove a repo."
         repoName = line.strip()
 
         # dispatch this event
@@ -3464,21 +3464,21 @@ except Exception as e:
         "Display/return credentials from the database."
         self.mainMenu.do_creds(line)
 
-    def complete_loadpymodule(self, text, line, begidx, endidx):
-        "Tab-complete a zip file path"
+    def complete_loadpy(self, text, line, begidx, endidx):
+        "Tab-complete a zip file path."
         return helpers.complete_path(text, line)
 
-    def complete_pythonscript(self, text, line, begidx, endidx):
-        "Tab-complete a zip file path"
+    def complete_pys(self, text, line, begidx, endidx):
+        "Tab-complete a zip file path."
         return helpers.complete_path(text, line)
 
     def complete_use(self, text, line, begidx, endidx):
-        "Tab-complete an Invader Python module path"
+        "Tab-complete an Invader Python module path."
         return self.mainMenu.complete_use(text, line, begidx, endidx, language='python')
 
 
     def complete_upload(self, text, line, begidx, endidx):
-        "Tab-complete an upload file path"
+        "Tab-complete an upload file path."
         return helpers.complete_path(text, line)
 
     # def complete_updateprofile(self, text, line, begidx, endidx):
@@ -3534,7 +3534,7 @@ class ListenersMenu(SubMenu):
             self.mainMenu.listeners.kill_listener(listenerID)
 
     def do_delete(self, line):
-        "Delete listener(s) from the database"
+        "Delete listener(s) from the database."
 
         listener_id = line.strip()
 
@@ -3550,7 +3550,7 @@ class ListenersMenu(SubMenu):
             self.mainMenu.listeners.delete_listener(listener_id)
 
     def do_payload(self, line):
-        "Use an Invader payload."
+        "Select an Invader payload."
 
         parts = line.split(' ')
 
@@ -3573,7 +3573,7 @@ class ListenersMenu(SubMenu):
 
 
     def do_listener(self, line):
-        "Use an Invader listener module."
+        "Select an Invader listener."
 
         parts = line.split(' ')
 
@@ -3641,7 +3641,7 @@ class ListenersMenu(SubMenu):
             print helpers.color("[!] Please enter a valid listenerName")
 
     def do_enable(self, line):
-        "Enables and starts one or all listners."
+        "Enables one or all listners."
 
         listenerID = line.strip()
 
@@ -3659,7 +3659,7 @@ class ListenersMenu(SubMenu):
             self.mainMenu.listeners.enable_listener(listenerID)
 
     def do_disable(self, line):
-        "Disables (stops) one or all listeners. The listener(s) will not start automatically with Invader"
+        "Disables one or all listeners."
 
         listenerID = line.strip()
 
@@ -3675,7 +3675,7 @@ class ListenersMenu(SubMenu):
             self.mainMenu.listeners.disable_listener(listenerID)
 
     def do_edit(self,line):
-        "Change a listener option, will not take effect until the listener is restarted"
+        "Change a listener option."
 
         arguments = line.strip().split(" ")
         if len(arguments) < 2:
@@ -3688,12 +3688,12 @@ class ListenersMenu(SubMenu):
             print helpers.color("[*] This change will not take effect until the listener is restarted")
 
     def complete_payload(self, text, line, begidx, endidx):
-        "Tab-complete an Invader payload module path."
+        "Tab-complete an Invader payload path."
         return self.mainMenu.complete_payload(text, line, begidx, endidx)
 
 
     def complete_kill(self, text, line, begidx, endidx):
-        "Tab-complete listener names"
+        "Tab-complete listener names."
 
         # get all the listener names
         names = self.mainMenu.listeners.activeListeners.keys() + ["all"]
@@ -3727,7 +3727,7 @@ class ListenersMenu(SubMenu):
         return [s[offs:] for s in names if s.startswith(mline)]
 
     def complete_launcher(self, text, line, begidx, endidx):
-        "Tab-complete language types and listener names/IDs"
+        "Tab-complete language types and listener (names/IDs)."
 
         languages = ['powershell', 'python']
 
@@ -3746,7 +3746,7 @@ class ListenersMenu(SubMenu):
 
 
     def complete_info(self, text, line, begidx, endidx):
-        "Tab-complete listener names/IDs"
+        "Tab-complete listener (names/IDs)."
 
         # get all the listener names
         names = self.mainMenu.listeners.activeListeners.keys()
@@ -3756,7 +3756,7 @@ class ListenersMenu(SubMenu):
 
 
     def complete_listener(self, text, line, begidx, endidx):
-        "Tab-complete an listener command"
+        "Tab-complete a listener command."
 
         names = self.mainMenu.listeners.loadedListeners.keys()
         mline = line.partition(' ')[2]
@@ -3783,12 +3783,12 @@ class ListenerMenu(SubMenu):
         self.prompt = '(Invader: ' + helpers.color("listeners/%s" % (listenerName), 'red') + ')> '
 
     def do_info(self, line):
-        "Display listener module options."
+        "Display listener options."
         messages.display_listener_module(self.listener)
 
 
     def do_execute(self, line):
-        "Execute the given listener module."
+        "Execute the given listener."
 
         self.mainMenu.listeners.start_listener(self.listenerName, self.listener)
 
@@ -3913,7 +3913,7 @@ class ListenerMenu(SubMenu):
 
 
     def complete_launcher(self, text, line, begidx, endidx):
-        "Tab-complete language types"
+        "Tab-complete language types."
 
         languages = ['powershell', 'python']
 
@@ -4299,7 +4299,7 @@ class ModuleMenu(SubMenu):
 
 
     def complete_interact(self, text, line, begidx, endidx):
-        "Tab-complete an interact command"
+        "Tab-complete an interact command."
 
         names = self.mainMenu.agents.get_agent_names_db()
 
@@ -4514,7 +4514,7 @@ class payloadMenu(SubMenu):
 
 
     def complete_interact(self, text, line, begidx, endidx):
-        "Tab-complete an interact command"
+        "Tab-complete an interact command."
 
         names = self.mainMenu.agents.get_agent_names_db()
 
