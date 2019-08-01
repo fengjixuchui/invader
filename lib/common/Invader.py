@@ -1146,7 +1146,7 @@ class SubMenu(cmd.Cmd):
         raise NavMain()
 
     def do_resource(self, arg):
-	"Read and execute a list of Invader commands from a file."
+	"Read and execute a list of Invader commands."
 	self.mainMenu.resourceQueue.extend(self.mainMenu.buildQueue(arg))
 
     def do_exit(self, line):
@@ -1190,7 +1190,7 @@ class AgentsMenu(SubMenu):
         raise NavMain()
 
     def do_autorun(self, line):
-	"Read and execute a list of Invader commands from a file."
+	"Read and execute a list of Invader commands."
 	line = line.strip()
         if not line:
 	    print helpers.color("[!] You must specify a resource file, show or clear. e.g. 'autorun /root/res.rc powershell' or 'autorun clear'")
@@ -1497,13 +1497,13 @@ class AgentsMenu(SubMenu):
                 print helpers.color("[!] Invalid agent name")
 
 
-    def do_workinghours(self, line):
-        "Set the workinghours for one or more agents."
+    def do_wkhours(self, line):
+        "Set the working hours for one or more agents."
 
         parts = line.strip().split(' ')
 
         if len(parts) == 1:
-            print helpers.color("[!] Usage: 'workinghours [agent/all] [9:00-17:00]'")
+            print helpers.color("[!] Usage: 'wkhours [agent/all] [9:00-17:00]'")
 
         elif parts[0].lower() == 'all':
             hours = parts[1]
@@ -1738,8 +1738,8 @@ class AgentsMenu(SubMenu):
         return self.complete_clear(text, line, begidx, endidx)
 
 
-    def complete_workinghours(self, text, line, begidx, endidx):
-        "Tab-complete a workinghours command."
+    def complete_wkhours(self, text, line, begidx, endidx):
+        "Tab-complete a wkhours command."
 
         return self.complete_clear(text, line, begidx, endidx)
 
@@ -2671,7 +2671,7 @@ class PowerShellAgentMenu(SubMenu):
 
 
     def do_creds(self, line):
-        "Display/return credentials from the database."
+        "Display/return database credentials."
         self.mainMenu.do_creds(line)
 
     def complete_upc(self, text, line, begidx, endidx):
