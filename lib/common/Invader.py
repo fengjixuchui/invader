@@ -481,7 +481,7 @@ class MainMenu(cmd.Cmd):
         pass
 
     def do_resource(self, arg):
-	"Read and execute a list of Invader commands from a file."
+	"Read and execute a list of Invader commands."
 	self.resourceQueue.extend(self.buildQueue(arg))
 
     def buildQueue(self, resourceFile, autoRun=False):
@@ -578,7 +578,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_creds(self, line):
-        "Add/display credentials to/from the database."
+        "Add/display database credentials."
 
         filterTerm = line.strip()
 
@@ -757,7 +757,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_load(self, line):
-        "Load Invader modules from a non-standard folder."
+        "Load Invader modules from a folder."
 
         if line.strip() == '' or not os.path.isdir(line.strip()):
             print helpers.color("[!] Please specify a valid folder to load modules from.")
@@ -1154,7 +1154,7 @@ class SubMenu(cmd.Cmd):
         raise KeyboardInterrupt
 
     def do_creds(self, line):
-        "Display/return credentials from the database."
+        "Display/return database credential."
         self.mainMenu.do_creds(line)
 
     # print a nicely formatted help menu
@@ -2085,7 +2085,7 @@ class PowerShellAgentMenu(SubMenu):
             self.mainMenu.agents.save_agent_log(self.sessionID, msg)
 
 
-    def do_workinghours(self, line):
+    def do_wkhours(self, line):
         "Get or set an agent's working hours (9:00-17:00)."
 
         parts = line.strip().split(' ')
@@ -3091,7 +3091,7 @@ class PythonAgentMenu(SubMenu):
             self.mainMenu.agents.save_agent_log(self.sessionID, msg)
 
 
-    def do_workinghours(self, line):
+    def do_wkhours(self, line):
         "Get or set an agent's working hours (9:00-17:00)."
 
         parts = line.strip().split(' ')
