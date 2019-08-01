@@ -687,7 +687,7 @@ class Listener:
             clientIP = request.remote_addr
 
             listenerName = self.options['Name']['Value']
-            message = "[*] GET request for {}/{} from {}".format(request.host, request_uri, clientIP)
+            message = "\n[*] GET request for {}/{} from {}".format(request.host, request_uri, clientIP)
             signal = json.dumps({
                 'print': True,
                 'message': message
@@ -714,7 +714,7 @@ class Listener:
 
                                 # step 2 of negotiation -> return payload.ps1 (stage 1)
                                 listenerName = self.options['Name']['Value']
-                                message = "\n[*] Sending {} payload (stage 1) to {}".format(language, clientIP)
+                                message = "[*] Sending {} payload (stage 1) to {}".format(language, clientIP)
                                 signal = json.dumps({
                                     'print': True,
                                     'message': message
