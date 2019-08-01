@@ -757,7 +757,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_load(self, line):
-        "Loads Invader modules from a non-standard folder."
+        "Load Invader modules from a non-standard folder."
 
         if line.strip() == '' or not os.path.isdir(line.strip()):
             print helpers.color("[!] Please specify a valid folder to load modules from.")
@@ -784,7 +784,7 @@ class MainMenu(cmd.Cmd):
 
 
     def do_list(self, line):
-        "Lists active agents or listeners."
+        "List active agents or listeners."
 
         parts = line.split(' ')
 
@@ -849,7 +849,7 @@ class MainMenu(cmd.Cmd):
         else:
             print helpers.color("[!] Please enter a valid agent name")
 
-    def do_preobfuscate(self, line):
+    def do_preobf(self, line):
         "Preobfuscate PowerShell module_source files."
 
         if not helpers.is_powershell_installed():
@@ -1095,7 +1095,7 @@ class MainMenu(cmd.Cmd):
 
         return self.complete_setlist(text, line, begidx, endidx)
 
-    def complete_preobfuscate(self, text, line, begidx, endidx):
+    def complete_preobf(self, text, line, begidx, endidx):
         "Tab-complete an interact command."
         options = [ (option[len('data/module_source/'):]) for option in helpers.get_module_source_files() ]
         options.append('all')
