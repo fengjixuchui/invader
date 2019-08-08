@@ -203,7 +203,7 @@ class Agents:
             cur.close()
 
             # dispatch this event
-            message = "\n[*] Agent {} deleted".format(sessionID)
+            message = "[*] Agent {} deleted".format(sessionID)
             signal = json.dumps({
                 'print': True,
                 'message': message
