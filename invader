@@ -1414,11 +1414,11 @@ if __name__ == '__main__':
         args.restport = args.restport[0]
 
     if args.version:
-        print Invader.VERSION
+        print invader.VERSION
 
     elif args.rest:
          # start an Invader instance and RESTful API
-        main = Invader.MainMenu(args=args)
+        main = invader.MainMenu(args=args)
         def thread_api(InvaderMenu):
 
             try:
@@ -1434,7 +1434,7 @@ if __name__ == '__main__':
 
     elif args.headless:
         # start an Invader instance and RESTful API and suppress output
-        main = Invader.MainMenu(args=args)
+        main = invader.MainMenu(args=args)
 
         try:
             start_restful_api(InvaderMenu=main, suppress=True, username=args.username, password=args.password, port=args.restport)
@@ -1443,7 +1443,7 @@ if __name__ == '__main__':
 
     else:
         # normal execution
-        main = Invader.MainMenu(args=args)
+        main = invader.MainMenu(args=args)
         main.cmdloop()
 
     sys.exit()
