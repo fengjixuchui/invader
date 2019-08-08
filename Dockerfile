@@ -11,7 +11,7 @@
 # 1) `USERNAME=entynetproject`
 # 2) `IMAGE=Invader`
 # 3) `git pull`
-# 4) `export VERSION="$(curl -s https://raw.githubusercontent.com/entynetproject/Invader/master/lib/common/Invader.py | grep "VERSION =" | cut -d '"' -f2)"`
+# 4) `export VERSION="$(curl -s https://raw.githubusercontent.com/entynetproject/Invader/master/lib/common/invader.py | grep "VERSION =" | cut -d '"' -f2)"`
 # 5) `docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION`
 # 1) `docker push $USERNAME/$IMAGE:latest`
 # 2) `docker push $USERNAME/$IMAGE:$VERSION`

@@ -55,19 +55,19 @@ def database_check_docker():
     Check for docker and setup database if nessary.
     """
     if os.path.exists('/.dockerenv'):
-        if not os.path.exists('data/Invader.db'):
+        if not os.path.exists('data/invader.db'):
             print '[*] Fresh start in docker, running reset.sh for you'
             subprocess.call(['./setup/reset.sh'])
 
 
 def database_connect():
     """
-    Connect with the backend ./Invader.db sqlite database and return the
+    Connect with the backend ./invader.db sqlite database and return the
     connection object.
     """
     try:
         # set the database connectiont to autocommit w/ isolation level
-        conn = sqlite3.connect('./data/Invader.db', check_same_thread=False)
+        conn = sqlite3.connect('./data/invader.db', check_same_thread=False)
         conn.text_factory = str
         conn.isolation_level = None
         return conn
@@ -109,7 +109,7 @@ def refresh_api_token(conn):
 
 def get_permanent_token(conn):
     """
-    Returns the permanent API token stored in Invader.db.
+    Returns the permanent API token stored in invader.db.
 
     If one doesn't exist, it will generate one and store it before returning.
     """
@@ -188,8 +188,8 @@ def start_restful_api(InvaderMenu, suppress=False, username=None, password=None,
 
     InvaderMenu  -   Main Invader menu object
     suppress    -   suppress most console output
-    username    -   optional username to use for the API, otherwise pulls from the Invader.db config
-    password    -   optional password to use for the API, otherwise pulls from the Invader.db config
+    username    -   optional username to use for the API, otherwise pulls from the invader.db config
+    password    -   optional password to use for the API, otherwise pulls from the invader.db config
     port        -   port to start the API on, defaults to 1337 ;)
     """
 
@@ -1402,8 +1402,8 @@ if __name__ == '__main__':
     launchGroup.add_argument('--rest', action='store_true', help='Run Invader and the RESTful API.')
     launchGroup.add_argument('--headless', action='store_true', help='Run Invader and the RESTful API headless without the usual interface.')
     restGroup.add_argument('--restport', type=int, nargs=1, help='Port to run the Invader RESTful API on.')
-    restGroup.add_argument('--username', nargs=1, help='Start the RESTful API with the specified username instead of pulling from Invader.db')
-    restGroup.add_argument('--password', nargs=1, help='Start the RESTful API with the specified password instead of pulling from Invader.db')
+    restGroup.add_argument('--username', nargs=1, help='Start the RESTful API with the specified username instead of pulling from invader.db')
+    restGroup.add_argument('--password', nargs=1, help='Start the RESTful API with the specified password instead of pulling from invader.db')
 
     args = parser.parse_args()
     database_check_docker()
