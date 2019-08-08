@@ -725,7 +725,7 @@ class Listener:
 
                             elif results.startswith('ERROR:'):
                                 listenerName = self.options['Name']['Value']
-                                message = "[!] Error from agents.handle_agent_data() for {} from {}: {}".format(request_uri, clientIP, results)
+                                message = "\n[!] Error from agents.handle_agent_data() for {} from {}: {}".format(request_uri, clientIP, results)
                                 signal = json.dumps({
                                     'print': True,
                                     'message': message
