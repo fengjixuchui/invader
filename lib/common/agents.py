@@ -2,9 +2,9 @@
 
 Main agent handling functionality for Invader.
 
-The Agents() class in instantiated in ./Invader.py by the main menu and includes:
+The Agents() class in instantiated in ./invader.py by the main menu and includes:
 
-    get_db_connection()         - returns the Invader.py:mainMenu database connection object
+    get_db_connection()         - returns the invader.py:mainMenu database connection object
     is_agent_present()          - returns True if an agent is present in the self.agents cache
     add_agent()                 - adds an agent to the self.agents cache and the backend database
     remove_agent_db()           - removes an agent from the self.agents cache and the backend database
@@ -100,7 +100,7 @@ class Agents:
             agentInfo = {'sessionKey' : agent['session_key'], 'functions' : agent['functions']}
             self.agents[agent['session_id']] = agentInfo
 
-        # pull out common configs from the main menu object in Invader.py
+        # pull out common configs from the main menu object in invader.py
         self.ipWhiteList = self.mainMenu.ipWhiteList
         self.ipBlackList = self.mainMenu.ipBlackList
 
@@ -203,7 +203,7 @@ class Agents:
             cur.close()
 
             # dispatch this event
-            message = "[*] Agent {} deleted".format(sessionID)
+            message = "\n[*] Agent {} deleted".format(sessionID)
             signal = json.dumps({
                 'print': True,
                 'message': message
@@ -1241,7 +1241,7 @@ class Agents:
 
         elif meta == 'STAGE1':
             # step 3 of negotiation -> client posts public key
-            message = "[*] Agent {} from {} posted public key".format(sessionID, clientIP)
+            message = "\n[*] Agent {} from {} posted public key".format(sessionID, clientIP)
             signal = json.dumps({
                 'print': False,
                 'message': message
@@ -1280,7 +1280,7 @@ class Agents:
                     rsaKey = encryption.rsa_xml_to_key(message)
 
                     if rsaKey:
-                        message = "[*] Agent {} from {} posted valid PowerShell RSA key".format(sessionID, clientIP)
+                        message = "\n[*] Agent {} from {} posted valid PowerShell RSA key".format(sessionID, clientIP)
                         signal = json.dumps({
                             'print': False,
                             'message': message
@@ -1347,7 +1347,7 @@ class Agents:
 
                     nonce = helpers.random_string(16, charset=string.digits)
 
-                    message = "[*] Agent {} from {} posted valid Python PUB key".format(sessionID, clientIP)
+                    message = "\n[*] Agent {} from {} posted valid Python PUB key".format(sessionID, clientIP)
                     signal = json.dumps({
                         'print': True,
                         'message': message
@@ -1372,7 +1372,7 @@ class Agents:
                     return encryptedMsg
 
             else:
-                message = "[*] Agent {} from {} using an invalid language specification: {}".format(sessionID, clientIP, language)
+                message = "\n[*] Agent {} from {} using an invalid language specification: {}".format(sessionID, clientIP, language)
                 signal = json.dumps({
                     'print': True,
                     'message': message

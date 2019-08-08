@@ -303,11 +303,11 @@ class MainMenu(cmd.Cmd):
 
     def database_connect(self):
         """
-        Connect to the default database at ./data/Invader.db.
+        Connect to the default database at ./data/invader.db.
         """
         try:
             # set the database connectiont to autocommit w/ isolation level
-            self.conn = sqlite3.connect('./data/Invader.db', check_same_thread=False)
+            self.conn = sqlite3.connect('./data/invader.db', check_same_thread=False)
             self.conn.text_factory = str
             self.conn.isolation_level = None
             return self.conn

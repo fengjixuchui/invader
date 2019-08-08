@@ -3,7 +3,7 @@
 Functionality that loads Invader payloads, sets generic payload options,
 and abstracts the invocation of launcher generation.
 
-The payloads() class in instantiated in ./Invader.py by the main menu and includes:
+The payloads() class in instantiated in ./invader.py by the main menu and includes:
 
     load_payloads() - loads payloads from the install path
     set_payload_option() - sets and option for all payloads

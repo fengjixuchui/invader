@@ -1,5 +1,5 @@
 """
-Connect to the default database at ./data/Invader.db.
+Connect to the default database at ./data/invader.db.
 """
 
 import sys
@@ -10,7 +10,7 @@ import helpers
 def connect_to_db():
     try:
         # set the database connectiont to autocommit w/ isolation level
-        conn = sqlite3.connect('./data/Invader.db', check_same_thread=False)
+        conn = sqlite3.connect('./data/invader.db', check_same_thread=False)
         conn.text_factory = str
         conn.isolation_level = None
         return conn
