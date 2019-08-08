@@ -1241,7 +1241,7 @@ class Agents:
 
         elif meta == 'STAGE1':
             # step 3 of negotiation -> client posts public key
-            message = "\n[*] Agent {} from {} posted public key".format(sessionID, clientIP)
+            message = "[*] Agent {} from {} posted public key".format(sessionID, clientIP)
             signal = json.dumps({
                 'print': False,
                 'message': message
@@ -1280,7 +1280,7 @@ class Agents:
                     rsaKey = encryption.rsa_xml_to_key(message)
 
                     if rsaKey:
-                        message = "\n[*] Agent {} from {} posted valid PowerShell RSA key".format(sessionID, clientIP)
+                        message = "[*] Agent {} from {} posted valid PowerShell RSA key".format(sessionID, clientIP)
                         signal = json.dumps({
                             'print': False,
                             'message': message
@@ -1347,7 +1347,7 @@ class Agents:
 
                     nonce = helpers.random_string(16, charset=string.digits)
 
-                    message = "\n[*] Agent {} from {} posted valid Python PUB key".format(sessionID, clientIP)
+                    message = "[*] Agent {} from {} posted valid Python PUB key".format(sessionID, clientIP)
                     signal = json.dumps({
                         'print': True,
                         'message': message
@@ -1372,7 +1372,7 @@ class Agents:
                     return encryptedMsg
 
             else:
-                message = "\n[*] Agent {} from {} using an invalid language specification: {}".format(sessionID, clientIP, language)
+                message = "[*] Agent {} from {} using an invalid language specification: {}".format(sessionID, clientIP, language)
                 signal = json.dumps({
                     'print': True,
                     'message': message
@@ -1713,7 +1713,7 @@ class Agents:
             self.lock.acquire()
             # report the agent result in the reporting database
             cur = conn.cursor()
-            message = "\n[*] Agent {} got results".format(sessionID)
+            message = "[*] Agent {} got results".format(sessionID)
             signal = json.dumps({
                 'print': False,
                 'message': message,
