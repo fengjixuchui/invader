@@ -82,7 +82,7 @@ OBFUSCATE_COMMAND = r'Token\All\1'
 #
 ###################################################
 
-conn = sqlite3.connect('%s/data/Invader.db'%INSTALL_PATH)
+conn = sqlite3.connect('%s/data/invader.db'%INSTALL_PATH)
 
 c = conn.cursor()
 

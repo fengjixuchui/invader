@@ -35,9 +35,9 @@ then
 fi
 
 # reset the database
-if [ -e ../data/Invader.db ]
+if [ -e ../data/invader.db ]
 then
-	rm ../data/Invader.db
+	rm ../data/invader.db
 fi
 
 python ./setup_database.py
