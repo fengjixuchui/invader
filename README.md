@@ -69,9 +69,52 @@
 
 > invader
 
-    (Invader)> listeners
+        (Invader)> listeners
     [!] No listeners currently active 
     (Invader: listeners)> listener http
+    (Invader: listeners/http)> info
+    
+        Name: HTTP[S]
+    Category: client_server
+
+    Authors:
+      @harmj0y
+
+    Description:
+      Starts a http[s] listener (PowerShell or Python) that uses a
+      GET/POST approach.
+
+    HTTP[S] Options:
+
+      Name              Required    Value                            Description
+      ----              --------    -------                          -----------
+      payloadURI        False                                        URI for the payload. Must use /download/. Example: /download/payload.php
+      ProxyCreds        False       default                          Proxy credentials ([domain\]username:password) to use for request (default, none, or other).
+      KillDate          False                                        Date for the listener to exit (MM/dd/yyyy).
+      Name              True        http                             Name for the listener.
+      SlackToken        False                                        Your SlackBot API token to communicate with your Slack instance.
+      Launcher          True        powershell -noP -sta -w 1 -enc   Launcher string.
+      DefaultDelay      True        5                                Agent delay/reach back interval (in seconds).
+      DefaultLostLimit  True        60                               Number of missed checkins before exiting
+      WorkingHours      False                                        Hours for the agent to operate (09:00-17:00).
+      DefaultProfile    True        /admin/get.php,/news.php,/login/ Default communication profile for the agent.
+                                process.php|Mozilla/5.0 (Windows
+                                NT 6.1; WOW64; Trident/7.0;
+                                rv:11.0) like Gecko
+      Host              True                                         Hostname/IP for staging.
+      CertPath          False                                        Certificate path for https listeners.
+      DefaultJitter     True        0.0                              Jitter in agent reachback interval (0.0-1.0).
+      Proxy             False       default                          Proxy to use for request (default, none, or other).
+      UserAgent         False       default                          User-agent string to use for the staging request (default, none, or other).
+      StagingKey        True        a684eceee76fc522773286a895bc8436 Staging key for initial agent negotiation.
+      BindIP            True        0.0.0.0                          The IP to bind to on the control server.
+      Port              True                                         Port for the listener.
+      ServerVersion     True        Microsoft-IIS/7.5                Server header for the control server.
+      SlackChannel      False       #general                         The Slack channel or DM that notifications will be sent to.
+
+
+    (Invader: listeners/http)> set Host <lhost>
+    (Invader: listeners/http)> set Port <lport>
     (Invader: listeners/http)> execute
     [*] Starting listener 'http'
      * Serving Flask app "http" (lazy loading)
@@ -89,6 +132,49 @@
     (Invader)> listeners
     [!] No listeners currently active 
     (Invader: listeners)> listener http
+    (Invader: listeners/http)> info
+    
+        Name: HTTP[S]
+    Category: client_server
+
+    Authors:
+      @harmj0y
+
+    Description:
+      Starts a http[s] listener (PowerShell or Python) that uses a
+      GET/POST approach.
+
+    HTTP[S] Options:
+
+      Name              Required    Value                            Description
+      ----              --------    -------                          -----------
+      payloadURI        False                                        URI for the payload. Must use /download/. Example: /download/payload.php
+      ProxyCreds        False       default                          Proxy credentials ([domain\]username:password) to use for request (default, none, or other).
+      KillDate          False                                        Date for the listener to exit (MM/dd/yyyy).
+      Name              True        http                             Name for the listener.
+      SlackToken        False                                        Your SlackBot API token to communicate with your Slack instance.
+      Launcher          True        powershell -noP -sta -w 1 -enc   Launcher string.
+      DefaultDelay      True        5                                Agent delay/reach back interval (in seconds).
+      DefaultLostLimit  True        60                               Number of missed checkins before exiting
+      WorkingHours      False                                        Hours for the agent to operate (09:00-17:00).
+      DefaultProfile    True        /admin/get.php,/news.php,/login/ Default communication profile for the agent.
+                                process.php|Mozilla/5.0 (Windows
+                                NT 6.1; WOW64; Trident/7.0;
+                                rv:11.0) like Gecko
+      Host              True                                         Hostname/IP for staging.
+      CertPath          False                                        Certificate path for https listeners.
+      DefaultJitter     True        0.0                              Jitter in agent reachback interval (0.0-1.0).
+      Proxy             False       default                          Proxy to use for request (default, none, or other).
+      UserAgent         False       default                          User-agent string to use for the staging request (default, none, or other).
+      StagingKey        True        a684eceee76fc522773286a895bc8436 Staging key for initial agent negotiation.
+      BindIP            True        0.0.0.0                          The IP to bind to on the control server.
+      Port              True                                         Port for the listener.
+      ServerVersion     True        Microsoft-IIS/7.5                Server header for the control server.
+      SlackChannel      False       #general                         The Slack channel or DM that notifications will be sent to.
+
+
+    (Invader: listeners/http)> set Host <lhost>
+    (Invader: listeners/http)> set Port <lport>
     (Invader: listeners/http)> execute
     [*] Starting listener 'http'
      * Serving Flask app "http" (lazy loading)
