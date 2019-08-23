@@ -70,8 +70,16 @@
 > invader
 
     (Invader)> listeners
+    [!] No listeners currently active 
     (Invader: listeners)> listener http
     (Invader: listeners/http)> execute
+    [*] Starting listener 'http'
+     * Serving Flask app "http" (lazy loading)
+     * Environment: production
+       WARNING: This is a development server. Do not use it in a production deployment.
+       Use a production WSGI server instead.
+     * Debug mode: off
+    [+] Listener successfully started!
     (Invader: listeners/http)> launcher powershell
     
 ## Building python listener
@@ -79,8 +87,16 @@
 > invader
 
     (Invader)> listeners
+    [!] No listeners currently active 
     (Invader: listeners)> listener http
     (Invader: listeners/http)> execute
+    [*] Starting listener 'http'
+     * Serving Flask app "http" (lazy loading)
+     * Environment: production
+       WARNING: This is a development server. Do not use it in a production deployment.
+       Use a production WSGI server instead.
+     * Debug mode: off
+    [+] Listener successfully started!
     (Invader: listeners/http)> launcher python
 
 ## Interacting with a session
