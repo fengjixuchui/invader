@@ -70,18 +70,18 @@
 > invader
 
     (Invader)> listeners
-    (Invader: listeners)> listener http
-    (Invader: listeners/http)> execute
-    (Invader: listeners/http)> launcher powershell
+    (Invader: listeners)> listener <listener>
+    (Invader: listeners/listener)> execute
+    (Invader: listeners/listener)> launcher powershell
     
 ## Building python listener
 
 > invader
 
     (Invader)> listeners
-    (Invader: listeners)> listener http
-    (Invader: listeners/http)> execute
-    (Invader: listeners/http)> launcher python
+    (Invader: listeners)> listener <listener>
+    (Invader: listeners/listener)> execute
+    (Invader: listeners/listener)> launcher python
 
 ## Interacting with a session
 
@@ -90,12 +90,10 @@
 
 > invader 
 
-    (Invader: listeners/http)> agents
-    (Invader: agents)> interact <MachineName>
-    (Invader: MachineName)> rename comp1
-    (Invader: comp1)> info
+    (Invader: listeners/listener)> agents
+    (Invader: agents)> interact <agent>
 
-# Why Invader framework?
+# Why invader framework?
 
 > A lot of Remote Administration Tool modules
 
