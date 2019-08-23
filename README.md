@@ -61,66 +61,9 @@
     INFO: You should know that after uninstalling 
     Invader all files of this framework will removed!
 
-# Invader framework examples
+# Why invader framework?
 
 <img width="1440" alt="invader" src="https://user-images.githubusercontent.com/43011806/63594254-4393f300-c5b6-11e9-8481-211e4f0f431e.png">
-
-## Building powershell listener
-
-> invader
-
-    (Invader)> listeners
-    [!] No listeners currently active 
-    (Invader: listeners)> listener http
-    (Invader: listeners/http)> set Host <lhost>
-    (Invader: listeners/http)> set Port <lport>
-    (Invader: listeners/http)> execute
-    [*] Starting listener 'http'
-     * Serving Flask app "http" (lazy loading)
-     * Environment: production
-       WARNING: This is a development server. Do not use it in a production deployment.
-       Use a production WSGI server instead.
-     * Debug mode: off
-    [+] Listener successfully started!
-    (Invader: listeners/http)> launcher powershell
-    
-## Building python listener
-
-> invader
-
-    (Invader)> listeners
-    [!] No listeners currently active 
-    (Invader: listeners)> listener http
-    (Invader: listeners/http)> set Host <lhost>
-    (Invader: listeners/http)> set Port <lport>
-    (Invader: listeners/http)> execute
-    [*] Starting listener 'http'
-     * Serving Flask app "http" (lazy loading)
-     * Environment: production
-       WARNING: This is a development server. Do not use it in a production deployment.
-       Use a production WSGI server instead.
-     * Debug mode: off
-    [+] Listener successfully started!
-    (Invader: listeners/http)> launcher python
-
-## Interacting with a session
-
-    INFO: After capturing a remote connection, you 
-    need to select an open session to interact with it.
-
-> invader 
-
-    (Invader)> agents
-    
-    [*] Active agents:
-
-     Name     La Internal IP     Machine Name      Username                Process            PID    Delay    Last Seen
-     ----     -- -----------     ------------      --------                -------            ---    -----    ---------
-     K6SHX6MX py 192.168.2.100   MacBook-Pro       Enty8080                /usr/bin/python    39763  5/0.0    2019-08-23 15:56:07
-     
-     (Invader: agents)> interact K6SHX6MX
-
-# Why invader framework?
 
 > A lot of Remote Administration Tool modules
 
