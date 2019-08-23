@@ -97,6 +97,7 @@
      Name     La Internal IP     Machine Name      Username                Process            PID    Delay    Last Seen
      ----     -- -----------     ------------      --------                -------            ---    -----    ---------
      K6SHX6MX py 192.168.2.100   MacBook-Pro       Enty8080                /usr/bin/python    39763  5/0.0    2019-08-23 15:56:07
+     
      (Invader: agents)> interact K6SHX6MX
 
 # Why invader framework?
