@@ -70,18 +70,18 @@
 > invader
 
     (Invader)> listeners
-    (Invader: listeners)> listener <listener>
-    (Invader: listeners/listener)> execute
-    (Invader: listeners/listener)> launcher powershell
+    (Invader: listeners)> listener http
+    (Invader: listeners/http)> execute
+    (Invader: listeners/http)> launcher powershell
     
 ## Building python listener
 
 > invader
 
     (Invader)> listeners
-    (Invader: listeners)> listener <listener>
-    (Invader: listeners/listener)> execute
-    (Invader: listeners/listener)> launcher python
+    (Invader: listeners)> listener http
+    (Invader: listeners/http)> execute
+    (Invader: listeners/http)> launcher python
 
 ## Interacting with a session
 
@@ -90,7 +90,7 @@
 
 > invader 
 
-    (Invader: listeners/listener)> agents
+    (Invader)> agents
     (Invader: agents)> interact <agent>
 
 # Why invader framework?
