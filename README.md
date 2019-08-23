@@ -69,7 +69,7 @@
 
 > invader
 
-        (Invader)> listeners
+    (Invader)> listeners
     [!] No listeners currently active 
     (Invader: listeners)> listener http
     (Invader: listeners/http)> set Host <lhost>
