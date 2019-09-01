@@ -2,9 +2,8 @@
 
 The main controller class for Invader.
 
-This is what's launched from ./Invader.
-Contains the Main, Listener, Agents, Agent, and Module
-menu loops.
+This is what's launched from ./invader (/usr/local/bin/invader).
+Contains the Main, Listener, Agents, Agent, and Module menu loops.
 
 """
 
