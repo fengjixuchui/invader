@@ -1301,8 +1301,8 @@ def start_restful_api(InvaderMenu, suppress=False, username=None, password=None,
         return jsonify({'success': True})
 
 
-    if not os.path.exists('./data/Invader-chain.pem'):
-        print "[!] Error: cannot find certificate ./data/Invader-chain.pem"
+    if not os.path.exists('./data/invader-chain.pem'):
+        print "[!] Error: cannot find certificate ./data/invader-chain.pem"
         sys.exit()
 
 
@@ -1379,7 +1379,7 @@ def start_restful_api(InvaderMenu, suppress=False, username=None, password=None,
         proto = ssl.PROTOCOL_SSLv23
 
     context = ssl.SSLContext(proto)
-    context.load_cert_chain("%s/Invader-chain.pem" % (certPath), "%s/Invader-priv.key" % (certPath))
+    context.load_cert_chain("%s/invader-chain.pem" % (certPath), "%s/invader-priv.key" % (certPath))
     app.run(host='0.0.0.0', port=int(port), ssl_context=context, threaded=True)
 
 
