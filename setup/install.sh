@@ -52,6 +52,8 @@ function install_powershell() {
 		brew tap caskroom/cask
 		brew cask install powershell
 	else
+	        sudo apt update
+		sudo apt-get update
 		# Deb 9.x
 		if cat /etc/debian_version | grep 9.* ; then
 			# Install system components
@@ -125,6 +127,7 @@ function install_powershell() {
 		#Kali Linux
 		if cat /etc/lsb-release | grep -i 'Kali'; then
 			# Install prerequisites
+			apt update
 			apt-get update
 			apt-get install -y curl gnupg apt-transport-https
 			# Import the public repository GPG keys
@@ -216,6 +219,7 @@ if uname | grep -q "Linux"; then
 	(cd bomutils && make install)
 fi
 chmod 755 bomutils/build/bin/mkbom && sudo cp bomutils/build/bin/mkbom /usr/local/bin/.
+sudo pip install -r requirements.txt
 echo ""
 # set up the database schema
 python ./setup_database.py
