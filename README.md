@@ -58,9 +58,6 @@
 
 > ./uninstall.sh
 
-    INFO: You should know that after uninstalling 
-    Invader all files of this framework will removed!
-
 # Why invader framework?
 
 <img width="1440" alt="invader" src="https://user-images.githubusercontent.com/43011806/63594254-4393f300-c5b6-11e9-8481-211e4f0f431e.png">
