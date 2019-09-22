@@ -36,9 +36,9 @@
 
 # About invader framework
 
-    INFO: Invader Framework is a post exploitation framework 
-    that includes a pure-PowerShell2.0 Windows and a Pure- 
-    -Python 2.6/2.7 Linux/OSX Remote Administration Tool.
+    INFO: Invader Framework is a post exploitation framework that 
+    includes a Pure-PowerShell 2.0/2.1 Windows and a Pure-Python 
+    2.6/2.7 Linux/OSX Remote Administration Tool.
 
 # How to install invader
 
