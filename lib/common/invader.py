@@ -4440,7 +4440,7 @@ class payloadMenu(SubMenu):
             if ".sh" in savePath:
                 os.chmod(savePath, 777)
 
-            print "\n" + helpers.color("[*] payload output written out to: %s\n" % (savePath))
+            print "\n" + helpers.color("[*] Payload output written out to: %s\n" % (savePath))
             # dispatch this event
             message = "[*] Generated payload"
             signal = json.dumps({
