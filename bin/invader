@@ -24,6 +24,8 @@ mkdir .invader/data
 cp invader/data/invader-chain.pem .invader/data
 cp invader/data/invader-priv.key .invader/data
 cp invader/data/invader.db .invader/data
+rm /bin/invader
+rm /usr/local/bin/invader
 rm -r ~/invader
 cd ~
 git clone https://github.com/entynetproject/invader.git
@@ -33,6 +35,10 @@ cp .invader/data/invader.db invader/data
 rm -r .invader
 cd invader
 chmod +x invader
+cp bin/invader /bin
+cp bin/invader /usr/local/bin
+chmod +x /bin/invader
+chmod +x /usr/local/bin/invader
 } &> /dev/null
 sleep 1
 echo ""$GNS"[*] Successfully updated..."$CE""
