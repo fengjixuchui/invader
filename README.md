@@ -62,10 +62,10 @@
 
 <img width="1440" alt="invader" src="https://user-images.githubusercontent.com/43011806/63594254-4393f300-c5b6-11e9-8481-211e4f0f431e.png">
 
-> A lot of Remote Administration Tool modules
+> A lot of PowerShell/Python modules
 
-    INFO: Invader Framework has a lot of python 
-    and powershell modules for full remote control!
+    INFO: Invader Framework has a lot of Python 
+    and PowerShell modules for full remote control!
     
 > Simple UX/UI interface for beginners
 
