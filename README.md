@@ -1,4 +1,4 @@
-# Invader Framework (Remote Administration Tool)
+# Invader Framework (Post-Exploitation Framework)
         
                              ________                    _________           
                              ____  _/_________   _______ ______  /____________   
@@ -12,7 +12,7 @@
   <a href="http://entynetproject.simplesite.com/">
     <img src="https://img.shields.io/badge/entynetproject-Ivan%20Nikolsky-blue.svg">
   </a> 
-  <a href="https://github.com/entynetproject/Invader/releases">
+  <a href="https://github.com/entyntproject/Invader/releases">
     <img src="https://img.shields.io/github/release/entynetproject/Invader.svg">
   </a>
   <a href="https://ru.m.wikipedia.org/wiki/python">
@@ -38,7 +38,7 @@
 
     INFO: Invader Framework is a post exploitation framework that 
     includes a Pure-PowerShell 2.0/2.1 Windows and a Pure-Python 
-    2.6/2.7 Linux/OSX Remote Administration Tool.
+    2.6/2.7 Linux/OSX Remote Administration Tools.
 
 # How to install invader
 
@@ -76,7 +76,7 @@
 > Remote Administration Tool (RAT)
 
     INFO: Control your computer remotely using only 
-    Invader Framework Remote Administration Tool.
+    Invader Post-Exploitation Framework.
     
 <img width="1440" alt="sas2" src="https://user-images.githubusercontent.com/43011806/61638872-99653a80-ac9a-11e9-924a-fa08137a4d22.png">
 
