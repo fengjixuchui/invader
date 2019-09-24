@@ -12,19 +12,19 @@
   <a href="http://entynetproject.simplesite.com/">
     <img src="https://img.shields.io/badge/entynetproject-Ivan%20Nikolsky-blue.svg">
   </a> 
-  <a href="https://github.com/entyntproject/Invader/releases">
-    <img src="https://img.shields.io/github/release/entynetproject/Invader.svg">
+  <a href="https://github.com/entyntproject/invader/releases">
+    <img src="https://img.shields.io/github/release/entynetproject/invader.svg">
   </a>
   <a href="https://ru.m.wikipedia.org/wiki/python">
     <img src="https://img.shields.io/badge/language-python-blue.svg">
  </a>
-  <a href="https://github.com/entynetproject/Invader">
-    <img src="https://img.shields.io/badge/tools-RAT-red.svg">
+  <a href="https://github.com/entynetproject/invader">
+    <img src="https://img.shields.io/badge/modules-285-red.svg">
  </a>
-  <a href="https://github.com/entynetproject/Invader/issues?q=is%3Aissue+is%3Aclosed">
-      <img src="https://img.shields.io/github/issues/entynetproject/Invader.svg">
+  <a href="https://github.com/entynetproject/invader/issues?q=is%3Aissue+is%3Aclosed">
+      <img src="https://img.shields.io/github/issues/entynetproject/invader.svg">
   </a>
-  <a href="https://github.com/entynetproject/Invader/wiki">
+  <a href="https://github.com/entynetproject/invader/wiki">
       <img src="https://img.shields.io/badge/wiki%20-invader-lightgrey.svg">
  </a>
   <a href="https://mobile.twitter.com/entynetproject">
