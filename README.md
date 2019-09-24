@@ -19,7 +19,7 @@
     <img src="https://img.shields.io/badge/language-python-blue.svg">
  </a>
   <a href="https://github.com/entynetproject/Invader">
-    <img src="https://img.shields.io/badge/tool-RAT-red.svg">
+    <img src="https://img.shields.io/badge/tools-RAT-red.svg">
  </a>
   <a href="https://github.com/entynetproject/Invader/issues?q=is%3Aissue+is%3Aclosed">
       <img src="https://img.shields.io/github/issues/entynetproject/Invader.svg">
