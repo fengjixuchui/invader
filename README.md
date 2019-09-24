@@ -25,7 +25,7 @@
       <img src="https://img.shields.io/github/issues/entynetproject/Invader.svg">
   </a>
   <a href="https://github.com/entynetproject/Invader/wiki">
-      <img src="https://img.shields.io/badge/wiki%20-Invader-lightgrey.svg">
+      <img src="https://img.shields.io/badge/wiki%20-invader-lightgrey.svg">
  </a>
   <a href="https://mobile.twitter.com/entynetproject">
     <img src="https://img.shields.io/badge/twitter-entynetproject-blue.svg">
@@ -36,9 +36,9 @@
 
 # About invader framework
 
-    INFO: Invader Framework is a post exploitation framework 
-    that includes a pure-PowerShell2.0 Windows and a pure 
-    Python 2.6/2.7 Linux/OSX Remote Administration Tool.
+    INFO: Invader Framework is a post exploitation framework that 
+    includes a Pure-PowerShell 2.0/2.1 Windows and a Pure-Python 
+    2.6/2.7 Linux/OSX Remote Administration Tool.
 
 # How to install invader
 
@@ -57,9 +57,6 @@
 > chmod +x uninstall.sh
 
 > ./uninstall.sh
-
-    INFO: You should know that after uninstalling 
-    Invader all files of this framework will removed!
 
 # Why invader framework?
 

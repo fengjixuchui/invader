@@ -43,7 +43,7 @@ punctuation = '!#%&()*+,-./:;<=>?@[]^_{|}~'
 if STAGING_KEY == "BLANK":
     BS='\033[1;34m'
     CE='\033[0m'
-    choice = raw_input(BS+"[*] Set server password> "+CE)
+    choice = raw_input(BS+"[*] Set database password> "+CE)
     if choice == "":
         # if no password is entered, generation something random
         STAGING_KEY = ''.join(random.sample(string.ascii_letters + string.digits + punctuation, 32))
