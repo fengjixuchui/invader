@@ -1,4 +1,4 @@
-# Invader Framework (Post-Exploitation Framework)
+# Invader Framework (Post Exploitation Framework)
         
                              ________                    _________           
                              ____  _/_________   _______ ______  /____________   
@@ -38,7 +38,7 @@
 
     INFO: Invader Framework is a post exploitation framework that 
     includes a Pure-PowerShell 2.0/2.1 Windows and a Pure-Python 
-    2.6/2.7 Linux/OSX Remote Administration Tools.
+    2.6/2.7 Linux/OSX remote administration tools.
 
 # How to install invader
 
@@ -73,10 +73,10 @@
     It is easy to understand and it will be easier 
     for you to master the Invader Framework.
     
-> Remote Administration Tool (RAT)
+> Windows/Linux/OSX remote administration tools
 
-    INFO: Control your computer remotely using only 
-    Invader Post-Exploitation Framework.
+    INFO: Invader Framework includes Windows, 
+    Linux and OSX remote administration tools.
     
 <img width="1440" alt="sas2" src="https://user-images.githubusercontent.com/43011806/61638872-99653a80-ac9a-11e9-924a-fa08137a4d22.png">
 
