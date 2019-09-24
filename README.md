@@ -75,7 +75,7 @@
     
 > Windows/Linux/OSX remote administration tools
 
-    INFO: Invader Framework includes Windows, 
+    INFO: Invader Framework includes a Windows, 
     Linux and OSX remote administration tools.
     
 <img width="1440" alt="sas2" src="https://user-images.githubusercontent.com/43011806/61638872-99653a80-ac9a-11e9-924a-fa08137a4d22.png">
