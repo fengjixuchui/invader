@@ -15,7 +15,7 @@
   <a href="https://github.com/entyntproject/invader/releases">
     <img src="https://img.shields.io/github/release/entynetproject/invader.svg">
   </a>
-  <a href="https://ru.m.wikipedia.org/wiki/python">
+  <a href="https://wikipedia.org/wiki/Python_(programming_language)">
     <img src="https://img.shields.io/badge/language-python-blue.svg">
  </a>
   <a href="https://github.com/entynetproject/invader">
@@ -27,7 +27,7 @@
   <a href="https://github.com/entynetproject/invader/wiki">
       <img src="https://img.shields.io/badge/wiki%20-invader-lightgrey.svg">
  </a>
-  <a href="https://mobile.twitter.com/entynetproject">
+  <a href="https://twitter.com/entynetproject">
     <img src="https://img.shields.io/badge/twitter-entynetproject-blue.svg">
  </a>
 </p>
