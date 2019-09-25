@@ -18,7 +18,7 @@
   <a href="https://wikipedia.org/wiki/Python_(programming_language)">
     <img src="https://img.shields.io/badge/language-python-blue.svg">
  </a>
-  <a href="https://github.com/entynetproject/invader">
+  <a href="https://github.com/entynetproject/invader/tree/master/lib/modules">
     <img src="https://img.shields.io/badge/modules-285-red.svg">
  </a>
   <a href="https://github.com/entynetproject/invader/issues?q=is%3Aissue+is%3Aclosed">
