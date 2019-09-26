@@ -1,4 +1,4 @@
-# Invader Framework (Remote Administration Tool)
+# Invader Framework (Post Exploitation Framework)
         
                              ________                    _________           
                              ____  _/_________   _______ ______  /____________   
@@ -12,22 +12,22 @@
   <a href="http://entynetproject.simplesite.com/">
     <img src="https://img.shields.io/badge/entynetproject-Ivan%20Nikolsky-blue.svg">
   </a> 
-  <a href="https://github.com/entynetproject/Invader/releases">
-    <img src="https://img.shields.io/github/release/entynetproject/Invader.svg">
+  <a href="https://github.com/entyntproject/invader/releases">
+    <img src="https://img.shields.io/github/release/entynetproject/invader.svg">
   </a>
-  <a href="https://ru.m.wikipedia.org/wiki/python">
+  <a href="https://wikipedia.org/wiki/Python_(programming_language)">
     <img src="https://img.shields.io/badge/language-python-blue.svg">
  </a>
-  <a href="https://github.com/entynetproject/Invader">
-    <img src="https://img.shields.io/badge/tool-RAT-red.svg">
+  <a href="https://github.com/entynetproject/invader">
+    <img src="https://img.shields.io/badge/modules-285-red.svg">
  </a>
-  <a href="https://github.com/entynetproject/Invader/issues?q=is%3Aissue+is%3Aclosed">
-      <img src="https://img.shields.io/github/issues/entynetproject/Invader.svg">
+  <a href="https://github.com/entynetproject/invader/issues?q=is%3Aissue+is%3Aclosed">
+      <img src="https://img.shields.io/github/issues/entynetproject/invader.svg">
   </a>
-  <a href="https://github.com/entynetproject/Invader/wiki">
+  <a href="https://github.com/entynetproject/invader/wiki">
       <img src="https://img.shields.io/badge/wiki%20-invader-lightgrey.svg">
  </a>
-  <a href="https://mobile.twitter.com/entynetproject">
+  <a href="https://twitter.com/entynetproject">
     <img src="https://img.shields.io/badge/twitter-entynetproject-blue.svg">
  </a>
 </p>
@@ -38,7 +38,7 @@
 
     INFO: Invader Framework is a post exploitation framework that 
     includes a Pure-PowerShell 2.0/2.1 Windows and a Pure-Python 
-    2.6/2.7 Linux/OSX Remote Administration Tool.
+    2.6/2.7 Linux/OSX remote administration tools.
 
 # How to install invader
 
@@ -62,10 +62,10 @@
 
 <img width="1440" alt="invader" src="https://user-images.githubusercontent.com/43011806/63594254-4393f300-c5b6-11e9-8481-211e4f0f431e.png">
 
-> A lot of Remote Administration Tool modules
+> Windows/Linux/OSX remote administration tools
 
-    INFO: Invader Framework has a lot of python 
-    and powershell modules for full remote control!
+    INFO: Invader Framework includes a Windows, 
+    Linux and OSX remote administration tools.
     
 > Simple UX/UI interface for beginners
 
@@ -73,10 +73,10 @@
     It is easy to understand and it will be easier 
     for you to master the Invader Framework.
     
-> Remote Administration Tool (RAT)
+> A lot of PowerShell/Python modules
 
-    INFO: Control your computer remotely using only 
-    Invader Framework Remote Administration Tool.
+    INFO: Invader Framework has a lot of Python 
+    and PowerShell modules for full remote control!
     
 <img width="1440" alt="sas2" src="https://user-images.githubusercontent.com/43011806/61638872-99653a80-ac9a-11e9-924a-fa08137a4d22.png">
 
